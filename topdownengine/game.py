@@ -16,6 +16,7 @@ class Game:
     - clock (pygame.time.Clock): Controls framerate and handles deltatime.
     - fps (int): Integer that controls how much FPS the Game should have
     - game_object_group (pygame.sprite.Group): Stores all GameObjects.
+    - game_speed_percentage (float): The speed percentage for execution, ranging from 0 to 1.
     """
 
     def __init__(
@@ -53,7 +54,7 @@ class Game:
                 break
     
     def update(self, dt: float) -> None:
-        self.game_object_group.update(dt)
+        self.game_object_group.update(dt, self)
 
     def render(self) -> None:
         self.screen.fill((255, 255, 255))
@@ -62,7 +63,7 @@ class Game:
 
     def run(self) -> None:
         while self.is_running:
-            dt = self.clock.tick(self.fps)
+            dt = self.clock.tick(self.fps) * self.game_speed_percentage
             self.handle_events()
             self.update(dt)
             self.render()
