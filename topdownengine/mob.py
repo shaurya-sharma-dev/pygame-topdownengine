@@ -12,7 +12,8 @@ class Mob(GameObject):
         headless: bool=False, 
         animation_paths: dict[str,str]|None=None, 
         frame_size: tuple[int]|None=None, 
-        directional_anims: bool=False, *groups
+        directional_anims: bool=False, 
+        *groups: Any
     ) -> None:
         # Set animation paths dict and frame size before calling super().__init__()
         # This make it automatically load in the animations without
@@ -20,6 +21,7 @@ class Mob(GameObject):
         self.animation_paths = animation_paths
         self.frame_size = frame_size
         self.directional_anims = directional_anims
+        self.current_animation = self.animation_paths.keys()[0]
         if self.directional_anims:
             self.current_dir = 'd'
 
