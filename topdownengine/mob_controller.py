@@ -5,27 +5,28 @@ from .controls import KeyboardInputManager
 import pygame as pg
 import math
 from topdownengine import math as tde_math
+from .mob import Mob
 
 class BaseMobController:
     "A base class for all mob controllers."
-    def update(self, mob, dt: float):
+    def update(self, mob: Mob, dt: float) -> None:
         """Update function for mob controllers."""
         pass
 
 class StaticController(BaseMobController):
     "A mob controller that keeps the mob still."
-    def update(self, mob, dt):
+    def update(self, mob: Mob, dt: float) -> None:
         "Sets the mob's velocity to (0, 0)."
         mob.velocity = pg.Vector2()
 
 class KeyboardInputController(BaseMobController):
     "A mob controller that uses keyboard inputs."
-    def __init__(self):
+    def __init__(self) -> None:
         "Initializes the input manager."
         self.input_mgr = KeyboardInputManager()
         self.speed = 2
 
-    def update(self, mob, dt: float):
+    def update(self, mob: Mob, dt: float) -> None:
         "Moves the mob based on keyboard input."
         input = self.input_mgr.get_input()
         dir = pg.Vector2(

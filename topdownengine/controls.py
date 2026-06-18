@@ -18,7 +18,7 @@ class KeyboardInputManager:
     - just_pressed_keys (ScancodeWrapper): Keys pressed in the current frame.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.keybinds = {
             'Move Right': pg.K_d,
             'Move Left': pg.K_a,
@@ -96,14 +96,14 @@ class KeyboardInputManager:
 
 class NoKeysPressed:
     "Emulates a pygame ScancodeWrapper where no keys are pressed."
-    def __getitem__(self, key): 
+    def __getitem__(self, key: int) -> bool: 
         return False
 
 class MoreKeysPressed:
     "Emulates a pygame ScancodeWrapper where given keys are always pressed."
-    def __init__(self, wrapper: pg.key.ScancodeWrapper, pressed_keys: set): 
+    def __init__(self, wrapper: pg.key.ScancodeWrapper, pressed_keys: set) -> None: 
         self.wrapper = wrapper
         self.pressed_keys = pressed_keys
 
-    def __getitem__(self, key): 
+    def __getitem__(self, key: int) -> bool:
         return self.wrapper[key] or key in self.pressed_keys

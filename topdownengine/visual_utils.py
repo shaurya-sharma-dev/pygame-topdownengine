@@ -5,7 +5,13 @@ import pygame as pg
 
 class VisualUtils:
     @staticmethod
-    def load_animation(filename, frame_width, frame_height, new_frame_width=None, new_frame_height=None):
+    def load_animation(
+        filename: str, 
+        frame_width: int, 
+        frame_height: int,
+        new_frame_width: int=None, 
+        new_frame_height: int=None
+    ) -> list[pg.Surface]:
         "Loads an animation from a given file with a given frame width and height"
         sheet = pg.image.load(filename).convert_alpha()
         frames = []
@@ -19,7 +25,12 @@ class VisualUtils:
         return frames
 
     @staticmethod
-    def load_animations(filename, frame_width, frame_height, scale_to: int|tuple=None) -> list[list[pg.Surface]]:
+    def load_animations(
+        filename: str, 
+        frame_width: int, 
+        frame_height: int, 
+        scale_to: int|tuple=None
+    ) -> list[list[pg.Surface]]:
         "Loads multiple animations from a given spritesheet with a given frame width and height."
         sheet = pg.image.load(filename).convert_alpha()
         all_rows = []
@@ -45,7 +56,11 @@ class VisualUtils:
         return all_rows
     
     @staticmethod
-    def flip_animation(anim: list[pg.Surface], flip_x: bool=False, flip_y: bool=False):
+    def flip_animation(
+        anim: list[pg.Surface], 
+        flip_x: bool=False, 
+        flip_y: bool=False
+    ) -> list[pg.Surface]:
         new_anim = []
         for frame in anim:
             new_anim.append(
@@ -59,10 +74,10 @@ class VisualUtils:
 
     @staticmethod
     def replace_color(
-            surface: pg.Surface, 
-            old_color: pg.typing.ColorLike, 
-            new_color: pg.typing.ColorLike
-        ) -> pg.Surface:
+        surface: pg.Surface, 
+        old_color: pg.typing.ColorLike, 
+        new_color: pg.typing.ColorLike
+    ) -> pg.Surface:
         "Replace all of one given color in a Surface with another."
         surface_new = surface.copy()
         with pg.PixelArray(surface_new) as pixels:
@@ -70,16 +85,22 @@ class VisualUtils:
         return surface_new
 
     @staticmethod
-    def make_img_white(surface: pg.Surface, amount: int=255):
+    def make_img_white(surface: pg.Surface, amount: int=255) -> pg.Surface:
         "Make a Surface white to a given degree (defaults to 255)."
         silhouette = surface.copy()
         silhouette.fill((amount, amount, amount, 0), special_flags=pg.BLEND_RGBA_ADD)
         return silhouette
 
     @staticmethod
-    def draw_low_res_line(screen, color, start_pos, end_pos, res=256):
+    def draw_low_res_line(
+        surface: pg.Surface, 
+        color: pg.typing.ColorLike, 
+        start_pos: pg.typing.Point, 
+        end_pos: pg.typing.Point, 
+        res: int=256
+    ) -> None:
         "Draw a line that matches the game's pixel resolution."
-        sw, sh = screen.get_size()
+        sw, sh = surface.get_size()
         if sw > sh:
             lw, lh = res, int(res * (sh / sw))
         else:
@@ -91,7 +112,7 @@ class VisualUtils:
         x1, y1 = int(end_pos[0] / scale), int(end_pos[1] / scale)
         pg.draw.line(low_res_surf, color, (x0, y0), (x1, y1), 1)
         final_surf = pg.transform.scale(low_res_surf, (sw, sh))
-        screen.blit(final_surf, (0, 0))
+        surface.blit(final_surf, (0, 0))
 
     @staticmethod
     def create_outline(
