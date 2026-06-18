@@ -8,8 +8,7 @@ from .game import Game
 class Mob(GameObject):
     def __init__(
         self, 
-        controller: Any, 
-        headless: bool=False, 
+        controller: Any,
         animation_paths: dict[str,str]|None=None, 
         frame_size: tuple[int]|None=None, 
         directional_anims: bool=False, 
@@ -25,8 +24,7 @@ class Mob(GameObject):
         if self.directional_anims:
             self.current_dir = 'd'
 
-        super().__init__(headless, *groups)
-        self.current_animation = self.animation_paths.keys()[0]
+        super().__init__(*groups)
         self.controller = controller
         self.jump_vel = 0.75
 

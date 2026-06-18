@@ -9,7 +9,6 @@ import pygame as pg
 class EnvObject(GameObject):
     def __init__(
         self,
-        headless: bool=False, 
         animation_paths: dict[str,str]|None=None, 
         frame_size: tuple[int]|None=None, 
         colliders: list[pg.Rect]=[],
@@ -26,8 +25,7 @@ class EnvObject(GameObject):
         # Meanwhile, hitboxes are in world space.
         self.colliders = colliders
 
-        super().__init__(headless, *groups)
-        self.current_animation = self.animation_paths.keys()[0]
+        super().__init__(*groups)
 
     @property
     def hitboxes(self) -> list[pg.Rect]:
