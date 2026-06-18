@@ -47,6 +47,9 @@ class Game:
         # GameObject Group
         self.game_object_group = pg.sprite.Group()
 
+        # Game Speed Percentage
+        self.game_speed_percentage = 1
+
     def handle_events(self) -> None:
         for event in pg.event.get():
             if event.type == pg.QUIT:
