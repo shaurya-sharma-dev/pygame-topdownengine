@@ -16,7 +16,7 @@ class VisualUtils:
         return frames
 
     @staticmethod
-    def load_animations(filename, frame_width, frame_height, scale_to: int|tuple=None):
+    def load_animations(filename, frame_width, frame_height, scale_to: int|tuple=None) -> list[list[pg.Surface]]:
         "Loads multiple animations from a given spritesheet with a given frame width and height."
         sheet = pg.image.load(filename).convert_alpha()
         all_rows = []
@@ -40,6 +40,19 @@ class VisualUtils:
             all_rows.append(current_row_frames) # Add the finished row to the master list
                 
         return all_rows
+    
+    @staticmethod
+    def flip_animation(anim: list[pg.Surface], flip_x: bool=False, flip_y: bool=False):
+        new_anim = []
+        for frame in anim:
+            new_anim.append(
+                pg.transform.flip(
+                    frame,
+                    flip_x,
+                    flip_y
+                )
+            )
+        return new_anim
 
     @staticmethod
     def replace_color(
