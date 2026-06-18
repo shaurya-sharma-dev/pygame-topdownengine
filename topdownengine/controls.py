@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Shaurya Sharma
+# SPDX-License-Identifier: MIT
+
 import pygame as pg
 from pygame._sdl2.controller import Controller
 
