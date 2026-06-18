@@ -10,7 +10,7 @@ class GameObject(pg.sprite.Sprite):
     SHADOWS = None
     SUBPIXEL = False
 
-    def __init__(self, headless: bool=False, *groups) -> None:
+    def __init__(self, headless: bool=False, *groups: pg.sprite.Group) -> None:
         super().__init__(*groups)
 
         # Position, Z-Axis, Velocity
@@ -37,7 +37,7 @@ class GameObject(pg.sprite.Sprite):
     
     # Visual Methods + Properties
     @classmethod
-    def load_and_scale_shadows(cls):
+    def load_and_scale_shadows(cls) -> None:
         from topdownengine.asset_paths import ASSETS_DIR
         shadows = list((ASSETS_DIR / "shadows").glob("*.png"))
         cls.SHADOWS = dict()
@@ -88,7 +88,7 @@ class GameObject(pg.sprite.Sprite):
                 )
 
     @classmethod
-    def set_scale(cls, new_scale: int, game: Game|None):
+    def set_scale(cls, new_scale: int, game: Game|None) -> None:
         cls.SCALE = new_scale
         cls.load_and_scale_shadows()
         if game is None: return
@@ -141,7 +141,7 @@ class GameObject(pg.sprite.Sprite):
         )
     
     # Update
-    def update(self, dt: float, game: Game):
+    def update(self, dt: float, game: Game) -> None:
         # Gravity
         self.z_vel -= self.gravity * dt
         self.z += self.z_vel * dt

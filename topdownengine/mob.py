@@ -2,9 +2,18 @@
 # SPDX-License-Identifier: MIT
 
 from .gameobject import GameObject
+from typing import Any
+from .game import Game
 
 class Mob(GameObject):
-    def __init__(self, controller, headless: bool=False, animation_paths: dict[str,str]|None=None, frame_size: tuple[int]|None=None, directional_anims: bool=False, *groups):
+    def __init__(
+        self, 
+        controller: Any, 
+        headless: bool=False, 
+        animation_paths: dict[str,str]|None=None, 
+        frame_size: tuple[int]|None=None, 
+        directional_anims: bool=False, *groups
+    ) -> None:
         # Set animation paths dict and frame size before calling super().__init__()
         # This make it automatically load in the animations without
         # having to call it a second time.
@@ -18,7 +27,7 @@ class Mob(GameObject):
         self.controller = controller
         self.jump_vel = 0.75
 
-    def update(self, dt, game):
+    def update(self, dt: float, game: Game) -> None:
         self.controller.update(self, dt)
         super().update(dt, game)
         if self.velocity.length():
@@ -38,6 +47,6 @@ class Mob(GameObject):
         else:
             self.current_animation = 'idle'
 
-    def jump(self):
+    def jump(self) -> None:
         if self.elevation == self.z:
             self.z_vel = self.jump_vel
