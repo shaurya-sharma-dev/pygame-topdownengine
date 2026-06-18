@@ -21,11 +21,11 @@ class Mob(GameObject):
         self.animation_paths = animation_paths
         self.frame_size = frame_size
         self.directional_anims = directional_anims
-        self.current_animation = self.animation_paths.keys()[0]
         if self.directional_anims:
             self.current_dir = 'd'
 
         super().__init__(headless, *groups)
+        self.current_animation = self.animation_paths.keys()[0]
         self.controller = controller
         self.jump_vel = 0.75
 
