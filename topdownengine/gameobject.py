@@ -61,7 +61,15 @@ class GameObject(pg.sprite.Sprite):
                 self.animations['idle'].append(image.convert_alpha())
         else:
             for k, v in self.animation_paths.items():
-                self.animations[k] = VisualUtils.load_animation(v, *self.frame_size)
+                if getattr(self, 'directional_anims', False):
+                    dirs = ['d', 'r', 'u', 'l']
+                    all_anims = VisualUtils.load_animations(v, *self.frame_size)
+                    all_anims.append(VisualUtils.flip_animation(all_anims[1], True, False))
+                    for i, anim in enumerate(all_anims):
+                        self.animations[f'{k}_{dirs[i]}'] = anim
+
+                else:
+                    self.animations[k] = VisualUtils.load_animation(v, *self.frame_size)
 
     def scale_animations(self) -> None:
         "Scale animations."
@@ -85,7 +93,10 @@ class GameObject(pg.sprite.Sprite):
     @property
     def image(self) -> pg.Surface:
         "Image for drawing"
-        current_anim = self.animations[self.current_animation]
+        if getattr(self, 'directional_anims', False):
+            current_anim = self.animations[f"{self.current_animation}_{self.current_dir}"]
+        else:
+            current_anim = self.animations[self.current_animation]
         frame = current_anim[int(self.frame) % len(current_anim)]
         shadow = None
         if self.obj_shadow is not None:
@@ -134,4 +145,7 @@ class GameObject(pg.sprite.Sprite):
         self.frame += self.anim_speed * dt
 
         # Add Velocity To Position
+        if self.velocity.length() <= 0.2:
+            # Add a 'deadzone' where if the velocity is low enough, it just becomes (0, 0)
+            self.velocity = pg.Vector2()
         self.position += self.velocity

@@ -16,7 +16,8 @@ game_object = tde.Mob(
         'idle': ASSETS_DIR / 'example-player' / 'idle.png',
         'walk': ASSETS_DIR / 'example-player' / 'walk.png'
     },
-    frame_size=(16,16)
+    frame_size=(16, 16),
+    directional_anims=True
 )
 
 # Add it to the game object group
