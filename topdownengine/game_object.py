@@ -9,6 +9,7 @@ class GameObject(pg.sprite.Sprite):
     SCALE = 1
     SHADOWS = None
     SUBPIXEL = False
+    VELOCITY_DEADZONE = 0.2
 
     def __init__(self, *groups: pg.sprite.Group) -> None:
         super().__init__(*groups)
@@ -148,7 +149,7 @@ class GameObject(pg.sprite.Sprite):
         self.frame += self.anim_speed * dt
 
         # Add Velocity To Position
-        if self.velocity.length() <= 0.2:
+        if self.velocity.length() <= self.VELOCITY_DEADZONE:
             # Add a 'deadzone' where if the velocity is low enough, it just becomes (0, 0)
             self.velocity = pg.Vector2()
         self.position += self.velocity
