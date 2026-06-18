@@ -10,8 +10,9 @@ class GameObject(pg.sprite.Sprite):
     SHADOWS = None
     SUBPIXEL = False
 
-    def __init__(self, *groups) -> None:
+    def __init__(self, headless: bool=False, *groups) -> None:
         super().__init__(*groups)
+
         # Position, Z-Axis, Velocity
         self.position = pg.Vector2()
         self.velocity = pg.Vector2()
@@ -26,6 +27,9 @@ class GameObject(pg.sprite.Sprite):
         self.anim_speed = 0.25
         self.current_animation = 'idle'
         self.obj_shadow = '16x8'
+        self.headless = headless
+        if headless:
+            return
         self.load_animations()
         self.scale_animations()
         if self.SHADOWS is None:
@@ -49,6 +53,7 @@ class GameObject(pg.sprite.Sprite):
 
     def load_animations(self) -> None:
         "Load unscaled animations."
+        if self.headless: return
         self.animations = dict()
 
         if getattr(self, 'animation_paths', None) is None:
@@ -73,6 +78,7 @@ class GameObject(pg.sprite.Sprite):
 
     def scale_animations(self) -> None:
         "Scale animations."
+        if self.headless: return
 
         for _, anim in self.animations.items():
             for i, frame in enumerate(anim):
