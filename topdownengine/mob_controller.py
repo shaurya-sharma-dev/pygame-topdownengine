@@ -20,18 +20,18 @@ class KeyboardInputController(BaseMobController):
     def __init__(self):
         "Initializes the input manager."
         self.input_mgr = KeyboardInputManager()
+        self.speed = 2
 
     def update(self, mob, dt: float):
         "Moves the mob based on keyboard input."
         input = self.input_mgr.get_input()
-        # dir = pg.Vector2(pg.mouse.get_pos())/mob.SCALE - mob.position
         dir = pg.Vector2(
             int('Move Right' in input) - int('Move Left' in input),
             int('Move Down' in input) - int('Move Up' in input)
         )
         if dir.length() != 0: 
             dir.normalize_ip()
-            dir *= 2
+            dir *= self.speed
 
         dt_seconds = dt / 1000.0
         snapping_speed = 10.0
