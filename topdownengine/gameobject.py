@@ -18,7 +18,7 @@ class GameObject(pg.sprite.Sprite):
         self.elevation = 0
         self.z = 0
         self.z_vel = 0
-        self.gravity = 0.01
+        self.gravity = 0.005
         self.height = 1
 
         # Visuals
