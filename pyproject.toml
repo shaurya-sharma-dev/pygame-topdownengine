@@ -5,6 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pygame-topdownengine"
 version = "0.0.1"
+authors = [
+    { name = "Shaurya Sharma" }
+]
 requires-python = ">=3.12.10"
 dependencies = [
     "pygame-ce>=2.5.7",
@@ -25,7 +28,8 @@ classifiers = [
 ]
 
 [tool.setuptools]
-# Automatically discovers package directory layout
 packages = { find = {} }
-# Add non-Python assets (such as the assets folder)
 include-package-data = true
+
+[tool.setuptools.package-data]
+"*" = ["py.typed", "assets/**/*"]

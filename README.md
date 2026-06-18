@@ -18,4 +18,4 @@ NOTE: THE PACKAGE IS NOT ON PYPI YET, SO THE COMMAND WILL NOT WORK.
 ## License
 This library is distributed under the MIT license, which can be found in the root of this repository under the `LICENSE` file.
 
-The files located in the `examples` folder are licensed under the Creative Commons Zero 1.0 Universal license, which can be found inside of `examples/LICENSE`.
+The source files located in the `examples` subfolder are licensed under the Creative Commons Zero 1.0 Universal license, which can be found inside of `examples/LICENSE`.
