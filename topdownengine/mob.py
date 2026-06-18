@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Shaurya Sharma
 # SPDX-License-Identifier: MIT
 
-from .gameobject import GameObject
+from .game_object import GameObject
 from typing import Any
 from .game import Game
 
