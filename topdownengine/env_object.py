@@ -19,7 +19,8 @@ class EnvObject(GameObject):
         # This make it automatically load in the animations without
         # having to call it a second time.
         self.animation_paths = animation_paths
-        self.frame_size = frame_size
+        if frame_size is not None:
+            self.frame_size = frame_size
 
         # Colliders are relative to the EnvObject.
         # Meanwhile, hitboxes are in world space.
