@@ -13,7 +13,7 @@ class Mob(GameObject):
 
         super().__init__(*groups)
         self.controller = controller
-        self.jump_vel = 1
+        self.jump_vel = 0.75
 
     def update(self, dt, game):
         self.controller.update(self, dt)
