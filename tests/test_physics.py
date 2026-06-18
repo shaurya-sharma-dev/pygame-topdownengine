@@ -1,14 +1,32 @@
 # Copyright (c) 2026 Shaurya Sharma
 # SPDX-License-Identifier: MIT
 
+import os
+
+# Set dummy drivers before importing pygame
+os.environ["SDL_VIDEODRIVER"] = "dummy"
+os.environ["SDL_AUDIODRIVER"] = "dummy"
+
 import topdownengine as tde
 from topdownengine.mob_controller import BaseMobController
+from topdownengine.asset_paths import ASSETS_DIR
 import pytest
 import pygame as pg
 
+pg.init()
+pg.display.set_mode((1,1))
+
 @pytest.fixture
 def mob():
-    return tde.Mob(controller=BaseMobController(), headless=True)
+    return tde.Mob(
+        controller=BaseMobController(), 
+        animation_paths={
+            'idle': ASSETS_DIR / 'example-player' / 'idle.png',
+            'walk': ASSETS_DIR / 'example-player' / 'walk.png'
+        },
+        frame_size=(16, 16),
+        directional_anims=True
+    )
 
 # Jump Tests
 def test_can_jump_while_grounded(mob):

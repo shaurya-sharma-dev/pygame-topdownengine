@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygame-topdownengine"
-version = "0.0.1"
+dynamic = ["version"]
 authors = [
     { name = "Shaurya Sharma" }
 ]
@@ -12,8 +12,9 @@ requires-python = ">=3.12.10"
 dependencies = [
     "pygame-ce>=2.5.7",
 ]
+readme = "README.md"
 license = "MIT"
-license-files = ["LICENSE*"]
+license-files = ["LICENSE"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "License :: OSI Approved :: MIT License",
