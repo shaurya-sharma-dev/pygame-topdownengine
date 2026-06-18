@@ -1,7 +1,7 @@
 from .gameobject import GameObject
 
 class Mob(GameObject):
-    def __init__(self, controller, animation_paths: dict[str,str]|None=None, frame_size: tuple[int]|None=None, directional_anims: bool=False, *groups):
+    def __init__(self, controller, headless: bool=False, animation_paths: dict[str,str]|None=None, frame_size: tuple[int]|None=None, directional_anims: bool=False, *groups):
         # Set animation paths dict and frame size before calling super().__init__()
         # This make it automatically load in the animations without
         # having to call it a second time.
@@ -11,7 +11,7 @@ class Mob(GameObject):
         if self.directional_anims:
             self.current_dir = 'd'
 
-        super().__init__(*groups)
+        super().__init__(headless, *groups)
         self.controller = controller
         self.jump_vel = 0.75
 
