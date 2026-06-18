@@ -1,5 +1,5 @@
 # pygame-topdownengine
-[![License: MIT](https://shields.io)](https://opensource.org)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org)
 pygame-topdownengine is a 2.5D engine for top-down games. It is designed to be highly modular, with most core systems being located in the easily extendible GameObject class. It is built on top of the pygame-ce package, which you can find here: https://github.com/pygame-community/pygame-ce/tree/main.
 
 ## Features
