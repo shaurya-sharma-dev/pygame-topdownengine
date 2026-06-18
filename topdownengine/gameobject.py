@@ -125,18 +125,6 @@ class GameObject(pg.sprite.Sprite):
         self.z = max(self.z, self.elevation)
         self.frame += self.anim_speed * dt
 
-        if pg.key.get_just_pressed()[pg.K_c]:
-            self.z_vel = 1
-        
-        # dir = pg.Vector2(pg.mouse.get_pos())/self.SCALE - self.position
-        # if dir.length() != 0: 
-        #     dir.normalize_ip()
-        #     dir *= 2
-
-        # dt_seconds = dt / 1000.0
-        # snapping_speed = 10.0
-        # weight = 1.0 - math.exp(-snapping_speed * dt_seconds)
-        # self.velocity = tdg_math.lerp(self.velocity, dir, weight)
-        self.position = pg.Vector2(pg.mouse.get_pos())/self.SCALE
+        # self.position = pg.Vector2(pg.mouse.get_pos())/self.SCALE
 
         self.position += self.velocity
