@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Shaurya Sharma
+# SPDX-License-Identifier: MIT
+
 import pygame as pg
 
 def lerp(start: float|pg.Vector2, end: float|pg.Vector2, t: float) -> float:

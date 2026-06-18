@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Shaurya Sharma
+# SPDX-License-Identifier: MIT
+
 from .controls import KeyboardInputManager
 import pygame as pg
 import math
