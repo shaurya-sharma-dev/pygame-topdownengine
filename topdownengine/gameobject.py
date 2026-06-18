@@ -3,8 +3,6 @@
 
 import pygame as pg
 from .game import Game
-from topdownengine import math as tdg_math
-import math
 
 class GameObject(pg.sprite.Sprite):
     SCALE = 1
@@ -120,11 +118,13 @@ class GameObject(pg.sprite.Sprite):
     
     # Update
     def update(self, dt: float, game: Game):
+        # Gravity
         self.z_vel -= self.gravity * dt
         self.z += self.z_vel * dt
         self.z = max(self.z, self.elevation)
+
+        # Frame Update
         self.frame += self.anim_speed * dt
 
-        # self.position = pg.Vector2(pg.mouse.get_pos())/self.SCALE
-
+        # Add Velocity To Position
         self.position += self.velocity
