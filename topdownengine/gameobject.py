@@ -7,7 +7,7 @@ from topdownengine import math as tdg_math
 import math
 
 class GameObject(pg.sprite.Sprite):
-    SCALE = 50
+    SCALE = 1
     SHADOWS = None
     SUBPIXEL = False
 
