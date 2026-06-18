@@ -1,7 +1,7 @@
 from .controls import KeyboardInputManager
 import pygame as pg
 import math
-from topdownengine import math as tdg_math
+from topdownengine import math as tde_math
 
 class BaseMobController:
     "A base class for all mob controllers."
@@ -27,7 +27,7 @@ class KeyboardInputController(BaseMobController):
         dt_seconds = dt / 1000.0
         snapping_speed = 10.0
         weight = 1.0 - math.exp(-snapping_speed * dt_seconds)
-        mob.velocity = tdg_math.lerp(mob.velocity, dir, weight)
+        mob.velocity = tde_math.lerp(mob.velocity, dir, weight)
 
         if 'Jump' in input:
             mob.jump()
