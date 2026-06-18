@@ -9,11 +9,20 @@ class BaseMobController:
         """Update function for mob controllers."""
         pass
 
+class StaticController(BaseMobController):
+    "A mob controller that keeps the mob still."
+    def update(self, mob, dt):
+        "Sets the mob's velocity to (0, 0)."
+        mob.velocity = pg.Vector2()
+
 class KeyboardInputController(BaseMobController):
+    "A mob controller that uses keyboard inputs."
     def __init__(self):
+        "Initializes the input manager."
         self.input_mgr = KeyboardInputManager()
 
     def update(self, mob, dt: float):
+        "Moves the mob based on keyboard input."
         input = self.input_mgr.get_input()
         # dir = pg.Vector2(pg.mouse.get_pos())/mob.SCALE - mob.position
         dir = pg.Vector2(
