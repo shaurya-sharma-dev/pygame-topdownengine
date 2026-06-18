@@ -3,6 +3,7 @@
 
 import pygame as pg
 from .game import Game
+from .visual_utils import VisualUtils
 
 class GameObject(pg.sprite.Sprite):
     SCALE = 1
@@ -50,11 +51,17 @@ class GameObject(pg.sprite.Sprite):
         "Load unscaled animations."
         self.animations = dict()
 
-        self.animations['idle'] = []
-        for i in range(4):
-            image = pg.Surface((16, 16))
-            image.fill((255/(i+1), 0, 0))
-            self.animations['idle'].append(image.convert_alpha())
+        if getattr(self, 'animation_paths', None) is None:
+            # When there is no animation path data, add red
+            # square idle animation with changing colors.
+            self.animations['idle'] = []
+            for i in range(4):
+                image = pg.Surface((16, 16))
+                image.fill((255/(i+1), 0, 0))
+                self.animations['idle'].append(image.convert_alpha())
+        else:
+            for k, v in self.animation_paths.items():
+                self.animations[k] = VisualUtils.load_animation(v, *self.frame_size)
 
     def scale_animations(self) -> None:
         "Scale animations."
