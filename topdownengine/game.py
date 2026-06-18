@@ -70,3 +70,5 @@ class Game:
             self.handle_events()
             self.update(dt)
             self.render()
+        pg.quit()
+        exit()
