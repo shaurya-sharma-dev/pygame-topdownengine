@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygame-topdownengine"
+version = "0.0.1"
+requires-python = ">=3.12.10"
+dependencies = [
+    "pygame-ce>=2.5.7",
+]
+license = "MIT"
+license-files = ["LICENSE*"]
+classifiers = [
+    "Development Status :: 3 - Alpha"
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Games/Entertainment",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+    "Typing :: Typed"
+]
+
+[tool.setuptools]
+# Automatically discovers package directory layout
+packages = { find = {} }
+# Add non-Python assets (such as the assets folder)
+include-package-data = true
