@@ -61,7 +61,7 @@ class GameObject(pg.sprite.Sprite):
             # square idle animation with changing colors.
             self.animations['idle'] = []
             for i in range(4):
-                image = pg.Surface((16, 16))
+                image = pg.Surface(getattr(self, 'frame_size', (16, 16)))
                 image.fill((255/(i+1), 0, 0))
                 self.animations['idle'].append(image.convert_alpha())
         else:
