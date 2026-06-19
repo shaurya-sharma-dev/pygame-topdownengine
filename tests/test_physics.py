@@ -8,33 +8,17 @@ os.environ["SDL_VIDEODRIVER"] = "dummy"
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 import topdownengine as tde
-from topdownengine.mob_controller import BaseMobController
-from topdownengine.asset_paths import ASSETS_DIR
 import pytest
 import pygame as pg
-
-pg.init()
-pg.display.set_mode((1,1))
-
-@pytest.fixture
-def mob():
-    return tde.Mob(
-        controller=BaseMobController(), 
-        animation_paths={
-            'idle': ASSETS_DIR / 'example-player' / 'idle.png',
-            'walk': ASSETS_DIR / 'example-player' / 'walk.png'
-        },
-        frame_size=(16, 16),
-        directional_anims=True
-    )
+from conftest import FAKED_KEYS
 
 # Jump Tests
-def test_can_jump_while_grounded(mob):
+def test_can_jump_while_grounded(game: tde.Game, mob: tde.Mob):
     mob.elevation = mob.z = 0
     mob.jump()
     assert mob.z_vel == mob.jump_vel
 
-def test_cannot_jump_while_airborne(mob):
+def test_cannot_jump_while_airborne(game: tde.Game, mob: tde.Mob):
     mob.elevation = 0
     mob.z = 10
     mob.jump()
@@ -52,5 +36,22 @@ MOVEMENT_TEST_ARGS = [
     pg.Vector2(-1, -1) # Up-Left
 ]
 @pytest.mark.parametrize("dir", MOVEMENT_TEST_ARGS)
-def test_movement(mob, dir):
-    pass
+def test_movement(game: tde.Game, mob: tde.Mob, dir: pg.Vector2):
+    def step(key, condition):
+        FAKED_KEYS.clear()
+        FAKED_KEYS.add(key)
+        game.handle_events()
+        mob.update(60, game)
+        assert eval(condition)
+
+    if dir.x == 1:
+        step(pg.K_d, 'mob.velocity.x > 0')
+
+    elif dir.x == -1: 
+        step(pg.K_a, 'mob.velocity.x < 0') 
+
+    if dir.y == 1:
+        step(pg.K_s, 'mob.velocity.y > 0')
+
+    elif dir.y == -1: 
+        step(pg.K_w, 'mob.velocity.y < 0')
