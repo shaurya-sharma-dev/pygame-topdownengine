@@ -1,5 +1,5 @@
 import topdownengine as tde
-from topdownengine.mobile_obj.controller import KeyboardInputController
+from topdownengine.mobile_obj.controller import KeyboardInputController, MovementAIController
 from topdownengine.asset_paths import ASSETS_DIR
 from topdownengine.math import scale_rect
 import pygame as pg
@@ -11,9 +11,20 @@ game = tde.Game(
     window_title="pygame-topdownengine Basic Usage Example"
 )
 
-# Define a MobileObj
-mobile_obj = tde.MobileObj(
+# Define a MobileObj to be the Player
+player = tde.MobileObj(
     controller=KeyboardInputController(), 
+    animation_paths={
+        'idle': ASSETS_DIR / 'example-player' / 'idle.png',
+        'walk': ASSETS_DIR / 'example-player' / 'walk.png'
+    },
+    frame_size=(16, 16),
+    directional_anims=True
+)
+
+# Define a MobileObj to follow the Player
+enemy = tde.MobileObj(
+    controller=MovementAIController(target_mobile_obj=player), 
     animation_paths={
         'idle': ASSETS_DIR / 'example-player' / 'idle.png',
         'walk': ASSETS_DIR / 'example-player' / 'walk.png'
@@ -27,9 +38,10 @@ env_obj = tde.EnvObject(frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)])
 env_obj.position = pg.Vector2(100, 100)
 env_obj.obj_shadow = '32x16'
 
-# Add them both to the game object group
-game.game_object_group.add(mobile_obj)
+# Add them to the game object group
+game.game_object_group.add(player)
 game.game_object_group.add(env_obj)
+game.game_object_group.add(enemy)
 
 # Rescale GameObjects to have a SCALE of 3 (this makes them more visible)
 tde.GameObject.set_scale(3, game)
