@@ -12,6 +12,7 @@ requires-python = ">=3.12.10"
 dependencies = [
     "pygame-ce>=2.5.7",
 ]
+description = "pygame-topdownengine is a 2.5D engine for top-down games."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -26,6 +27,10 @@ classifiers = [
     "Operating System :: MacOS",
     "Typing :: Typed"
 ]
+
+[project.urls]
+Homepage = "https://github.com/shaurya-sharma-dev/pygame-topdownengine/tree/main"
+Changelog = "https://github.com/shaurya-sharma-dev/pygame-topdownengine/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 packages = { find = {} }
