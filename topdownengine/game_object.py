@@ -11,6 +11,7 @@ class GameObject(pg.sprite.Sprite):
     SHADOWS = None
     SUBPIXEL = False
     VELOCITY_DEADZONE = 0.2
+    CAUSES_COLLISIONS = False
 
     def __init__(self, *groups: pg.sprite.Group) -> None:
         super().__init__(*groups)
@@ -207,7 +208,7 @@ class GameObject(pg.sprite.Sprite):
             collision_found = False
             for self_hitbox in self.hitboxes:  # always fresh
                 for game_obj in game.game_object_group:
-                    if game_obj is self or (game_obj.z + game_obj.height) <= self.z:
+                    if game_obj is self or not game_obj.CAUSES_COLLISIONS or (game_obj.z + game_obj.height) <= self.z:
                         continue
                     for other_hitbox in game_obj.hitboxes:
                         if self_hitbox.colliderect(other_hitbox):
@@ -236,7 +237,7 @@ class GameObject(pg.sprite.Sprite):
 
         for self_hitbox in self.hitboxes:
             for game_obj in game.game_object_group:
-                if game_obj is self:
+                if game_obj is self or not game_obj.CAUSES_COLLISIONS:
                     continue
 
                 for other_hitbox in game_obj.hitboxes:
