@@ -16,3 +16,12 @@ def lerp(start: float|pg.Vector2, end: float|pg.Vector2, t: float) -> float:
     if type(start) != type(end):
         raise TypeError(f'{type(start)} and {type(end)} are not the same; they must be equal.')
     return start + (end - start) * t
+
+def scale_rect(rect: pg.Rect|pg.FRect, scalar: int|float) -> pg.Rect|pg.FRect:
+    new_rect = rect.copy()
+    new_rect.width *= scalar
+    new_rect.height *= scalar
+    new_rect.top *= scalar
+    new_rect.left *= scalar
+
+    return new_rect

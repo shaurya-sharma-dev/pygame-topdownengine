@@ -21,21 +21,11 @@ class EnvObject(GameObject):
         if frame_size is not None:
             self.frame_size = frame_size
 
+        super().__init__(*groups)
+
         # Colliders are relative to the EnvObject.
         # Meanwhile, hitboxes are in world space.
         self.colliders = colliders
-
-        super().__init__(*groups)
-
-    @property
-    def hitboxes(self) -> list[pg.Rect]:
-        """Return a list of hitbox Rects in world-space, as opposed to
-        EnvObject.colliders, which uses relative positioning to the
-        EnvObject itself."""
-        return [
-            pg.Rect(c.left + self.position.x, c.top + self.position.y, c.width, c.height)
-            for c in self.colliders
-        ]
 
     def update(self, dt: float, game: Game) -> None:
         super().update(dt, game)

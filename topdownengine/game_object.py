@@ -4,6 +4,7 @@
 import pygame as pg
 from .game import Game
 from .visual_utils import VisualUtils
+from topdownengine import math as tde_math
 
 class GameObject(pg.sprite.Sprite):
     SCALE = 1
@@ -21,7 +22,7 @@ class GameObject(pg.sprite.Sprite):
         self.z = 0
         self.z_vel = 0
         self.gravity = 0.005
-        self.height = 1
+        self.height = 8
 
         # Visuals
         self.frame = 0
@@ -35,6 +36,8 @@ class GameObject(pg.sprite.Sprite):
         self.scale_animations()
         if self.SHADOWS is None:
             GameObject.load_and_scale_shadows()
+
+        self.colliders = self.generate_colliders()
     
     # Visual Methods + Properties
     @classmethod
@@ -95,13 +98,18 @@ class GameObject(pg.sprite.Sprite):
             go.scale_animations()
 
     @property
-    def image(self) -> pg.Surface:
-        "Image for drawing"
+    def current_frame(self) -> pg.Surface:
+        "Current animation frame the GameObj is on."
         if getattr(self, 'directional_anims', False):
             current_anim = self.animations[f"{self.current_animation}_{self.current_dir}"]
         else:
             current_anim = self.animations[self.current_animation]
-        frame = current_anim[int(self.frame) % len(current_anim)]
+        return current_anim[int(self.frame) % len(current_anim)]
+
+    @property
+    def image(self) -> pg.Surface:
+        "Image for drawing."
+        frame = self.current_frame
         shadow = None
         if self.obj_shadow is not None:
             shadow = self.SHADOWS[self.obj_shadow]
@@ -123,7 +131,7 @@ class GameObject(pg.sprite.Sprite):
         return image
         
     @property
-    def rect(self) -> pg.Rect:
+    def rect(self) -> pg.Rect|pg.FRect:
         "Rect object for drawing."
         shadow_offset = pg.Vector2(0, self.SHADOWS[self.obj_shadow].height//2 if self.obj_shadow is not None else 0)
         elev_pos = self.position - pg.Vector2(0, self.elevation)
@@ -138,6 +146,93 @@ class GameObject(pg.sprite.Sprite):
             midbottom=elev_pos * self.SCALE + shadow_offset
         )
     
+    # Collisions
+    def generate_colliders(self) -> list[pg.Rect|pg.FRect]:
+        "Default list of Rect objects for collisions."
+        frame = self.current_frame
+        elev_pos = self.position - pg.Vector2(0, self.elevation)
+        if self.SUBPIXEL:
+            r = self.current_frame.get_frect(
+                topleft=elev_pos * self.SCALE
+            )
+        else:
+            elev_pos.x = int(elev_pos.x)
+            elev_pos.y = int(elev_pos.y)
+            r = self.current_frame.get_rect(
+                topleft=elev_pos * self.SCALE
+            )
+
+        r = tde_math.scale_rect(r, 1/self.SCALE)
+
+        return [r]
+    
+    @property
+    def hitboxes(self) -> list[pg.Rect]:
+        """Return a list of hitbox Rects in world-space, as opposed to
+        GameObj.colliders, which uses relative positioning to the
+        GameObj itself."""
+        return [
+            pg.Rect(c.left + self.position.x - c.width//2, c.top + self.position.y - c.height - self.elevation, c.width, c.height)
+            for c in self.colliders
+        ]
+
+    def _handle_collision(self, dir: pg.Vector2, game: Game) -> bool:
+        """Checks for collisions and moves the GameObj. Returns whether 
+        a collision occured or not."""
+        if dir.x and dir.y:
+            raise ValueError('Both axes cannot be moved in one step. Move them in separate method calls.')
+        
+        moving_right = dir.x > 0
+        moving_down = dir.y > 0
+        moving_x = bool(dir.x)
+
+        self.position += dir
+
+        collision_found = True
+        return_value = False
+        while collision_found:
+            collision_found = False
+            for self_hitbox in self.hitboxes:  # always fresh
+                for game_obj in game.game_object_group:
+                    if game_obj is self or (game_obj.z + game_obj.height) <= self.z:
+                        continue
+                    for other_hitbox in game_obj.hitboxes:
+                        if self_hitbox.colliderect(other_hitbox):
+                            if moving_x:
+                                if moving_right:
+                                    self.position.x += other_hitbox.left - self_hitbox.right
+                                else:
+                                    self.position.x += other_hitbox.right - self_hitbox.left
+                            else:
+                                if moving_down:
+                                    self.position.y += other_hitbox.top - self_hitbox.bottom
+                                else:
+                                    self.position.y += other_hitbox.bottom - self_hitbox.top
+                            collision_found = True
+                            return_value = True
+                            break  # restart with fresh hitboxes
+                    if collision_found:
+                        break
+                if collision_found:
+                    break
+
+        return return_value
+
+    def _handle_elevation(self, game: Game) -> None:
+        new_elevation = 0
+
+        for self_hitbox in self.hitboxes:
+            inflated = self_hitbox.inflate(2, 2)
+            for game_obj in game.game_object_group:
+                if game_obj is self:
+                    continue
+
+                for other_hitbox in game_obj.hitboxes:
+                    if self_hitbox.colliderect(other_hitbox):
+                        new_elevation = max(new_elevation, game_obj.height + game_obj.elevation)
+
+        self.elevation = new_elevation
+
     # Update
     def update(self, dt: float, game: Game) -> None:
         # Gravity
@@ -152,4 +247,10 @@ class GameObject(pg.sprite.Sprite):
         if self.velocity.length() <= self.VELOCITY_DEADZONE:
             # Add a 'deadzone' where if the velocity is low enough, it just becomes (0, 0)
             self.velocity = pg.Vector2()
-        self.position += self.velocity
+
+        if not self.velocity.length():
+            return
+        
+        self._handle_collision(pg.Vector2(self.velocity.x, 0), game)
+        self._handle_collision(pg.Vector2(0, self.velocity.y), game)
+        self._handle_elevation(game)
