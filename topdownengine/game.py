@@ -61,7 +61,8 @@ class Game:
 
     def render(self) -> None:
         self.screen.fill((255, 255, 255))
-        self.game_object_group.draw(self.screen)
+        for game_obj in sorted(self.game_object_group.sprites(), key=lambda g: g.draw_index):
+            self.screen.blit(game_obj.image, game_obj.rect)
         pg.display.flip()
 
     def run(self) -> None:
