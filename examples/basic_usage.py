@@ -34,27 +34,33 @@ game.game_object_group.add(env_obj)
 # Rescale GameObjects to have a SCALE of 3 (this makes them more visible)
 tde.GameObject.set_scale(3, game)
 
+# GameObj automatically generates a four frame "flashing animation."
+# In order to disable it, this line of code makes it use only the first frame,
+# which is solid red.
+env_obj.animations = {'idle': [env_obj.animations['idle'][0]]} 
+
 # You can add subpixel rendering by uncommenting the below line of code
 # tde.GameObject.SUBPIXEL = True
 
-original_draw = game.render
-def new_render():
-    original_draw()
-    pg.draw.rect(
-        game.screen, 
-        (0, 0, 255), 
-        scale_rect(mobile_obj.hitboxes[0], mobile_obj.SCALE),
-        1
-    )
-    pg.draw.rect(
-        game.screen, 
-        (0, 0, 255), 
-        scale_rect(env_obj.hitboxes[0], env_obj.SCALE),
-        1
-    )
-    pg.display.flip()
+# Debug Rendering
+# original_draw = game.render
+# def new_render():
+#     original_draw()
+#     pg.draw.rect(
+#         game.screen, 
+#         (0, 0, 255), 
+#         scale_rect(mobile_obj.hitboxes[0], mobile_obj.SCALE),
+#         1
+#     )
+#     pg.draw.rect(
+#         game.screen, 
+#         (0, 0, 255), 
+#         scale_rect(env_obj.hitboxes[0], env_obj.SCALE),
+#         1
+#     )
+#     pg.display.flip()
 
-game.render = new_render
+# game.render = new_render
 
 # Run the game
 game.run()
