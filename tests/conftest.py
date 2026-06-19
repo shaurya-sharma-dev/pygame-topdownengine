@@ -4,7 +4,7 @@
 import pygame as pg
 import pytest
 import topdownengine as tde
-from topdownengine.mob_controller import KeyboardInputController
+from topdownengine.mobile_obj.controller import KeyboardInputController
 from topdownengine.asset_paths import ASSETS_DIR
 from topdownengine.controls import MoreKeysPressed
 
@@ -17,8 +17,8 @@ def game():
     pg.quit()
 
 @pytest.fixture
-def mob():
-    return tde.Mob(
+def mobile_obj():
+    return tde.MobileObj(
         controller=KeyboardInputController(), 
         animation_paths={
             'idle': ASSETS_DIR / 'example-player' / 'idle.png',

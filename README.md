@@ -5,7 +5,7 @@ pygame-topdownengine is a 2.5D engine for top-down games. It is designed to be h
 
 ## Features
 - GameObject class that contains all of the core systems.
-- Built-in Mob class for anything that moves.
+- Built-in MobileObj class for anything that moves.
 - Option to use either pixel-perfect or subpixel rendering.
 - Dynamic scale-setting for all GameObjects.
 - Robust 3D collision detection.

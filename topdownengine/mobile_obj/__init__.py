@@ -1,11 +1,11 @@
 # Copyright (c) 2026 Shaurya Sharma
 # SPDX-License-Identifier: MIT
 
-from .game_object import GameObject
+from topdownengine.game_object import GameObject
 from typing import Any
-from .game import Game
+from topdownengine.game import Game
 
-class Mob(GameObject):
+class MobileObj(GameObject):
     def __init__(
         self, 
         controller: Any,
