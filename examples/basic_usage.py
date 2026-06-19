@@ -1,5 +1,5 @@
 import topdownengine as tde
-from topdownengine.mob_controller import KeyboardInputController
+from topdownengine.mobile_obj.controller import KeyboardInputController
 from topdownengine.asset_paths import ASSETS_DIR
 
 # Define an instance of the Game class
@@ -9,8 +9,8 @@ game = tde.Game(
     window_title="pygame-topdownengine Basic Usage Example"
 )
 
-# Define a mob
-game_object = tde.Mob(
+# Define a mobile_obj
+game_object = tde.MobileObj(
     controller=KeyboardInputController(), 
     animation_paths={
         'idle': ASSETS_DIR / 'example-player' / 'idle.png',
