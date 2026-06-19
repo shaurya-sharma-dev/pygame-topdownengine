@@ -7,3 +7,4 @@ framework. It allows for the quick creation of 2.5D top-down games."""
 from .game import Game
 from .game_object import GameObject
 from .mobile_obj import MobileObj
+from .env_object import EnvObject
