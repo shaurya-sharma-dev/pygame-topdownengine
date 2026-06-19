@@ -7,6 +7,8 @@ from .game import Game
 import pygame as pg
 
 class EnvObject(GameObject):
+    CAUSES_COLLISIONS = True
+    
     def __init__(
         self,
         animation_paths: dict[str,str]|None=None, 
