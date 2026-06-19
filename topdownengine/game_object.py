@@ -146,6 +146,10 @@ class GameObject(pg.sprite.Sprite):
             midbottom=elev_pos * self.SCALE + shadow_offset
         )
     
+    @property
+    def draw_index(self) -> int:
+        return (self.z, self.rect.bottom)
+    
     # Collisions
     def generate_colliders(self) -> list[pg.Rect|pg.FRect]:
         "Default list of Rect objects for collisions."
@@ -173,6 +177,16 @@ class GameObject(pg.sprite.Sprite):
         GameObj itself."""
         return [
             pg.Rect(c.left + self.position.x - c.width//2, c.top + self.position.y - c.height - self.elevation, c.width, c.height)
+            for c in self.colliders
+        ]
+    
+    @property
+    def unelevated_hitboxes(self) -> list[pg.Rect]:
+        """Return a list of hitbox Rects in world-space unelevated, as opposed to
+        GameObj.colliders, which uses relative positioning to the
+        GameObj itself."""
+        return [
+            pg.Rect(c.left + self.position.x - c.width//2, c.top + self.position.y - c.height, c.width, c.height)
             for c in self.colliders
         ]
 
@@ -228,7 +242,7 @@ class GameObject(pg.sprite.Sprite):
                     continue
 
                 for other_hitbox in game_obj.hitboxes:
-                    if self_hitbox.colliderect(other_hitbox):
+                    if self_hitbox.colliderect(other_hitbox) or self.unelevated_hitboxes[self.hitboxes.index(self_hitbox)].colliderect(other_hitbox):
                         new_elevation = max(new_elevation, game_obj.height + game_obj.elevation)
 
         self.elevation = new_elevation
