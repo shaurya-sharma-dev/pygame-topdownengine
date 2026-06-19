@@ -148,7 +148,7 @@ class GameObject(pg.sprite.Sprite):
         )
     
     @property
-    def draw_index(self) -> int:
+    def draw_index(self) -> tuple[int|float]:
         return (self.z, self.rect.bottom)
     
     # Collisions
