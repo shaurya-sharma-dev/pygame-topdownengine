@@ -191,8 +191,7 @@ class GameObject(pg.sprite.Sprite):
         ]
 
     def _handle_collision(self, dir: pg.Vector2, game: Game) -> bool:
-        """Checks for collisions and moves the GameObj. Returns whether 
-        a collision occured or not."""
+        """Checks for collisions and moves the GameObj. Returns whether a collision occured or not."""
         if dir.x and dir.y:
             raise ValueError('Both axes cannot be moved in one step. Move them in separate method calls.')
         
@@ -236,7 +235,6 @@ class GameObject(pg.sprite.Sprite):
         new_elevation = 0
 
         for self_hitbox in self.hitboxes:
-            inflated = self_hitbox.inflate(2, 2)
             for game_obj in game.game_object_group:
                 if game_obj is self:
                     continue
