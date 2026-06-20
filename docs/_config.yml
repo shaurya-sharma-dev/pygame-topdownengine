@@ -6,7 +6,7 @@ url: "https://shaurya-sharma-dev.github.io"
 baseurl: "/pygame-topdownengine"             
 
 # Themes and Plugins
-remote_theme: jekyll-theme-minimal/minimal
+remote_theme: jekyll-theme-minimal
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
