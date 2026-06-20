@@ -1,7 +1,8 @@
 ---
 layout: null
 ---
-- [Home](./index.md)
-- [Getting Started](./installation.md)
-  - [Installation](./installation.md)
-  - [Quickstart](./quickstart.md)
+
+### Getting Started
+- [Introduction](./index.md)
+- [Quick Start Guide](./quickstart.md)
+- [Installation](./installation.md)
