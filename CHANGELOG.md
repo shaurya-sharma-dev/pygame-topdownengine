@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [0.0.2] - 2026-06-20
+
 ### Fixed
 - Elevation detection by no longer using `GameObj.unelevated_hitboxes`.
 
