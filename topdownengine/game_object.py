@@ -38,6 +38,7 @@ class GameObject(pg.sprite.Sprite):
         if self.SHADOWS is None:
             GameObject.load_and_scale_shadows()
 
+        # Collisions
         self.colliders = self.generate_colliders()
     
     # Visual Methods + Properties
@@ -180,16 +181,6 @@ class GameObject(pg.sprite.Sprite):
             pg.Rect(c.left + self.position.x - c.width//2, c.top + self.position.y - c.height - self.elevation, c.width, c.height)
             for c in self.colliders
         ]
-    
-    @property
-    def unelevated_hitboxes(self) -> list[pg.Rect]:
-        """Return a list of hitbox Rects in world-space unelevated, as opposed to
-        GameObj.colliders, which uses relative positioning to the
-        GameObj itself."""
-        return [
-            pg.Rect(c.left + self.position.x - c.width//2, c.top + self.position.y - c.height, c.width, c.height)
-            for c in self.colliders
-        ]
 
     def _handle_collision(self, dir: pg.Vector2, game: Game) -> bool:
         """Checks for collisions and moves the GameObj. Returns whether a collision occured or not."""
@@ -233,7 +224,7 @@ class GameObject(pg.sprite.Sprite):
         return return_value
 
     def _handle_elevation(self, game: Game) -> None:
-        new_elevation = 0
+        self.elevation = 0
 
         for self_hitbox in self.hitboxes:
             for game_obj in game.game_object_group:
@@ -241,10 +232,8 @@ class GameObject(pg.sprite.Sprite):
                     continue
 
                 for other_hitbox in game_obj.hitboxes:
-                    if self_hitbox.colliderect(other_hitbox) or self.unelevated_hitboxes[self.hitboxes.index(self_hitbox)].colliderect(other_hitbox):
-                        new_elevation = max(new_elevation, game_obj.height + game_obj.elevation)
-
-        self.elevation = new_elevation
+                    if self_hitbox.colliderect(other_hitbox):
+                        self.elevation = max(self.elevation, game_obj.height + game_obj.elevation)
 
     # Update
     def update(self, dt: float, game: Game) -> None:
