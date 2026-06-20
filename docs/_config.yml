@@ -1,0 +1,12 @@
+title: "pygame-topdownengine Documentation"
+description: "A documentation for the pygame-topdownengine Documentation top-down game engine."
+
+# URL Settings (Crucial for GitHub Pages layout tracking)
+url: "https://shaurya-sharma-dev.github.io" 
+baseurl: "/pygame-topdownengine"             
+
+# Themes and Plugins
+remote_theme: jekyll-theme-minimal/minimal
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
