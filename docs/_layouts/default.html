@@ -15,7 +15,7 @@
       
       {% assign nav_file = site.pages | where: "name", "navigation.md" | first %}
       <div style="line-height: 1.8; font-size: 0.95em;">
-        {{ nav_file.content }}
+        {{ nav_file.content | markdownify }}
       </div>
     </nav>
     
