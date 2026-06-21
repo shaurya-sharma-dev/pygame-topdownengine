@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygame-topdownengine"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
     { name = "Shaurya Sharma" }
 ]
@@ -56,6 +56,7 @@ keywords = [
 [project.urls]
 Source = "https://github.com/shaurya-sharma-dev/pygame-topdownengine/tree/main"
 Changelog = "https://github.com/shaurya-sharma-dev/pygame-topdownengine/blob/main/CHANGELOG.md"
+Documentation = "https://shaurya-sharma-dev.github.io/pygame-topdownengine/"
 
 [tool.setuptools]
 packages = { find = {} }
