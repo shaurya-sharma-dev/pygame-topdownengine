@@ -155,7 +155,6 @@ class GameObject(pg.sprite.Sprite):
     # Collisions
     def generate_colliders(self) -> list[pg.Rect|pg.FRect]:
         "Default list of Rect objects for collisions."
-        frame = self.current_frame
         elev_pos = self.position - pg.Vector2(0, self.elevation)
         if self.SUBPIXEL:
             r = self.current_frame.get_frect(
@@ -168,9 +167,7 @@ class GameObject(pg.sprite.Sprite):
                 topleft=elev_pos * self.SCALE
             )
 
-        r = tde_math.scale_rect(r, 1/self.SCALE)
-
-        return [r]
+        return [tde_math.scale_rect(r, 1/self.SCALE)]
     
     @property
     def hitboxes(self) -> list[pg.Rect]:
