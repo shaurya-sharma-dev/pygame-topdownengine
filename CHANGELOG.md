@@ -13,6 +13,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - Internal logic of `GameObject.generate_colliders` to remove unused `frame` variable.
 - `KeyboardInputManager` so that `KeyboardInputManager.keys` and `KeyboardInputManager.just_pressed_keys` are no longer defined in `__init__`.
 
+### Fixed
+- `MobileObj` to make the angles required for up and down animations narrower (45 degrees each) and left and right wider (135 degrees each).
+- `GameObject.draw_index` to use `GameObject.elevation` instead of `GameObject.z`.
+
 ## [0.0.2] - 2026-06-20
 
 ### Fixed
