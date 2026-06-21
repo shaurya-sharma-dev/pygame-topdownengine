@@ -51,16 +51,16 @@ class MobileObj(GameObject):
         if self.velocity.length():
             self.current_animation = 'walk'
             angle = self.velocity.as_polar()[1]
-            if -45 <= angle <= 45: # Right
+            if -67.5 <= angle <= 67.5: # Right
                 self.current_dir = 'r'
 
-            elif (-180 <= angle <= -135) or (135 <= angle <= 180): # Left
+            elif (-180 <= angle <= -112.5) or (112.5 <= angle <= 180): # Left 
                 self.current_dir = 'l'
 
-            elif 45 <= angle <= 135: # Down
+            elif 67.5 <= angle <= 112.5: # Down
                 self.current_dir = 'd'
 
-            elif -135 <= angle <= -45: # Up
+            elif -112.5 <= angle <= -67.5: # Up
                 self.current_dir = 'u'
         else:
             self.current_animation = 'idle'
