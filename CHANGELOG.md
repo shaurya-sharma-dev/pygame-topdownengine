@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [0.0.3] - 2026-06-21
+
 ### Added
 - Google-style docstrings to `MobileObj`, `scale_rect`, `lerp`, `KeyboardInputController`, and `MoreKeysPressed`.
 
@@ -34,5 +36,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `EnvObject` class (subclass of `GameObject`) that allows adding environmental decorations, collisions, and objects.
 - `VisualUtils` class in order to provide for the easy manipulation of Surfaces.
 - Two custom math functions, `lerp` (that works for Vectors and numbers) and `scale_rect`, to allow for more concise code.
-- `KeyboardInputManager` class to easily get keyboard input and NoKeysPressed and MoreKeysPressed classes to allow for manipulating the input stream.
+- `KeyboardInputManager` class to easily get keyboard input and `NoKeysPressed` and `MoreKeysPressed` classes to allow for manipulating the input stream.
 - `assets/` folder with predefined assets. It currently houses shadows and an example player sprite.
