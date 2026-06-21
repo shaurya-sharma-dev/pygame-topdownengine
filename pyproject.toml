@@ -18,18 +18,43 @@ license = "MIT"
 license-files = ["LICENSE"]
 classifiers = [
     "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
     "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Games/Entertainment",
+    "Topic :: Software Development :: Libraries :: pygame",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Operating System :: Unix",
     "Operating System :: MacOS",
     "Typing :: Typed"
 ]
+keywords = [
+    "game",
+    "gamedev",
+    "game-engine",
+    "engine",
+    "game-development",
+    "game-2d",
+    "collision-detection",
+    "pygame", 
+    "pygame-library", 
+    "topdown",
+    "pygame-2d-engine",
+    "game-engine-2d",
+    "topdown-engine",
+    "pygame-ce",
+    "z-axis",
+    "subpixel-rendering",
+    "topdown-game",
+    "pixel-perfect-rendering",
+]
 
 [project.urls]
-Homepage = "https://github.com/shaurya-sharma-dev/pygame-topdownengine/tree/main"
+Source = "https://github.com/shaurya-sharma-dev/pygame-topdownengine/tree/main"
 Changelog = "https://github.com/shaurya-sharma-dev/pygame-topdownengine/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
