@@ -7,15 +7,11 @@ from pygame._sdl2.controller import Controller
 class KeyboardInputManager:
     """Acts as a keyboard and mouse input reciever.
     
-    This class stores keybind information, allows for the serialization
-    and deserialization of keybinds, and collects input data to compile
-    into a list of inputs.
-    
     Attributes:
-    - keybinds (dict[str,int|str]): Stores all keybind data.
-    - non_hold_inputs (list[str]): List of which inputs can't be held.
-    - keys (ScancodeWrapper): Keys currently pressed.
-    - just_pressed_keys (ScancodeWrapper): Keys pressed in the current frame.
+        keybinds (dict[str,int|str]): Stores all keybind data.
+        non_hold_inputs (list[str]): List of which inputs can't be held.
+        keys (pg.key.ScancodeWrapper): Keys currently pressed.
+        just_pressed_keys (pg.key.ScancodeWrapper): Keys pressed in the current frame.
     """
 
     def __init__(self) -> None:
@@ -100,8 +96,18 @@ class NoKeysPressed:
         return False
 
 class MoreKeysPressed:
-    "Emulates a pygame ScancodeWrapper where given keys are always pressed."
-    def __init__(self, wrapper: pg.key.ScancodeWrapper, pressed_keys: set) -> None: 
+    """Emulates a pygame ScancodeWrapper where given keys are always pressed.
+
+    Args:
+        wrapper: The wrapper to add keys to.
+        pressed_keys: The keys to add to the wrapper.
+        
+    Attributes:
+        wrapper: The base wrapper that keys were added to.
+        pressed_keys: The keys added to the wrapper.
+    """
+
+    def __init__(self, wrapper: pg.key.ScancodeWrapper, pressed_keys: set[int]) -> None: 
         self.wrapper = wrapper
         self.pressed_keys = pressed_keys
 

@@ -6,6 +6,23 @@ from typing import Any
 from topdownengine.game import Game
 
 class MobileObj(GameObject):
+    """Subclass of GameObject that serves as a wrapper around MobileObjControllers with some 
+    extra movement functionality.
+
+    Args:
+        controller (BaseMobileObjController): The controller the MobileObj should use.
+        animation_paths (dict[str,str], optional): The animation paths to load animations from. Defaults to None.
+        frame_size (tuple[int]|None, optional): The frame size to use to load/generate animations. Defaults to None.
+        directional_anims (bool, optional): Whether or not to load and use directional animations. Defaults to False.
+
+    Attributes:
+        animation_paths (dict[str,str]|None): The paths animations were loaded from.
+        frame_size (tuple[int]|None): The frame size used to load/generate animations.
+        directional_anims (bool): Whether or not to load and use directional animations.
+        current_dir (str): Current direction (only set if directional_anims is True).
+        controller (BaseMobileObjController): The controller the MobileObj should use.
+        jump_vel (float): The z-velocity that should be used while jumping.
+    """
     def __init__(
         self, 
         controller: Any,
@@ -49,5 +66,6 @@ class MobileObj(GameObject):
             self.current_animation = 'idle'
 
     def jump(self) -> None:
+        
         if self.elevation == self.z:
             self.z_vel = self.jump_vel

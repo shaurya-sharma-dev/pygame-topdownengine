@@ -14,6 +14,13 @@ class BaseMobileObjController:
         pass
 
     def move(self, mobile_obj: MobileObj, dt: float, dir: pg.Vector2) -> None:
+        """Change a MobileObj's velocity using a given dir Vector.
+        
+        Args:
+            mobile_obj (MobileObj): The MobileObj to move
+            dt (float): The deltatime
+            dir (pg.Vector2): Vector to move by
+        """
         if dir.length() != 0: 
             dir.normalize_ip()
             dir *= self.speed
