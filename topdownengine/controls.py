@@ -23,7 +23,6 @@ class KeyboardInputManager:
             'Jump': pg.K_SPACE
         }
         self.non_hold_inputs = []
-        self.keys = self.just_pressed_keys = NoKeysPressed()
 
     def serialize(self) -> dict:
         return {
