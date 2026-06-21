@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+- Google-style docstrings to `MobileObj`, `scale_rect`, `lerp`, `KeyboardInputController`, and `MoreKeysPressed`.
+
 ### Changed
 - Internal logic of `GameObject.generate_colliders` to remove unused `frame` variable.
 
