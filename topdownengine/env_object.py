@@ -8,6 +8,7 @@ import pygame as pg
 
 class EnvObject(GameObject):
     CAUSES_COLLISIONS = True
+    CAN_PUSH = False
     
     def __init__(
         self,

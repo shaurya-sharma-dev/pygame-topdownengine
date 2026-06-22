@@ -30,6 +30,7 @@ enemy = tde.MobileObject(
 env_obj = tde.EnvObject(frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)])
 env_obj.position = pg.Vector2(100, 100)
 env_obj.obj_shadow = '32x16'
+env_obj.PUSHABLE = True
 
 # Add them to the game object group
 game.game_object_group.add(player, env_obj, enemy)

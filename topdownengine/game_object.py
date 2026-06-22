@@ -10,9 +10,14 @@ class GameObject(pg.sprite.Sprite):
     SCALE = 1
     SHADOWS = None
     SUBPIXEL = False
+
+    # Physics Attributes
     VELOCITY_DEADZONE = 0.2
     CAUSES_COLLISIONS = False
     FRICTION = 0.9
+    CAN_PUSH = True
+    PUSHABLE = False
+    PUSH_RES = 0.25
 
     def __init__(self, *groups: pg.sprite.Group) -> None:
         super().__init__(*groups)
@@ -203,8 +208,6 @@ class GameObject(pg.sprite.Sprite):
                         continue
                     for other_hitbox in game_obj.hitboxes:
                         if self_hitbox.colliderect(other_hitbox):
-                            push_vel = pg.Vector2()
-                            push_vel += dir * 0.25
                             if moving_x:
                                 if moving_right:
                                     self.position.x += other_hitbox.left - self_hitbox.right
@@ -215,7 +218,8 @@ class GameObject(pg.sprite.Sprite):
                                     self.position.y += other_hitbox.top - self_hitbox.bottom
                                 else:
                                     self.position.y += other_hitbox.bottom - self_hitbox.top
-                            game_obj.velocity += push_vel
+                            if self.CAN_PUSH and game_obj.PUSHABLE:
+                                game_obj.velocity += dir * game_obj.PUSH_RES
                             collision_found = True
                             return_value = True
                             break  # restart with fresh hitboxes
