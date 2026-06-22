@@ -9,15 +9,15 @@ from . import MobileObject
 
 class BaseController:
     "A base class for all MobileObj controllers."
-    def update(self, mobile_obj: MobileObject, dt: float) -> None:
-        """Update function for MobileObj controllers."""
+    def update(self, mobile_object: MobileObject, dt: float) -> None:
+        """Update function for MobileObject controllers."""
         pass
 
     def move(self, mobile_object: MobileObject, dt: float, dir: pg.Vector2) -> None:
-        """Change a MobileObj's velocity using a given dir Vector.
+        """Change a MobileObject's velocity using a given dir Vector.
         
         Args:
-            mobile_obj (MobileObj): The MobileObj to move
+            mobile_object (MobileObject): The MobileObj to move
             dt (float): The deltatime
             dir (pg.Vector2): Vector to move by
         """
@@ -30,13 +30,13 @@ class BaseController:
         mobile_object.velocity = tde_math.lerp(mobile_object.velocity, dir, weight)
 
 class StaticController(BaseController):
-    "A MobileObj controller that keeps the MobileObj still."
+    "A MobileObject controller that keeps the MobileObj still."
     def update(self, mobile_object: MobileObject, dt: float) -> None:
         "Sets the MobileObj's velocity to (0, 0)."
         mobile_object.velocity = pg.Vector2()
 
 class KeyboardInputController(BaseController):
-    "A MobileObj controller that uses keyboard inputs."
+    "A MobileObject controller that uses keyboard inputs."
     def __init__(self) -> None:
         "Initializes the input manager."
         self.input_mgr = KeyboardInputManager()
@@ -44,7 +44,7 @@ class KeyboardInputController(BaseController):
         self.snapping_speed = 10.0
 
     def update(self, mobile_object: MobileObject, dt: float) -> None:
-        "Moves the MobileObj based on keyboard input."
+        "Moves the MobileObject based on keyboard input."
         input = self.input_mgr.get_input()
 
         if 'Jump' in input:
@@ -63,6 +63,6 @@ class MovementAIController(BaseController):
         self.snapping_speed = 10.0
 
     def update(self, mobile_object: MobileObject, dt: float) -> None:
-        "Move the MobileObj towards the target."
+        "Move the MobileObject towards the target."
         dir = self.target_mobile_object.position - mobile_object.position
         self.move(mobile_object, dt, dir)
