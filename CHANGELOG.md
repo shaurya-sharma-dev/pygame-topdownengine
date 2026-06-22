@@ -6,11 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
-### Fixed
-- `GameObject.generate_colliders` to divide the default collider's `height` by 2. This makes the collider represent the feet instead of the entire sprite, making the engine more realistic and accurate.
+### Changed
+- **Breaking:** Renamed `MobileObj` to `MobileObj`.
+- **Breaking:** Renamed the `topdownengine.mobile_obj` subpackage to `topdownengine.mobile_object`.
+- **Breaking:** Renamed `topdownengine.mobile_object.BaseMobileObjController` to `topdownengine.mobile_obj.BaseController`.
+- **Breaking:** Renamed `mobile_obj` parameter in all controller classes to `mobile_object`.
 
 ### Removed
 - `EnvObject.update` because it was just calling `GameObject.update` and not doing anything else.
+
+### Fixed
+- `GameObject.generate_colliders` to divide the default collider's `height` by 2. This makes the collider represent the feet instead of the entire sprite, making the engine more realistic and accurate.
 
 ## [0.0.3] - 2026-06-21
 
