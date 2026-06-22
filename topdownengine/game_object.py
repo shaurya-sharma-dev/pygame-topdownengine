@@ -17,7 +17,7 @@ class GameObject(pg.sprite.Sprite):
     FRICTION = 0.9
     CAN_PUSH = True
     PUSHABLE = False
-    PUSH_RES = 0.25
+    PUSH_RES = 0.65
 
     def __init__(self, *groups: pg.sprite.Group) -> None:
         super().__init__(*groups)
@@ -30,6 +30,7 @@ class GameObject(pg.sprite.Sprite):
         self.z_vel = 0
         self.gravity = 0.005
         self.height = 8
+        self.on_game_object = None
 
         # Visuals
         self.frame = 0
@@ -187,7 +188,7 @@ class GameObject(pg.sprite.Sprite):
             for c in self.colliders
         ]
 
-    def _handle_collision(self, dir: pg.Vector2, game: Game) -> bool:
+    def _handle_collision(self, dir: pg.Vector2, game: Game, only_push: bool=False, pushed: set=set()) -> bool:
         """Checks for collisions and moves the GameObj. Returns whether a collision occured or not."""
         if dir.x and dir.y:
             raise ValueError('Both axes cannot be moved in one step. Move them in separate method calls.')
@@ -204,10 +205,10 @@ class GameObject(pg.sprite.Sprite):
             collision_found = False
             for self_hitbox in self.hitboxes:  # always fresh
                 for game_obj in game.game_object_group:
-                    if game_obj is self or not game_obj.CAUSES_COLLISIONS or (game_obj.z + game_obj.height) <= self.z:
+                    if game_obj is self or (not game_obj.CAUSES_COLLISIONS and not only_push) or (game_obj.z + game_obj.height) <= self.z or ((game_obj.z) >= self.z + self.height and only_push):
                         continue
                     for other_hitbox in game_obj.hitboxes:
-                        if self_hitbox.colliderect(other_hitbox):
+                        if self_hitbox.colliderect(other_hitbox) and not only_push:
                             if moving_x:
                                 if moving_right:
                                     self.position.x += other_hitbox.left - self_hitbox.right
@@ -218,8 +219,12 @@ class GameObject(pg.sprite.Sprite):
                                     self.position.y += other_hitbox.top - self_hitbox.bottom
                                 else:
                                     self.position.y += other_hitbox.bottom - self_hitbox.top
-                            if self.CAN_PUSH and game_obj.PUSHABLE:
-                                game_obj.velocity += dir * game_obj.PUSH_RES
+                            if (only_push) or (not only_push and self.CAN_PUSH and game_obj.PUSHABLE):
+                                pushed.add(game_obj)
+                                game_obj._handle_collision(dir * game_obj.PUSH_RES, game, True, pushed)
+                                for game_object_b in game.game_object_group.sprites():
+                                    if game_object_b.on_game_object == game_obj:
+                                        game_object_b._handle_collision(dir * game_obj.PUSH_RES, game, True, pushed)
                             collision_found = True
                             return_value = True
                             break  # restart with fresh hitboxes
@@ -232,6 +237,7 @@ class GameObject(pg.sprite.Sprite):
 
     def _handle_elevation(self, game: Game) -> None:
         self.elevation = 0
+        self.on_game_object = None
 
         for self_hitbox in self.hitboxes:
             for game_obj in game.game_object_group:
@@ -242,8 +248,7 @@ class GameObject(pg.sprite.Sprite):
                     if self_hitbox.colliderect(other_hitbox):
                         if game_obj.height + game_obj.elevation > self.elevation:
                             self.elevation = game_obj.height + game_obj.elevation
-                            self._handle_collision(pg.Vector2(game_obj.velocity.x * game_obj.FRICTION, 0), game)
-                            self._handle_collision(pg.Vector2(0, game_obj.velocity.y * game_obj.FRICTION), game)
+                            self.on_game_object = game_obj
 
     # Update
     def update(self, dt: float, game: Game) -> None:
