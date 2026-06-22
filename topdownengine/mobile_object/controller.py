@@ -40,7 +40,7 @@ class KeyboardInputController(BaseController):
     def __init__(self) -> None:
         "Initializes the input manager."
         self.input_mgr = KeyboardInputManager()
-        self.speed = 2
+        self.speed = 3
         self.snapping_speed = 10.0
 
     def update(self, mobile_object: MobileObject, dt: float) -> None:
@@ -59,7 +59,7 @@ class KeyboardInputController(BaseController):
 class MovementAIController(BaseController):
     def __init__(self, target_mobile_object: MobileObject) -> None:
         self.target_mobile_object = target_mobile_object
-        self.speed = 1.5
+        self.speed = 2
         self.snapping_speed = 10.0
 
     def update(self, mobile_object: MobileObject, dt: float) -> None:
