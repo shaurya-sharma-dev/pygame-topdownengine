@@ -167,6 +167,8 @@ class GameObject(pg.sprite.Sprite):
                 topleft=elev_pos * self.SCALE
             )
 
+        r.height -= r.height / 2 if self.SUBPIXEL else r.height // 2
+
         return [tde_math.scale_rect(r, 1/self.SCALE)]
     
     @property
