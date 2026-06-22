@@ -87,7 +87,7 @@ env_obj.animations['idle'] = [env_obj.animations['idle'][0]]
 ```
 
 ## Subpixel vs Pixel-Perfect Rendering
-pygame-topdownengine offers both pixel-perfect rendering and subpixel rendering out of the box. By default, pixel-perfect rendering is the default. However, if you want subpixel rendering to make it more smooth, you can do that with this code:
+pygame-topdownengine offers both pixel-perfect rendering and subpixel rendering out of the box. By default, pixel-perfect rendering is used. However, if you want subpixel rendering to make it more smooth, you can do that with this code:
 ```
 tde.GameObject.SUBPIXEL = True
 ```
