@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- `GameObject.generate_colliders` to divide the default collider's `height` by 2. This makes the collider represent the feet instead of the entire sprite, making the engine more realistic and accurate.
+
 ### Removed
 - `EnvObject.update` because it was just calling `GameObject.update` and not doing anything else.
 
