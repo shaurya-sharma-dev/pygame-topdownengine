@@ -1,16 +1,20 @@
 # pygame-topdownengine
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org)
+[![License: MIT](https://img.shields.io/pypi/l/pygame-topdownengine)](https://github.com/shaurya-sharma-dev/pygame-topdownengine/blob/main/LICENSE)
+[![PyPI Version](https://img.shields.io/pypi/v/pygame-topdownengine)](https://pypi.org/project/pygame-topdownengine/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/pygame-topdownengine)](https://pypi.org/project/pygame-topdownengine/)
+[![Types: Typed](https://img.shields.io/pypi/types/pygame-topdownengine)](https://pypi.org/project/pygame-topdownengine/)
 
 pygame-topdownengine is a 2.5D engine for top-down games. It is designed to be highly modular, with most core systems being located in the easily extendible GameObject class. It is built on top of the pygame-ce package, which you can find here: https://github.com/pygame-community/pygame-ce/tree/main.
 
 ## Features
-- GameObject class that contains all of the core systems.
-- MobileObj class that allows for modular movement behavior.
-- EnvObj class for environmental decorations or objects.
-- Built in VisualUtils class that allows for the easy manipulation of Surfaces.
+- `GameObject` class that contains all of the core systems.
+- `MobileObject` class that allows for modular movement behavior.
+- `EnvObject` class for environmental decorations or objects.
+- Built in `VisualUtils` class that allows for the easy manipulation of Surfaces.
 - Option to use either pixel-perfect or subpixel rendering.
-- Dynamic scale-setting for all GameObjects.
+- Dynamic scale-setting for all `GameObject` instances.
 - Robust 3D collision detection.
+- Toggleable `Game.debug` attribute to render hitboxes during development.
 
 ## Quickstart
 This code makes a Player character, a secondary character that will attempt to follow the Player character, and a solid object the Player can collide with and jump over.
