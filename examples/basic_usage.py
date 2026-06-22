@@ -1,5 +1,5 @@
 import topdownengine as tde
-from topdownengine.mobile_obj.controller import KeyboardInputController, MovementAIController
+from topdownengine.mobile_object.controller import KeyboardInputController, MovementAIController
 from topdownengine.asset_paths import ASSETS_DIR
 import pygame as pg
 
@@ -10,8 +10,8 @@ game = tde.Game(
     window_title="pygame-topdownengine Basic Usage Example"
 )
 
-# Define a MobileObj to be the Player
-player = tde.MobileObj(
+# Define a MobileObject to be the Player
+player = tde.MobileObject(
     controller=KeyboardInputController(), 
     animation_paths={
         'idle': ASSETS_DIR / 'example-player' / 'idle.png',
@@ -19,14 +19,14 @@ player = tde.MobileObj(
     }, frame_size=(16, 16), directional_anims=True
 )
 
-# Define a MobileObj to follow the Player
-enemy = tde.MobileObj(
-    controller=MovementAIController(target_mobile_obj=player), 
+# Define a MobileObject to follow the Player
+enemy = tde.MobileObject(
+    controller=MovementAIController(target_mobile_object=player), 
     animation_paths=player.animation_paths, # Use same animations as the Player
     frame_size=(16, 16), directional_anims=True
 )
 
-# Define an EnvObj
+# Define an EnvObject
 env_obj = tde.EnvObject(frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)])
 env_obj.position = pg.Vector2(100, 100)
 env_obj.obj_shadow = '32x16'

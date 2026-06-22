@@ -5,15 +5,15 @@ from topdownengine.controls import KeyboardInputManager
 import pygame as pg
 import math
 from topdownengine import math as tde_math
-from . import MobileObj
+from . import MobileObject
 
-class BaseMobileObjController:
+class BaseController:
     "A base class for all MobileObj controllers."
-    def update(self, mobile_obj: MobileObj, dt: float) -> None:
+    def update(self, mobile_obj: MobileObject, dt: float) -> None:
         """Update function for MobileObj controllers."""
         pass
 
-    def move(self, mobile_obj: MobileObj, dt: float, dir: pg.Vector2) -> None:
+    def move(self, mobile_object: MobileObject, dt: float, dir: pg.Vector2) -> None:
         """Change a MobileObj's velocity using a given dir Vector.
         
         Args:
@@ -27,15 +27,15 @@ class BaseMobileObjController:
 
         dt_seconds = dt / 1000.0
         weight = 1.0 - math.exp(-self.snapping_speed * dt_seconds)
-        mobile_obj.velocity = tde_math.lerp(mobile_obj.velocity, dir, weight)
+        mobile_object.velocity = tde_math.lerp(mobile_object.velocity, dir, weight)
 
-class StaticController(BaseMobileObjController):
+class StaticController(BaseController):
     "A MobileObj controller that keeps the MobileObj still."
-    def update(self, mobile_obj: MobileObj, dt: float) -> None:
+    def update(self, mobile_object: MobileObject, dt: float) -> None:
         "Sets the MobileObj's velocity to (0, 0)."
-        mobile_obj.velocity = pg.Vector2()
+        mobile_object.velocity = pg.Vector2()
 
-class KeyboardInputController(BaseMobileObjController):
+class KeyboardInputController(BaseController):
     "A MobileObj controller that uses keyboard inputs."
     def __init__(self) -> None:
         "Initializes the input manager."
@@ -43,26 +43,26 @@ class KeyboardInputController(BaseMobileObjController):
         self.speed = 2
         self.snapping_speed = 10.0
 
-    def update(self, mobile_obj: MobileObj, dt: float) -> None:
+    def update(self, mobile_object: MobileObject, dt: float) -> None:
         "Moves the MobileObj based on keyboard input."
         input = self.input_mgr.get_input()
 
         if 'Jump' in input:
-            mobile_obj.jump()
+            mobile_object.jump()
 
         dir = pg.Vector2(
             int('Move Right' in input) - int('Move Left' in input),
             int('Move Down' in input) - int('Move Up' in input)
         )
-        self.move(mobile_obj, dt, dir)
+        self.move(mobile_object, dt, dir)
 
-class MovementAIController(BaseMobileObjController):
-    def __init__(self, target_mobile_obj: MobileObj) -> None:
-        self.target_mobile_obj = target_mobile_obj
+class MovementAIController(BaseController):
+    def __init__(self, target_mobile_object: MobileObject) -> None:
+        self.target_mobile_object = target_mobile_object
         self.speed = 1.5
         self.snapping_speed = 10.0
 
-    def update(self, mobile_obj: MobileObj, dt: float) -> None:
+    def update(self, mobile_object: MobileObject, dt: float) -> None:
         "Move the MobileObj towards the target."
-        dir = self.target_mobile_obj.position - mobile_obj.position
-        self.move(mobile_obj, dt, dir)
+        dir = self.target_mobile_object.position - mobile_object.position
+        self.move(mobile_object, dt, dir)
