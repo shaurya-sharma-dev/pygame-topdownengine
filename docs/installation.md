@@ -27,5 +27,5 @@ source venv/bin/activate
 venv\Scripts\activate.bat
 
 # Activate 'venv' on Windows Powershell
-venv\Scripts\activate.bat
+venv\Scripts\activate.ps1
 ```
