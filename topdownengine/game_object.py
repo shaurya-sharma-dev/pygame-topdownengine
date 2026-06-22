@@ -12,6 +12,7 @@ class GameObject(pg.sprite.Sprite):
     SUBPIXEL = False
     VELOCITY_DEADZONE = 0.2
     CAUSES_COLLISIONS = False
+    FRICTION = 0.9
 
     def __init__(self, *groups: pg.sprite.Group) -> None:
         super().__init__(*groups)
@@ -202,6 +203,8 @@ class GameObject(pg.sprite.Sprite):
                         continue
                     for other_hitbox in game_obj.hitboxes:
                         if self_hitbox.colliderect(other_hitbox):
+                            push_vel = pg.Vector2()
+                            push_vel += dir * 0.25
                             if moving_x:
                                 if moving_right:
                                     self.position.x += other_hitbox.left - self_hitbox.right
@@ -212,6 +215,7 @@ class GameObject(pg.sprite.Sprite):
                                     self.position.y += other_hitbox.top - self_hitbox.bottom
                                 else:
                                     self.position.y += other_hitbox.bottom - self_hitbox.top
+                            game_obj.velocity += push_vel
                             collision_found = True
                             return_value = True
                             break  # restart with fresh hitboxes
@@ -232,7 +236,10 @@ class GameObject(pg.sprite.Sprite):
 
                 for other_hitbox in game_obj.hitboxes:
                     if self_hitbox.colliderect(other_hitbox):
-                        self.elevation = max(self.elevation, game_obj.height + game_obj.elevation)
+                        if game_obj.height + game_obj.elevation > self.elevation:
+                            self.elevation = game_obj.height + game_obj.elevation
+                            self._handle_collision(pg.Vector2(game_obj.velocity.x * game_obj.FRICTION, 0), game)
+                            self._handle_collision(pg.Vector2(0, game_obj.velocity.y * game_obj.FRICTION), game)
 
     # Update
     def update(self, dt: float, game: Game) -> None:
@@ -245,12 +252,10 @@ class GameObject(pg.sprite.Sprite):
         self.frame += self.anim_speed * dt
 
         # Add Velocity To Position
+        self.velocity *= self.FRICTION
         if self.velocity.length() <= self.VELOCITY_DEADZONE:
             # Add a 'deadzone' where if the velocity is low enough, it just becomes (0, 0)
             self.velocity = pg.Vector2()
-
-        if not self.velocity.length():
-            return
         
         self._handle_collision(pg.Vector2(self.velocity.x, 0), game)
         self._handle_collision(pg.Vector2(0, self.velocity.y), game)
