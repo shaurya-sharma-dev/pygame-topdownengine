@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+- `Game.debug` boolean attribute which draws the `hitboxes` of all `GameObject` instances in `Game.game_object_group`.
+
 ### Changed
 - **Breaking:** Renamed `MobileObj` to `MobileObj`.
 - **Breaking:** Renamed the `topdownengine.mobile_obj` subpackage to `topdownengine.mobile_object`.
