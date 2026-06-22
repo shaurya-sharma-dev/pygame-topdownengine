@@ -28,6 +28,3 @@ class EnvObject(GameObject):
         # Colliders are relative to the EnvObject.
         # Meanwhile, hitboxes are in world space.
         self.colliders = colliders
-
-    def update(self, dt: float, game: Game) -> None:
-        super().update(dt, game)

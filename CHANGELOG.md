@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Removed
+- `EnvObject.update` because it was just calling `GameObject.update` and not doing anything else.
+
 ## [0.0.3] - 2026-06-21
 
 ### Added
