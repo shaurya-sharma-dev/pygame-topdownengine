@@ -13,7 +13,7 @@ Let's get the ball rolling! Before we can do anything however, we will need to i
 # Import the main engine
 import topdownengine as tde
 # The first import allows for keyboard-based movement and the second one allows for AI-based movement.
-from topdownengine.mobile_obj.controller import KeyboardInputController, MovementAIController
+from topdownengine.mobile_object.controller import KeyboardInputController, MovementAIController
 # We will need this for pre-made animations the package comes with.
 from topdownengine.asset_paths import ASSETS_DIR
 # pygame-ce provides us with some really helpful utilities.
@@ -34,8 +34,8 @@ game = tde.Game(
 ## The Player
 Now that we have a Game instance, the next thing we will define is the Player. This code gives the player keyboard movement and animations (using the package's premade animations).
 ```
-# Define a MobileObj to be the Player
-player = tde.MobileObj(
+# Define a MobileObject to be the Player
+player = tde.MobileObject(
     controller=KeyboardInputController(), 
     animation_paths={
         'idle': ASSETS_DIR / 'example-player' / 'idle.png',
@@ -45,10 +45,10 @@ player = tde.MobileObj(
 ```
 
 ## The Enemy
-Now let's make the character that follows you. For the purposes of this tutorial, lets call it the "enemy". This code makes the enemy follow the player and uses the same animations as the Player itself.
+Now let's make the character that follows you. For the purposes of this tutorial, let's call it the "enemy". This code makes the enemy follow the player and uses the same animations as the Player itself.
 ```
-# Define a MobileObj to follow the Player
-enemy = tde.MobileObj(
+# Define a MobileObject to follow the Player
+enemy = tde.MobileObject(
     controller=MovementAIController(target_mobile_obj=player), 
     animation_paths=player.animation_paths, # Use same animations as the Player
     frame_size=(16, 16), directional_anims=True
@@ -56,7 +56,7 @@ enemy = tde.MobileObj(
 ```
 
 ## EnvObject
-Now let's define a box the player can collide with and jump over. Essentially, this code will make the box 32x32 in world space, give it a shadow, and set its position away from (0, 0), which is the default position for all GameObjects, which include MobileObjs (like the player and enemy) and EnvObjects (like this box).
+Now let's define a box the player can collide with and jump over. Essentially, this code will make the box 32x32 in world space, give it a shadow, and set its position away from (0, 0), which is the default position for all GameObjects, which include MobileObjects (like the player and enemy) and EnvObjects (like this box).
 ```
 # Define an EnvObj
 env_obj = tde.EnvObject(frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)])
