@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 import pygame as pg
+from .math import scale_rect
 
 class Game:
     """Acts as the central core of the game and manages the core loop and gamestate.
@@ -16,7 +17,8 @@ class Game:
     - clock (pygame.time.Clock): Controls framerate and handles deltatime.
     - fps (int): Integer that controls how much FPS the Game should have
     - game_object_group (pygame.sprite.Group): Stores all GameObjects.
-    - game_speed_percentage (float): The speed percentage for execution, ranging from 0 to 1.
+    - game_speed_percentage (float): The speed percentage for execution, ranging from `0` to `1`.
+    - debug (bool): If `True`, debug rendering will be enabled.
     """
 
     def __init__(
@@ -25,7 +27,8 @@ class Game:
         screen_height: int,
         window_title: str='pygame-topdownengine',
         window_icon_path: str|None=None,
-        fps: int=60
+        fps: int=60,
+        debug: bool=False
     ) -> None:
         # Initialize pygame-ce
         pg.init()
@@ -43,6 +46,9 @@ class Game:
 
         # Is Running Boolean Flag
         self.is_running = True
+
+        # Debug Boolean Flag
+        self.debug = debug
 
         # GameObject Group
         self.game_object_group = pg.sprite.Group()
@@ -63,6 +69,17 @@ class Game:
         self.screen.fill((255, 255, 255))
         for game_obj in sorted(self.game_object_group.sprites(), key=lambda g: g.draw_index):
             self.screen.blit(game_obj.image, game_obj.rect)
+        # Draw debug in a separate loop so that it is drawn over images.
+        if self.debug:
+            for game_obj in self.game_object_group.sprites():
+                # Draw Hitboxes
+                for hitbox in game_obj.hitboxes:
+                    pg.draw.rect(
+                        self.screen, 
+                        (0, 0, 255), 
+                        scale_rect(hitbox, game_obj.SCALE),
+                        1
+                    )
         pg.display.flip()
 
     def run(self) -> None:
