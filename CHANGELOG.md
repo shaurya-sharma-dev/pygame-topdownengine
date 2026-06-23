@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Added
 - `GameObject.FRICTION` which slows down velocity over time.
-- **Experimental:** Ability for `GameObjects` to push other `GameObjects` and `CAN_PUSH`, `PUSHABLE`, `PUSH_RES`, and `ANCHORED` attributes to `GameObject` to control push feature behavior (see `GameObject` docstring for more).
+- **Experimental:** Ability for `GameObjects` to push other `GameObjects` and `CAN_PUSH`, `PUSHABLE` and `PUSH_RES` attributes to `GameObject` to control push feature behavior (see `GameObject` docstring for more).
 - Docstring to `GameObject`.
 
 ### Changed

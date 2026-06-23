@@ -16,10 +16,9 @@ class GameObject(pg.sprite.Sprite):
         VELOCITY_DEADZONE (float): Minimum magnitude for `velocity` before it gets set to `(0, 0)`.
         CAUSES_COLLISONS (bool): Can this `GameObject` cause other `GameObjects` to collide with it?
         FRICTION (float): Multiplier for `velocity`.
-        CAN_PUSH (bool): Can this object BEGIN a push chain by pushing another `GameObject`?
-        PUSHABLE (bool): Can this object BEGIN a push chain by being pushed by another `GameObject`?
+        CAN_PUSH (bool): Can this object push another `GameObject`?
+        PUSHABLE (bool): Can this object be pushed by another `GameObject`?
         PUSH_RES (float): Multiplier to determine push resistance, stacks in a push chain.
-        ANCHORED (bool): If True, the `GameObject` cannot be pushed to start or in the middle of a push chain.
 
         position (pg.Vector2): Current world-space position of the `GameObject`.
         velocity (pg.Vector2): Current world-space velocity of the `GameObject`.
@@ -54,9 +53,8 @@ class GameObject(pg.sprite.Sprite):
     CAUSES_COLLISIONS = False
     FRICTION = 0.9
     CAN_PUSH = True
-    PUSHABLE = False
+    PUSHABLE = True
     PUSH_RES = 0.65
-    ANCHORED = False
 
     def __init__(self, *groups: pg.sprite.Group) -> None:
         super().__init__(*groups)
@@ -261,7 +259,7 @@ class GameObject(pg.sprite.Sprite):
                                     self.position.y += other_hitbox.top - self_hitbox.bottom
                                 else:
                                     self.position.y += other_hitbox.bottom - self_hitbox.top
-                            if (only_push and not game_obj.ANCHORED) or (not only_push and self.CAN_PUSH and game_obj.PUSHABLE):
+                            if (only_push) or (not only_push and self.CAN_PUSH and game_obj.PUSHABLE):
                                 pushed.add(game_obj)
                                 game_obj._handle_collision(dir * game_obj.PUSH_RES, game, True, pushed)
                                 for game_object_b in game.game_object_group.sprites():
