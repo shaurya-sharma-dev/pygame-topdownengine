@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+- `GameObject.FRICTION` which slows down velocity over time.
+- **Experimental:** Ability for `GameObjects` to push other `GameObjects` and `CAN_PUSH`, `PUSHABLE`, `PUSH_RES`, and `ANCHORED` attributes to `GameObject` to control push feature behavior (see `GameObject` docstring for more).
+- Docstring to `GameObject`.
+
+### Changed
+- Default speeds of `Controllers` to work better with push mechanics.
+
 ## [0.1.0] - 2026-06-22
 
 ### Added
