@@ -257,15 +257,20 @@ class GameObject(pg.sprite.Sprite):
                             self.on_game_object = game_obj
                             self.standing_on_rect = other_hitbox
 
-        if self.on_game_object is None:
-            if self.prev_standing_on_rect is not None:
-                if not (
-                    any([r.colliderect(self.prev_standing_on_rect) for r in self.prev_hitboxes])
-                ):
-                    """This condition fixes a bug where a GameObject would be teleported to the
-                    bottom of another GameObject if they walked or were pushed off the top of said 
-                    GameObject while the object they were standing on was being pushed."""
+        if self.on_game_object is None and self.prev_standing_on_rect is not None:
+            if (
+                not any([r.colliderect(self.prev_standing_on_rect) for r in self.prev_hitboxes]) 
+            ):  
+                """This condition fixes a bug where a GameObject would be teleported to the
+                bottom of another GameObject if they walked or were pushed off the top of said 
+                GameObject while the object they were standing on was being pushed. The bug also occured
+                in the horizontal directions."""
+                if self.velocity.y < 0:
                     self.position.y = self.prev_standing_on_rect.top - 2
+                if self.velocity.x > 0:
+                    self.position.x = self.prev_standing_on_rect.right + 2
+                elif self.velocity.x < 0:
+                    self.position.x = self.prev_standing_on_rect.left - 2
 
     # Update
     def update(self, dt: float, game: Game) -> None:
