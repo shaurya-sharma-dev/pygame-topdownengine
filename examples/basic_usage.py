@@ -37,8 +37,8 @@ game.game_object_group.add(player, env_obj, enemy)
 # Rescale GameObjects to have a SCALE of 3 (this makes them more visible)
 tde.GameObject.set_scale(3, game)
 
-# GameObj automatically generates a four frame "flashing animation."
-# In order have our EnvObj not flash, we will make it use only the first frame.
+# GameObject automatically generates a four frame "flashing animation."
+# In order have our EnvObject not flash, we will make it use only the first frame.
 env_obj.animations['idle'] = [env_obj.animations['idle'][0]]
 
 # You can add subpixel rendering by uncommenting the below line of code.
