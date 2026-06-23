@@ -18,6 +18,7 @@ class GameObject(pg.sprite.Sprite):
     CAN_PUSH = True
     PUSHABLE = False
     PUSH_RES = 0.65
+    ANCHORED = False
 
     def __init__(self, *groups: pg.sprite.Group) -> None:
         super().__init__(*groups)
@@ -31,6 +32,8 @@ class GameObject(pg.sprite.Sprite):
         self.gravity = 0.005
         self.height = 8
         self.on_game_object = None
+        self.standing_on_rect = None
+        self.prev_standing_on_rect = None
 
         # Visuals
         self.frame = 0
@@ -47,6 +50,7 @@ class GameObject(pg.sprite.Sprite):
 
         # Collisions
         self.colliders = self.generate_colliders()
+        self.prev_hitboxes = self.hitboxes
     
     # Visual Methods + Properties
     @classmethod
@@ -208,7 +212,7 @@ class GameObject(pg.sprite.Sprite):
                     if game_obj is self or (not game_obj.CAUSES_COLLISIONS and not only_push) or (game_obj.z + game_obj.height) <= self.z or ((game_obj.z) >= self.z + self.height and only_push):
                         continue
                     for other_hitbox in game_obj.hitboxes:
-                        if self_hitbox.colliderect(other_hitbox) and not only_push:
+                        if self_hitbox.colliderect(other_hitbox):
                             if moving_x:
                                 if moving_right:
                                     self.position.x += other_hitbox.left - self_hitbox.right
@@ -219,7 +223,7 @@ class GameObject(pg.sprite.Sprite):
                                     self.position.y += other_hitbox.top - self_hitbox.bottom
                                 else:
                                     self.position.y += other_hitbox.bottom - self_hitbox.top
-                            if (only_push) or (not only_push and self.CAN_PUSH and game_obj.PUSHABLE):
+                            if (only_push and not game_obj.ANCHORED) or (not only_push and self.CAN_PUSH and game_obj.PUSHABLE):
                                 pushed.add(game_obj)
                                 game_obj._handle_collision(dir * game_obj.PUSH_RES, game, True, pushed)
                                 for game_object_b in game.game_object_group.sprites():
@@ -238,6 +242,8 @@ class GameObject(pg.sprite.Sprite):
     def _handle_elevation(self, game: Game) -> None:
         self.elevation = 0
         self.on_game_object = None
+        self.prev_standing_on_rect = self.standing_on_rect
+        self.standing_on_rect = None
 
         for self_hitbox in self.hitboxes:
             for game_obj in game.game_object_group:
@@ -249,9 +255,21 @@ class GameObject(pg.sprite.Sprite):
                         if game_obj.height + game_obj.elevation > self.elevation:
                             self.elevation = game_obj.height + game_obj.elevation
                             self.on_game_object = game_obj
+                            self.standing_on_rect = other_hitbox
+
+        if self.on_game_object is None:
+            if self.prev_standing_on_rect is not None:
+                if not (
+                    any([r.colliderect(self.prev_standing_on_rect) for r in self.prev_hitboxes])
+                ):
+                    """This condition fixes a bug where a GameObject would be teleported to the
+                    bottom of another GameObject if they walked or were pushed off the top of said 
+                    GameObject while the object they were standing on was being pushed."""
+                    self.position.y = self.prev_standing_on_rect.top - 2
 
     # Update
     def update(self, dt: float, game: Game) -> None:
+        self.prev_hitboxes = self.hitboxes
         # Gravity
         self.z_vel -= self.gravity * dt
         self.z += self.z_vel * dt
