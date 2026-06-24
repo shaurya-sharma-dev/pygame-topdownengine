@@ -4,4 +4,5 @@
 - [Quickstart](./quickstart.md)
 
 #### API Reference
+- [Game](./Game.md)
 - [GameObject](./GameObject.md)
