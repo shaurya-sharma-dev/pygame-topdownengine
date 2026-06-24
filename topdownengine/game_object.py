@@ -128,10 +128,12 @@ class GameObject(pg.sprite.Sprite):
             new_scale (int): The new target scale being set to.
             game (Game|None): The Game object being used. While you may pass in None, you MUST pass in a Game instance if you have already defined GameObjects.
         """
-        new_scale = game.set_target_scale(new_scale)
+        if game is not None:
+            new_scale = game.set_target_scale(new_scale)
         cls.SCALE = new_scale
         cls.load_and_scale_shadows()
-        if game is None: return
+        if game is None: 
+            return
         for go in game.game_object_group:
             go.load_animations()
             go.scale_animations()
