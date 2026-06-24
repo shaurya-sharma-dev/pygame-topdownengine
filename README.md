@@ -31,14 +31,15 @@ game = tde.Game(
     window_title="pygame-topdownengine Basic Usage Example"
 )
 
-# Define a MobileObject to be the Player
+# Define a MobileObject to be the Player + Enable Camera Tracking
 player = tde.MobileObject(
     controller=KeyboardInputController(), 
     animation_paths={
-        'idle': ASSETS_DIR / 'example-player' / 'idle.png',
-        'walk': ASSETS_DIR / 'example-player' / 'walk.png'
+        "idle": ASSETS_DIR / "example-player" / "idle.png",
+        "walk": ASSETS_DIR / "example-player" / "walk.png"
     }, frame_size=(16, 16), directional_anims=True
 )
+game.camera.focus_game_object = player
 
 # Define a MobileObject to follow the Player
 enemy = tde.MobileObject(
