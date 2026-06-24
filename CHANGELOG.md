@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+- New `example-cliff.png` asset to assets folder.
+- `Game.bg_color` attribute to control the fill color used in rendering cycles.
+
 ## [0.2.1] - 2026-06-24
 
 ### Added
