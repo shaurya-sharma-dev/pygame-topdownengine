@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-06-24
+
 ### Added
 - Dev dependencies (which is currently just `pytest ~= 9.1`).
 
