@@ -88,10 +88,6 @@ class Game:
                 from .game_object import GameObject
                 GameObject.set_scale(3, self, True)
 
-    @property
-    def target_world_width(self):
-        return self.og_width / self.target_scale
-
     def set_target_scale(self, target_scale: int):
         self.target_scale = target_scale
         return self.target_scale * (self.screen.width / self.og_width)
