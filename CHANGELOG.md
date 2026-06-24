@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-24
+
 ### Added
 - Docstring to `GameObject` and `GameObject.set_scale`.
 - `Game.extra_features` list to be defined upon instantiation that can enable extra features.
