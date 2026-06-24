@@ -27,7 +27,8 @@ Great! Now that we have imported everything, let's define the first thing you wi
 game = tde.Game(
     screen_width=900, 
     screen_height=650, 
-    window_title="pygame-topdownengine Basic Usage Example"
+    window_title="pygame-topdownengine Basic Usage Example",
+    target_scale=3 # Add scale of three to make it more visible
 )
 ```
 
@@ -70,13 +71,6 @@ Now, we need to add these three to the actual game itself. In order to do that, 
 ```
 # Add them to the game object group
 game.game_object_group.add(player, env_obj, enemy)
-```
-
-## Scaling
-pygame-topdownengine also supports scaling in order to make everything more visible. This below code will set the scale to 3 for every GameObject in the game.
-```
-# Rescale GameObjects to have a SCALE of 3 (this makes them more visible)
-tde.GameObject.set_scale(3, game)
 ```
 
 ## The EnvObject (again?)
