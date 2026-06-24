@@ -129,9 +129,8 @@ class GameObject(pg.sprite.Sprite):
             game (Game|None): The Game object being used. While you may pass in None, you MUST pass in a Game instance if you have already defined GameObjects.
             window_resize (bool): Whether this method is being called by a window resize event. Defaults to False.
         """
-        if game is not None and not window_resize:
-            game.target_scale = new_scale
-            new_scale = game.screen.width / game.og_width * new_scale
+        if game is not None:
+            new_scale = game.set_target_scale(new_scale)
 
         cls.SCALE = new_scale
         cls.load_and_scale_shadows()

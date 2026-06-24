@@ -7,7 +7,7 @@ import pygame as pg
 game = tde.Game(
     screen_width=900, 
     screen_height=650, 
-    window_title="pygame-topdownengine Basic Usage Example"
+    window_title="pygame-topdownengine Basic Usage Example", extra_features=['resize']
 )
 
 # Define a MobileObject to be the Player
