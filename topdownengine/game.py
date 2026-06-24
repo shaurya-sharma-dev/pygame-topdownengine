@@ -56,7 +56,6 @@ class Game:
         )
         pg.display.set_caption(window_title)
         self.target_ratio = screen_width/screen_height
-        self.target_scale = target_scale
         self.og_width = screen_width
 
         # Clock + FPS
@@ -74,6 +73,10 @@ class Game:
 
         # Game Speed Percentage
         self.game_speed_percentage = 1
+
+        # Set Target Scale
+        from .game_object import GameObject
+        GameObject.set_scale(target_scale, self)
 
     def handle_events(self) -> None:
         for event in pg.event.get():
