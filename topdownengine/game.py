@@ -83,10 +83,7 @@ class Game:
             if event.type == pg.QUIT:
                 self.is_running = False
                 break
-            elif event.type == pg.VIDEORESIZE:
-                new_width = event.w
-                new_height = event.h
-                
+            elif event.type == pg.VIDEORESIZE:                
                 # We import GameObject in handle_events to prevent a circular import.
                 from .game_object import GameObject
                 GameObject.set_scale(3, self, True)
