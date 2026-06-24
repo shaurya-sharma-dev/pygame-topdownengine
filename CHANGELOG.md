@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+- Dev dependencies (which is currently just `pytest ~= 9.1`).
+
+### Fixed
+- Dependencies by using compatible release notation in `pyproject.toml`.
+
 ## [0.2.0] - 2026-06-24
 
 ### Added
