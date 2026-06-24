@@ -58,11 +58,11 @@ class GameObject(pg.sprite.Sprite):
         # Visuals
         self.frame = 0
         self.anim_speed = 0.25
-        if getattr(self, 'animation_paths', None) is not None:
+        if getattr(self, "animation_paths", None) is not None:
             self.current_animation = list(self.animation_paths.keys())[0]
         else:
-            self.current_animation = 'idle'
-        self.obj_shadow = '16x8'
+            self.current_animation = "idle"
+        self.obj_shadow = "16x8"
         self.load_animations()
         self.scale_animations()
         if self.SHADOWS is None:
@@ -82,7 +82,7 @@ class GameObject(pg.sprite.Sprite):
                 shadow
             ).convert_alpha()
 
-            cls.SHADOWS[shadow.name.replace('.png', '')] = pg.transform.scale(
+            cls.SHADOWS[shadow.name.replace(".png", "")] = pg.transform.scale(
                 shadow_img,
                 (shadow_img.width * cls.SCALE, shadow_img.height * cls.SCALE)
             )
@@ -91,22 +91,22 @@ class GameObject(pg.sprite.Sprite):
         "Load unscaled animations."
         self.animations = dict()
 
-        if getattr(self, 'animation_paths', None) is None:
+        if getattr(self, "animation_paths", None) is None:
             # When there is no animation path data, add red
             # square idle animation with changing colors.
-            self.animations['idle'] = []
+            self.animations["idle"] = []
             for i in range(4):
-                image = pg.Surface(getattr(self, 'frame_size', (16, 16)))
+                image = pg.Surface(getattr(self, "frame_size", (16, 16)))
                 image.fill((255/(i+1), 0, 0))
-                self.animations['idle'].append(image.convert_alpha())
+                self.animations["idle"].append(image.convert_alpha())
         else:
             for k, v in self.animation_paths.items():
-                if getattr(self, 'directional_anims', False):
-                    dirs = ['d', 'r', 'u', 'l']
+                if getattr(self, "directional_anims", False):
+                    dirs = ["d", "r", "u", "l"]
                     all_anims = VisualUtils.load_animations(v, *self.frame_size)
                     all_anims.append(VisualUtils.flip_animation(all_anims[1], True, False))
                     for i, anim in enumerate(all_anims):
-                        self.animations[f'{k}_{dirs[i]}'] = anim
+                        self.animations[f"{k}_{dirs[i]}"] = anim
 
                 else:
                     self.animations[k] = VisualUtils.load_animation(v, *self.frame_size)
@@ -143,7 +143,7 @@ class GameObject(pg.sprite.Sprite):
     @property
     def current_frame(self) -> pg.Surface:
         "Current animation frame the GameObj is on."
-        if getattr(self, 'directional_anims', False):
+        if getattr(self, "directional_anims", False):
             current_anim = self.animations[f"{self.current_animation}_{self.current_dir}"]
         else:
             current_anim = self.animations[self.current_animation]
@@ -225,7 +225,7 @@ class GameObject(pg.sprite.Sprite):
     def _handle_collision(self, dir: pg.Vector2, game: Game) -> bool:
         """Checks for collisions and moves the GameObj. Returns whether a collision occured or not."""
         if dir.x and dir.y:
-            raise ValueError('Both axes cannot be moved in one step. Move them in separate method calls.')
+            raise ValueError("Both axes cannot be moved in one step. Move them in separate method calls.")
         
         moving_right = dir.x > 0
         moving_down = dir.y > 0
@@ -287,7 +287,7 @@ class GameObject(pg.sprite.Sprite):
 
         # Add Velocity To Position
         if self.velocity.length() <= self.VELOCITY_DEADZONE:
-            # Add a 'deadzone' where if the velocity is low enough, it just becomes (0, 0)
+            # Add a "deadzone" where if the velocity is low enough, it just becomes (0, 0)
             self.velocity = pg.Vector2()
 
         if not self.velocity.length():

@@ -21,13 +21,13 @@ class Game:
         extra_features (list[str]): List of extra features to add at runtime. You MUST set it during instantiation.
     """
 
-    VALID_EXTRA_FEATURES = {'resize',}
+    VALID_EXTRA_FEATURES = {"resize",}
 
     def __init__(
         self, 
         screen_width: int, 
         screen_height: int,
-        window_title: str='pygame-topdownengine',
+        window_title: str="pygame-topdownengine",
         window_icon_path: str|None=None,
         fps: int=60,
         debug: bool=False,

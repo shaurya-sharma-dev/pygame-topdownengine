@@ -45,13 +45,13 @@ def test_movement(game: tde.Game, mobile_object: tde.MobileObject, dir: pg.Vecto
         assert eval(condition)
 
     if dir.x == 1:
-        step(pg.K_d, 'mobile_object.velocity.x > 0')
+        step(pg.K_d, "mobile_object.velocity.x > 0")
 
     elif dir.x == -1: 
-        step(pg.K_a, 'mobile_object.velocity.x < 0') 
+        step(pg.K_a, "mobile_object.velocity.x < 0") 
 
     if dir.y == 1:
-        step(pg.K_s, 'mobile_object.velocity.y > 0')
+        step(pg.K_s, "mobile_object.velocity.y > 0")
 
     elif dir.y == -1: 
-        step(pg.K_w, 'mobile_object.velocity.y < 0')
+        step(pg.K_w, "mobile_object.velocity.y < 0")

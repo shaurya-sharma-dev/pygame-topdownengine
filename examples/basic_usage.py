@@ -14,8 +14,8 @@ game = tde.Game(
 player = tde.MobileObject(
     controller=KeyboardInputController(), 
     animation_paths={
-        'idle': ASSETS_DIR / 'example-player' / 'idle.png',
-        'walk': ASSETS_DIR / 'example-player' / 'walk.png'
+        "idle": ASSETS_DIR / "example-player" / "idle.png",
+        "walk": ASSETS_DIR / "example-player" / "walk.png"
     }, frame_size=(16, 16), directional_anims=True
 )
 
@@ -29,7 +29,7 @@ enemy = tde.MobileObject(
 # Define an EnvObject
 env_obj = tde.EnvObject(frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)])
 env_obj.position = pg.Vector2(100, 100)
-env_obj.obj_shadow = '32x16'
+env_obj.obj_shadow = "32x16"
 
 # Add them to the game object group
 game.game_object_group.add(player, env_obj, enemy)
@@ -39,7 +39,7 @@ tde.GameObject.set_scale(3, game)
 
 # GameObject automatically generates a four frame "flashing animation."
 # In order have our EnvObject not flash, we will make it use only the first frame.
-env_obj.animations['idle'] = [env_obj.animations['idle'][0]]
+env_obj.animations["idle"] = [env_obj.animations["idle"][0]]
 
 # You can add subpixel rendering by uncommenting the below line of code.
 # tde.GameObject.SUBPIXEL = True
