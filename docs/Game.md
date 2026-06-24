@@ -15,7 +15,7 @@ Acts as the central core of the game and manages the core loop and gamestate.
 - `game_object_group` (pygame.sprite.Group): Stores all GameObjects.
 - `game_speed_percentage` (float): The speed percentage for execution, ranging from `0` to `1`.
 - `debug` (bool): If `True`, debug rendering will be enabled.
-- `target_ratio` (float): Target aspect ratio for resizing.
 - `target_scale` (int): The target scale for the original window size.
 - `og_width` (int): Original window width.
 - `extra_features` (list[str]): List of extra features to add at runtime. You MUST set it during instantiation.
+- `camera` (Camera): Camera object to use when rendering.
