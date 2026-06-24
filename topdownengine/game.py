@@ -18,6 +18,7 @@ class Game:
         target_scale (int): The target scale for the original window size.
         og_width (int): Original window width.
         extra_features (list[str]): List of extra features to add at runtime. You MUST set it during instantiation.
+        camera (Camera): Camera object to use when rendering.
     """
 
     VALID_EXTRA_FEATURES = {"resize",}
@@ -76,6 +77,10 @@ class Game:
         from .game_object import GameObject
         GameObject.set_scale(target_scale, self)
 
+        # Camera (Import Here to Prevent Circular Import)
+        from .camera import Camera
+        self.camera = Camera()
+
     def handle_events(self) -> None:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -91,12 +96,14 @@ class Game:
         return self.target_scale * (self.screen.width / self.og_width)
     
     def update(self, dt: float) -> None:
+        self.camera.update(dt)
         self.game_object_group.update(dt, self)
 
     def render(self) -> None:
         self.screen.fill((255, 255, 255))
         for game_obj in sorted(self.game_object_group.sprites(), key=lambda g: g.draw_index):
-            self.screen.blit(game_obj.image, game_obj.rect)
+            self.screen.blit(game_obj.image, game_obj.rect.move(-self.camera.position * game_obj.SCALE))
+        
         # Draw debug in a separate loop so that it is drawn over images.
         if self.debug:
             for game_obj in self.game_object_group.sprites():
