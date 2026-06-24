@@ -1,6 +1,6 @@
 # pygame-topdownengine
 [![License: MIT](https://img.shields.io/pypi/l/pygame-topdownengine)](https://github.com/shaurya-sharma-dev/pygame-topdownengine/blob/main/LICENSE)
-[![PyPI Version](https://img.shields.io/pypi/v/pygame-topdownengine)](https://pypi.org/project/pygame-topdownengine/)
+[![PyPI Version](https://img.shields.io/pypi/v/pygame-topdownengine?update=True)](https://pypi.org/project/pygame-topdownengine/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pygame-topdownengine)](https://pypi.org/project/pygame-topdownengine/)
 [![Types: Typed](https://img.shields.io/pypi/types/pygame-topdownengine)](https://pypi.org/project/pygame-topdownengine/)
 
