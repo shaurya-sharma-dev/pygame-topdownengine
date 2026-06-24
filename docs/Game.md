@@ -7,6 +7,7 @@ title: "Game"
 Acts as the central core of the game and manages the core loop and gamestate.
     
 ## Attributes
+
 - `screen` (pygame.Surface): The primary display Surface.
 - `is_running` (bool): Boolean flag to control execution.
 - `clock` (pygame.time.Clock): Controls framerate and handles deltatime.
