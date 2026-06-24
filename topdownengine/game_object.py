@@ -121,7 +121,18 @@ class GameObject(pg.sprite.Sprite):
                 )
 
     @classmethod
-    def set_scale(cls, new_scale: int, game: Game|None) -> None:
+    def set_scale(cls, new_scale: int, game: Game|None, window_resize: bool=False) -> None:
+        """This method sets the target scale of all GameObjects.
+    
+        Args:
+            new_scale (int): The new target scale being set to.
+            game (Game|None): The Game object being used. While you may pass in None, you MUST pass in a Game instance if you have already defined GameObjects.
+            window_resize (bool): Whether this method is being called by a window resize event. Defaults to False.
+        """
+        if game is not None and not window_resize:
+            game.target_scale = new_scale
+            new_scale = game.screen.width / game.og_width * new_scale
+
         cls.SCALE = new_scale
         cls.load_and_scale_shadows()
         if game is None: return

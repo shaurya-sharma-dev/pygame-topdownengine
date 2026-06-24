@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Added
 - Docstring to `GameObject`.
+- `Game.extra_features` list to be defined upon instantiation that can enable extra features.
+- Window resizing logic (you can enable it by appending `"resize"` to `Game.extra_features` when initializing).
+- Docstring to `GameObject.set_scale`.
 
 ## [0.1.0] - 2026-06-22
 
