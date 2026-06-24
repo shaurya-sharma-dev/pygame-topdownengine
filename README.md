@@ -57,10 +57,6 @@ env_obj.obj_shadow = '32x16'
 # Add them to the game object group
 game.game_object_group.add(player, env_obj, enemy)
 
-# GameObj automatically generates a four frame "flashing animation."
-# In order have our EnvObj not flash, we will make it use only the first frame.
-env_obj.animations['idle'] = [env_obj.animations['idle'][0]]
-
 # You can add subpixel rendering by uncommenting the below line of code.
 # tde.GameObject.SUBPIXEL = True
 
