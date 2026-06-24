@@ -47,12 +47,12 @@ class KeyboardInputController(BaseController):
         "Moves the MobileObject based on keyboard input."
         input = self.input_mgr.get_input()
 
-        if 'Jump' in input:
+        if "Jump" in input:
             mobile_object.jump()
 
         dir = pg.Vector2(
-            int('Move Right' in input) - int('Move Left' in input),
-            int('Move Down' in input) - int('Move Up' in input)
+            int("Move Right" in input) - int("Move Left" in input),
+            int("Move Down" in input) - int("Move Up" in input)
         )
         self.move(mobile_object, dt, dir)
 

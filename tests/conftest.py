@@ -12,7 +12,7 @@ from topdownengine.controls import MoreKeysPressed
 @pytest.fixture
 def game():
     game = tde.Game(1, 1)
-    print('Initializing game instance.')
+    print("Initializing game instance.")
     yield game
     pg.quit()
 
@@ -21,8 +21,8 @@ def mobile_object():
     return tde.MobileObject(
         controller=KeyboardInputController(), 
         animation_paths={
-            'idle': ASSETS_DIR / 'example-player' / 'idle.png',
-            'walk': ASSETS_DIR / 'example-player' / 'walk.png'
+            "idle": ASSETS_DIR / "example-player" / "idle.png",
+            "walk": ASSETS_DIR / "example-player" / "walk.png"
         },
         frame_size=(16, 16),
         directional_anims=True

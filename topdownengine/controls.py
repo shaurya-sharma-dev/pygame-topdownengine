@@ -16,11 +16,11 @@ class KeyboardInputManager:
 
     def __init__(self) -> None:
         self.keybinds = {
-            'Move Right': pg.K_d,
-            'Move Left': pg.K_a,
-            'Move Up': pg.K_w,
-            'Move Down': pg.K_s,
-            'Jump': pg.K_SPACE
+            "Move Right": pg.K_d,
+            "Move Left": pg.K_a,
+            "Move Up": pg.K_w,
+            "Move Down": pg.K_s,
+            "Jump": pg.K_SPACE
         }
         self.non_hold_inputs = []
 
@@ -44,10 +44,10 @@ class KeyboardInputManager:
         inputs = []
 
         for keybind in self.keybinds:
-            if self.keybinds[keybind] == 'Button 1':
+            if self.keybinds[keybind] == "Button 1":
                 if pg.mouse.get_just_pressed()[0]: 
                     inputs.append(keybind) 
-            elif self.keybinds[keybind] == 'Button 3':
+            elif self.keybinds[keybind] == "Button 3":
                 if pg.mouse.get_just_pressed()[2]: 
                     inputs.append(keybind) 
             else:
@@ -66,14 +66,14 @@ class KeyboardInputManager:
 #         self.controller = Controller(0)
 
 #         self.keybinds = {
-#             # 'Interact': pg.K_e,
-#             # 'Inventory': pg.K_i,
-#             'Use Item': pg.CONTROLLER_BUTTON_RIGHTSHOULDER,
-#             'Use Item Special': 5,
-#             # 'Use Ability 1': pg.K_v,
-#             # 'Use Ability 2': pg.K_b,
+#             # "Interact": pg.K_e,
+#             # "Inventory": pg.K_i,
+#             "Use Item": pg.CONTROLLER_BUTTON_RIGHTSHOULDER,
+#             "Use Item Special": 5,
+#             # "Use Ability 1": pg.K_v,
+#             # "Use Ability 2": pg.K_b,
 #         }
-#         self.non_hold_inputs = ['Interact', 'Inventory']
+#         self.non_hold_inputs = ["Interact", "Inventory"]
 
 #     def get_input(self) -> list[str]:
 #         inputs = []
@@ -86,7 +86,7 @@ class KeyboardInputManager:
 #                         inputs.append(keybind)
 #                 else:
 #                     inputs.append(keybind) 
-#                     print('hello')
+#                     print("hello")
 #         return inputs
 
 class NoKeysPressed:

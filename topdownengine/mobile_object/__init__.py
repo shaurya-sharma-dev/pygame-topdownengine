@@ -39,7 +39,7 @@ class MobileObject(GameObject):
             self.frame_size = frame_size
         self.directional_anims = directional_anims
         if self.directional_anims:
-            self.current_dir = 'd'
+            self.current_dir = "d"
 
         super().__init__(*groups)
         self.controller = controller
@@ -49,21 +49,21 @@ class MobileObject(GameObject):
         self.controller.update(self, dt)
         super().update(dt, game)
         if self.velocity.length():
-            self.current_animation = 'walk'
+            self.current_animation = "walk"
             angle = self.velocity.as_polar()[1]
             if -67.5 <= angle <= 67.5: # Right
-                self.current_dir = 'r'
+                self.current_dir = "r"
 
             elif (-180 <= angle <= -112.5) or (112.5 <= angle <= 180): # Left 
-                self.current_dir = 'l'
+                self.current_dir = "l"
 
             elif 67.5 <= angle <= 112.5: # Down
-                self.current_dir = 'd'
+                self.current_dir = "d"
 
             elif -112.5 <= angle <= -67.5: # Up
-                self.current_dir = 'u'
+                self.current_dir = "u"
         else:
-            self.current_animation = 'idle'
+            self.current_animation = "idle"
 
     def jump(self) -> None:
         if self.elevation == self.z:
