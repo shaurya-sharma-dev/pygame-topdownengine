@@ -10,6 +10,7 @@ game = tde.Game(
     window_title="pygame-topdownengine Basic Usage Example",
     target_scale=3 # Add scale of three to make it more visible
 )
+game.bg_color = (40, 229, 30)
 
 # Define a MobileObject to be the Player + Enable Camera Tracking
 player = tde.MobileObject(
@@ -29,16 +30,17 @@ enemy = tde.MobileObject(
 )
 
 # Define an EnvObject
-env_obj = tde.EnvObject(frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)])
+env_obj = tde.EnvObject(
+    animation_paths={
+        "idle": ASSETS_DIR / "example-cliff.png"
+    },
+    frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)]
+)
 env_obj.position = pg.Vector2(100, 100)
 env_obj.obj_shadow = "32x16"
 
 # Add them to the game object group
 game.game_object_group.add(player, env_obj, enemy)
-
-# GameObject automatically generates a four frame "flashing animation."
-# In order have our EnvObject not flash, we will make it use only the first frame.
-env_obj.animations["idle"] = [env_obj.animations["idle"][0]]
 
 # You can add subpixel rendering by uncommenting the below line of code.
 # tde.GameObject.SUBPIXEL = True

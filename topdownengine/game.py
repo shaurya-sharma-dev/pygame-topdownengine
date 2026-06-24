@@ -19,6 +19,7 @@ class Game:
         og_width (int): Original window width.
         extra_features (list[str]): List of extra features to add at runtime. You MUST set it during instantiation.
         camera (Camera): Camera object to use when rendering.
+        bg_color (pygame.typing.ColorLike): Color to fill the screen with at the start of every draw cycle.
     """
 
     VALID_EXTRA_FEATURES = {"resize",}
@@ -81,6 +82,9 @@ class Game:
         from .camera import Camera
         self.camera = Camera()
 
+        # Background Color
+        self.bg_color = (255, 255, 255)
+
     def handle_events(self) -> None:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -100,7 +104,7 @@ class Game:
         self.game_object_group.update(dt, self)
 
     def render(self) -> None:
-        self.screen.fill((255, 255, 255))
+        self.screen.fill(self.bg_color)
         for game_obj in sorted(self.game_object_group.sprites(), key=lambda g: g.draw_index):
             self.screen.blit(game_obj.image, game_obj.rect.move(-self.camera.position * game_obj.SCALE))
         

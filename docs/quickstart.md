@@ -73,14 +73,6 @@ Now, we need to add these three to the actual game itself. In order to do that, 
 game.game_object_group.add(player, env_obj, enemy)
 ```
 
-## The EnvObject (again?)
-Now, we have to return to the EnvObject. By default, the GameObject class generates a four frame "flashing animation." In order have our EnvObject not flash, we will make it use only the first frame (which is solid red). 
-
-We waited to do this after setting the scale because using the `set_scale` method automatically reloads animations, meaning if we had done it earlier, it would have regenerated the flashing animation.
-```
-env_obj.animations['idle'] = [env_obj.animations['idle'][0]]
-```
-
 ## Subpixel vs Pixel-Perfect Rendering
 pygame-topdownengine offers both pixel-perfect rendering and subpixel rendering out of the box. By default, pixel-perfect rendering is used. However, if you want subpixel rendering to make it more smooth, you can do that with this code:
 ```
