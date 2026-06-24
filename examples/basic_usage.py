@@ -7,7 +7,8 @@ import pygame as pg
 game = tde.Game(
     screen_width=900, 
     screen_height=650, 
-    window_title="pygame-topdownengine Basic Usage Example"
+    window_title="pygame-topdownengine Basic Usage Example",
+    target_scale=3 # Add scale of three to make it more visible
 )
 
 # Define a MobileObject to be the Player + Enable Camera Tracking
@@ -34,9 +35,6 @@ env_obj.obj_shadow = "32x16"
 
 # Add them to the game object group
 game.game_object_group.add(player, env_obj, enemy)
-
-# Rescale GameObjects to have a SCALE of 3 (this makes them more visible)
-tde.GameObject.set_scale(3, game)
 
 # GameObject automatically generates a four frame "flashing animation."
 # In order have our EnvObject not flash, we will make it use only the first frame.
