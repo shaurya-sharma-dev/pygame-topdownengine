@@ -23,7 +23,7 @@ This class is the base class for all in-world objects in the engine.
 - `frame` (float): Current animation frame.
 - `anim_speed` (float): Animation speed.
 - `current_animation` (str): Current animation.
-- `obj_shadow` (str|None): Shadow size being used (or None for no shadow).
+- `obj_shadow` (str\|None): Shadow size being used (or None for no shadow).
 - `colliders` (list[pg.Rect\|pg.FRect]): List of hitboxes relative to the `GameObject`.
 - `hitboxes` (list[pg.Rect\|pg.FRect]): List of world-space hitboxes in the current frame.
 - `current_frame` (pg.Surface): Current animation frame surface.
