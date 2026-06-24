@@ -84,7 +84,7 @@ class Game:
             elif event.type == pg.VIDEORESIZE:                
                 # We import GameObject in handle_events to prevent a circular import.
                 from .game_object import GameObject
-                GameObject.set_scale(3, self, True)
+                GameObject.set_scale(self.target_scale, self)
 
     def set_target_scale(self, target_scale: int):
         self.target_scale = target_scale
