@@ -34,14 +34,15 @@ game = tde.Game(
 ## The Player
 Now that we have a Game instance, the next thing we will define is the Player. This code gives the player keyboard movement and animations (using the package's premade animations).
 ```
-# Define a MobileObject to be the Player
+# Define a MobileObject to be the Player + Enable Camera Tracking
 player = tde.MobileObject(
     controller=KeyboardInputController(), 
     animation_paths={
-        'idle': ASSETS_DIR / 'example-player' / 'idle.png',
-        'walk': ASSETS_DIR / 'example-player' / 'walk.png'
+        "idle": ASSETS_DIR / "example-player" / "idle.png",
+        "walk": ASSETS_DIR / "example-player" / "walk.png"
     }, frame_size=(16, 16), directional_anims=True
 )
+game.camera.focus_game_object = player
 ```
 
 ## The Enemy
