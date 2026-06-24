@@ -84,19 +84,20 @@ class Game:
                 self.is_running = False
                 break
             elif event.type == pg.VIDEORESIZE:
-                new_width = self.screen.width
-                new_height = self.screen.height
-                if new_width / new_height > self.target_ratio:
-                    # Window is wider than the target aspect ratio
-                    new_width = int(new_height * self.target_ratio)
-                else:
-                    # Window is taller than the target aspect ratio
-                    new_height = int(new_width / self.target_ratio)
+                new_width = event.w
+                new_height = event.h
                 
                 # We import GameObject in handle_events to prevent a circular import.
                 from .game_object import GameObject
-                GameObject.set_scale(new_width / self.og_width * self.target_scale, self, True)
-                self.screen = pg.display.set_mode((new_width, new_height), pg.RESIZABLE)
+                GameObject.set_scale(3, self, True)
+
+    @property
+    def target_world_width(self):
+        return self.og_width / self.target_scale
+
+    def set_target_scale(self, target_scale: int):
+        self.target_scale = target_scale
+        return self.target_scale * (self.screen.width / self.og_width)
     
     def update(self, dt: float) -> None:
         self.game_object_group.update(dt, self)
