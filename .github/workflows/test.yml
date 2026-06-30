@@ -3,12 +3,18 @@ name: Tests
 on:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - 'docs/**'
+    paths:
+      - '**'                  # Include entire repository
+      - '!docs/**'            # Exclude docs/
+      - '!.github/**'         # Exclude .github/
+      - '.github/workflows/test.yml' # Include this workflow file
   pull_request:
     branches: [ "main" ]
-    paths-ignore:
-      - 'docs/**'
+    paths:
+      - '**'                  # Include entire repository
+      - '!docs/**'            # Exclude docs/
+      - '!.github/**'         # Exclude .github/
+      - '.github/workflows/test.yml' # Include this workflow file
 
 jobs:
   run-tests:
