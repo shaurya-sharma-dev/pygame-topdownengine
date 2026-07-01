@@ -8,7 +8,7 @@ from topdownengine import math as tde_math
 from . import MobileObject
 
 class BaseController:
-    "A base class for all MobileObj controllers."
+    "A base class for all MobileObject controllers."
     def update(self, mobile_object: MobileObject, dt: float) -> None:
         """Update function for MobileObject controllers."""
         pass
@@ -32,7 +32,7 @@ class BaseController:
 class StaticController(BaseController):
     "A MobileObject controller that keeps the MobileObj still."
     def update(self, mobile_object: MobileObject, dt: float) -> None:
-        "Sets the MobileObj's velocity to (0, 0)."
+        "Sets the MobileObject's velocity to (0, 0)."
         mobile_object.velocity = pg.Vector2()
 
 class KeyboardInputController(BaseController):
