@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 import pygame as pg
-from .math import scale_rect
+from .scenes import GameplayScene
 
 class Game:
     """Acts as the central core of the game and manages the core loop and gamestate.
@@ -85,6 +85,12 @@ class Game:
         # Background Color
         self.bg_color = (255, 255, 255)
 
+        # Scenes
+        self.scenes = {
+            "gameplay": GameplayScene(self)
+        }
+        self.active_scene_key = "gameplay"
+
     def handle_events(self) -> None:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -101,24 +107,11 @@ class Game:
     
     def update(self, dt: float) -> None:
         self.camera.update(dt)
-        self.game_object_group.update(dt, self)
+        self.scenes[self.active_scene_key].update(dt)
 
     def render(self) -> None:
         self.screen.fill(self.bg_color)
-        for game_obj in sorted(self.game_object_group.sprites(), key=lambda g: g.draw_index):
-            self.screen.blit(game_obj.image, game_obj.rect.move(-self.camera.position * game_obj.SCALE))
-        
-        # Draw debug in a separate loop so that it is drawn over images.
-        if self.debug:
-            for game_obj in self.game_object_group.sprites():
-                # Draw Hitboxes
-                for hitbox in game_obj.hitboxes:
-                    pg.draw.rect(
-                        self.screen, 
-                        (0, 0, 255), 
-                        scale_rect(hitbox, game_obj.SCALE),
-                        1
-                    )
+        self.scenes[self.active_scene_key].render()
         pg.display.flip()
 
     def run(self) -> None:
