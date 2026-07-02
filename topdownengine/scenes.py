@@ -17,7 +17,7 @@ class GameplayScene(BaseScene):
 
     def render(self):
         for game_obj in sorted(self.game.game_object_group.sprites(), key=lambda g: g.draw_index):
-            self.game.screen.blit(game_obj.image, game_obj.rect.move(-self.camera.position * game_obj.SCALE))
+            self.game.screen.blit(game_obj.image, game_obj.rect.move(-self.game.camera.position * game_obj.SCALE))
         
         # Draw debug in a separate loop so that it is drawn over images.
         if self.game.debug:
