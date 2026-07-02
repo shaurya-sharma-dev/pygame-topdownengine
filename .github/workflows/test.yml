@@ -8,6 +8,10 @@ on:
       - '!docs/**'            # Exclude docs/
       - '!.github/**'         # Exclude .github/
       - '.github/workflows/test.yml' # Include this workflow file
+      - '!**/LICENSE' # Exclude LICENSE
+      - '!**/README.md' # Exclude README
+      - '!**/CHANGELOG.md' # Exclude CHANGELOG
+      
   pull_request:
     branches: [ "main" ]
     paths:
@@ -15,6 +19,9 @@ on:
       - '!docs/**'            # Exclude docs/
       - '!.github/**'         # Exclude .github/
       - '.github/workflows/test.yml' # Include this workflow file
+      - '!**/LICENSE' # Exclude LICENSE
+      - '!**/README.md' # Exclude README
+      - '!**/CHANGELOG.md' # Exclude CHANGELOG
 
 jobs:
   run-tests:
