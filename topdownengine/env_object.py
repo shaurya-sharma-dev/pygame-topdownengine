@@ -13,7 +13,7 @@ class EnvObject(GameObject):
         self,
         animation_paths: dict[str,str]|None=None, 
         frame_size: tuple[int]|None=None, 
-        rel_hitboxes: list[pg.Rect]=[],
+        colliders: list[pg.Rect]=[],
         *groups: Any
     ) -> None:
         # Set animation paths dict and frame size before calling super().__init__()
@@ -25,6 +25,6 @@ class EnvObject(GameObject):
 
         super().__init__(*groups)
 
-        # EnvObject.rel_hitboxes are relative to the EnvObject.
-        # Meanwhile, EnvObject.hitboxes are in world space.
-        self.rel_hitboxes = rel_hitboxes
+        # Colliders are relative to the EnvObject.
+        # Meanwhile, hitboxes are in world space.
+        self.colliders = colliders
