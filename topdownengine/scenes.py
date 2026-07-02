@@ -22,11 +22,11 @@ class GameplayScene(BaseScene):
         # Draw debug in a separate loop so that it is drawn over images.
         if self.game.debug:
             for game_obj in self.game.game_object_group.sprites():
-                # Draw Hitboxes
-                for hitbox in game_obj.world_colliders:
+                # Draw Colliders
+                for collider in game_obj.world_colliders:
                     pg.draw.rect(
                         self.game.screen, 
                         (0, 0, 255), 
-                        scale_rect(hitbox, game_obj.SCALE),
+                        scale_rect(collider, game_obj.SCALE),
                         1
                     )
