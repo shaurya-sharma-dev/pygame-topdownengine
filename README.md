@@ -14,7 +14,7 @@ pygame-topdownengine is a 2.5D engine for top-down games. It is designed to be h
 - Option to use either pixel-perfect or subpixel rendering.
 - Dynamic scale-setting for all `GameObject` instances.
 - Robust 3D collision detection.
-- Toggleable `Game.debug` attribute to render hitboxes during development.
+- Toggleable `Game.debug` attribute to render colliders during development.
 
 ## Quickstart
 This code makes a Player character, a secondary character that will attempt to follow the Player character, and a solid object the Player can collide with and jump over.
