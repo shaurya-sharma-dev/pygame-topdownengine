@@ -34,7 +34,7 @@ env_object = tde.EnvObject(
     animation_paths={
         "idle": ASSETS_DIR / "example-cliff.png"
     },
-    frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)]
+    frame_size=(32, 32), rel_hitboxes=[pg.Rect(0, 0, 32, 32)]
 )
 env_object.position = pg.Vector2(100, 100)
 env_object.obj_shadow = "32x16"

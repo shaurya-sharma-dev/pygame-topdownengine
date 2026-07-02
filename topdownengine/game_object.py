@@ -28,7 +28,7 @@ class GameObject(pg.sprite.Sprite):
         anim_speed (float): Animation speed.
         current_animation (str): Current animation.
         obj_shadow (str|None): Shadow size being used (or None for no shadow).
-        colliders (list[pg.Rect|pg.FRect]): List of hitboxes relative to the `GameObject`.
+        rel_hitboxes (list[pg.Rect|pg.FRect]): List of hitboxes relative to the `GameObject`.
         hitboxes (list[pg.Rect|pg.FRect]): List of world-space hitboxes in the current frame.
 
         current_frame (pg.Surface): Current animation frame surface.
@@ -69,7 +69,7 @@ class GameObject(pg.sprite.Sprite):
             GameObject.load_and_scale_shadows()
 
         # Collisions
-        self.colliders = self.generate_colliders()
+        self.rel_hitboxes = self.generate_hitboxes()
     
     # Visual Methods + Properties
     @classmethod
@@ -192,7 +192,7 @@ class GameObject(pg.sprite.Sprite):
         return (self.elevation, self.rect.bottom)
     
     # Collisions
-    def generate_colliders(self) -> list[pg.Rect|pg.FRect]:
+    def generate_hitboxes(self) -> list[pg.Rect|pg.FRect]:
         "Default list of Rect objects for collisions."
         elev_pos = self.position - pg.Vector2(0, self.elevation)
         if self.SUBPIXEL:
@@ -217,7 +217,7 @@ class GameObject(pg.sprite.Sprite):
         GameObj itself."""
         return [
             pg.Rect(c.left + self.position.x - c.width//2, c.top + self.position.y - c.height - self.elevation, c.width, c.height)
-            for c in self.colliders
+            for c in self.rel_hitboxes
         ]
 
     def _handle_collision(self, dir: pg.Vector2, game: Game) -> bool:
