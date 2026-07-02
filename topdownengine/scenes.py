@@ -27,6 +27,6 @@ class GameplayScene(BaseScene):
                     pg.draw.rect(
                         self.game.screen, 
                         (0, 0, 255), 
-                        scale_rect(hitbox, game_obj.SCALE),
+                        scale_rect(hitbox.move(-self.game.camera.position), game_obj.SCALE),
                         1
                     )
