@@ -81,3 +81,5 @@ If you would like to view the documentation page on installation, which also has
 This library is distributed under the MIT license, which can be found in the root of this repository under the `LICENSE` file.
 
 The source files located in the `examples` subfolder are licensed under the Creative Commons Zero 1.0 Universal license, which can be found inside of `examples/LICENSE`.
+
+The documentation (found in the `docs` subfolder) is also licensed under the Creative Commons Zero 1.0 Universal license, which can be found inside of `docs/LICENSE`.
