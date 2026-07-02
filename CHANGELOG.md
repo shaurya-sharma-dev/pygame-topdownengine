@@ -10,6 +10,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - New `example-cliff.png` asset to assets folder.
 - `Game.bg_color` attribute to control the fill color used in rendering cycles.
 
+### Changed
+- **Breaking:** Rename `GameObject.hitboxes` to `GameObject.world_colliders`.
+
 ### Fixed
 - `BaseController` class docstring and `StaticController.update` docstring to refer to `MobileObject` instead of the now-removed `MobileObj`.
 
