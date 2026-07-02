@@ -4,6 +4,9 @@ from .math import scale_rect
 class BaseScene:
     def __init__(self, game):
         self.game = game
+
+    def handle_event(self, event: pg.Event):
+        pass
     
     def update(self, dt: float):
         pass

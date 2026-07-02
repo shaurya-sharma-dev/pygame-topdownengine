@@ -100,6 +100,7 @@ class Game:
                 # We import GameObject in handle_events to prevent a circular import.
                 from .game_object import GameObject
                 GameObject.set_scale(self.target_scale, self)
+            self.scenes[self.active_scene_key].handle_event(event)
 
     def set_target_scale(self, target_scale: int):
         self.target_scale = target_scale
