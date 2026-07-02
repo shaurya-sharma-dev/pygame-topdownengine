@@ -23,7 +23,7 @@ class GameplayScene(BaseScene):
         if self.game.debug:
             for game_obj in self.game.game_object_group.sprites():
                 # Draw Hitboxes
-                for hitbox in game_obj.hitboxes:
+                for hitbox in game_obj.world_colliders:
                     pg.draw.rect(
                         self.game.screen, 
                         (0, 0, 255), 
