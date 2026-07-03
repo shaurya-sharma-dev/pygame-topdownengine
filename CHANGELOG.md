@@ -6,12 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [0.3.0]
+
 ### Added
 - New `example-cliff.png` asset to assets folder.
 - `Game.bg_color` attribute to control the fill color used in rendering cycles.
+- `BaseScene` and `GameplayScene` classes which are used to define scenes, which control the `Game` class's execution loop. For instance, the `GameplayScene` will render and update all `GameObjects` while a different scene could act as the main menu.
+- `UIContainer`, `BaseUIElement`, `Button`, and `Text` classes to allow for an object-oriented way to build UIs that are integrated into the engine.
 
 ### Fixed
-- `BaseController` class docstring and `StaticController.update` docstring to refer to `MobileObject` instead of the now-removed `MobileObj`.
+- `BaseController` class docstring and `StaticController.update` docstring to refer to `MobileObject` instead of `MobileObj` (which was the old name).
+- Camera offset in debug rendering logic.
 
 ## [0.2.1] - 2026-06-24
 
@@ -82,7 +87,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `KeyboardInputManager` class to easily get keyboard input and `NoKeysPressed` and `MoreKeysPressed` classes to allow for manipulating the input stream.
 - `assets/` folder with predefined assets. It currently houses shadows and an example player sprite.
 
-[unreleased]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.2.1...HEAD
+[unreleased]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.2.1...0.3.0
 [0.2.1]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.0.3...v0.1.0
