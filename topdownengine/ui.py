@@ -1,6 +1,5 @@
 from __future__ import annotations
 import pygame as pg
-from .game import Game
 from collections.abc import Callable
 
 class UIContainer:
@@ -28,7 +27,7 @@ class UIContainer:
             surface.blit(e.image, e.rect)
 
 class BaseUIElement:
-    def __init__(self, game: Game, position: pg.typing.Point, align: str="center", image: pg.Surface=None):
+    def __init__(self, game, position: pg.typing.Point, align: str="center", image: pg.Surface=None):
         self.game = game
         self.containers = set()
         self._image = image
@@ -55,7 +54,7 @@ class BaseUIElement:
         pass
 
 class Button(BaseUIElement):
-    def __init__(self, game: Game, position: pg.typing.Point, align: str="center", image: pg.Surface=None, on_click: Callable[[], None]=None, hover_highlight_strength: int=100):
+    def __init__(self, game, position: pg.typing.Point, align: str="center", image: pg.Surface=None, on_click: Callable[[], None]=None, hover_highlight_strength: int=100):
         super().__init__(game, position, align, image)
         self.on_click = on_click
         self.hover_highlight_strength = hover_highlight_strength
