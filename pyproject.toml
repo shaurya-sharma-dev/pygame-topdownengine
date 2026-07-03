@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygame-topdownengine"
-version = "0.2.1"
+version = "0.3.0"
 authors = [
     { name = "Shaurya Sharma" }
 ]
 requires-python = ">=3.12.10"
 dependencies = [
-    "pygame-ce ~= 2.5",
+    "pygame-ce~=2.5",
 ]
 description = "pygame-topdownengine is a 2.5D engine for top-down games."
 readme = "README.md"
@@ -55,7 +55,7 @@ keywords = [
 
 [project.optional-dependencies]
 dev = [
-    "pytest ~= 9.1",
+    "pytest~=9.1",
 ]
 
 [project.urls]

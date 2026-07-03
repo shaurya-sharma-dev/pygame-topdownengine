@@ -23,6 +23,9 @@ import topdownengine as tde
 from topdownengine.mobile_object.controller import KeyboardInputController, MovementAIController
 from topdownengine.asset_paths import ASSETS_DIR
 import pygame as pg
+from topdownengine.scenes import BaseScene
+from topdownengine.ui import Button, UIContainer, Text
+from topdownengine.font import Font
 
 # Define an instance of the Game class
 game = tde.Game(
@@ -32,6 +35,25 @@ game = tde.Game(
     target_scale=3 # Add scale of three to make it more visible
 )
 game.bg_color = (40, 229, 30)
+
+# Define main menu using a BaseScene instance + set the active scene to the main menu
+game.scenes["menu"] = BaseScene(game)
+game.active_scene_key = "menu"
+
+# Create the play button + header
+font = Font("Arial")
+header = Text((450, 200), font, 50, "pygame-topdownengine", (255, 255, 255))
+
+play_btn = Button((450, 350), on_click=lambda: setattr(game, "active_scene_key", "gameplay"))
+play_btn.image = pg.Surface((150, 50))
+play_btn.image.fill((0, 0, 0))
+font.draw_text("PLAY", 75, 25, 40, play_btn.image, (255, 255, 255))
+
+# Add the header + play button to the main menu
+container = UIContainer()
+container.add_ui_element(header)
+container.add_ui_element(play_btn)
+game.scenes["menu"].ui_containers.append(container)
 
 # Define a MobileObject to be the Player + Enable Camera Tracking
 player = tde.MobileObject(
@@ -81,3 +103,5 @@ If you would like to view the documentation page on installation, which also has
 This library is distributed under the MIT license, which can be found in the root of this repository under the `LICENSE` file.
 
 The source files located in the `examples` subfolder are licensed under the Creative Commons Zero 1.0 Universal license, which can be found inside of `examples/LICENSE`.
+
+The documentation (found in the `docs` subfolder) is also licensed under the Creative Commons Zero 1.0 Universal license, which can be found inside of `docs/LICENSE`.
