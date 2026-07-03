@@ -65,8 +65,7 @@ class Button(BaseUIElement):
         self.on_click = on_click
         self.hover_highlight_strength = hover_highlight_strength
 
-    @property
-    def image(self) -> pg.Surface:
+    def _get_image(self) -> pg.Surface:
         if self.is_mouse_over():
             highlighted_image = self._image.copy()
             highlighted_image.fill(
@@ -76,6 +75,8 @@ class Button(BaseUIElement):
             return highlighted_image
         
         return self._image
+    
+    image = property(fget=_get_image, fset=BaseUIElement.image.fset)
 
     def is_mouse_over(self) -> bool:
         return self.rect.collidepoint(pg.mouse.get_pos())
