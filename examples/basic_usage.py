@@ -28,7 +28,7 @@ play_btn.image = pg.Surface((150, 50))
 play_btn.image.fill((0, 0, 0))
 font.draw_text("PLAY", 75, 25, 40, play_btn.image, (255, 255, 255))
 
-# Add the play button to the main menu
+# Add the header + play button to the main menu
 container = UIContainer()
 container.add_ui_element(header)
 container.add_ui_element(play_btn)

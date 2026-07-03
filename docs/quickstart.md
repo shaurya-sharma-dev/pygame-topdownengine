@@ -21,6 +21,11 @@ from topdownengine.asset_paths import ASSETS_DIR
 
 # pygame-ce provides us with some really helpful utilities.
 import pygame as pg
+
+# We will need this for the main menu.
+from topdownengine.scenes import BaseScene
+from topdownengine.ui import Button, UIContainer, Text
+from topdownengine.font import Font
 ```
 
 ## The Game Class
@@ -36,8 +41,38 @@ game = tde.Game(
 game.bg_color = (40, 229, 30) # Give it a background color
 ```
 
+## The Main Menu
+Before we get started with anything else, let's implement a (very basic) main menu. In our main menu, we will add a very basic header/title and a play button.
+```
+# Define main menu using a BaseScene instance + set the active scene to the main menu
+game.scenes["menu"] = BaseScene(game)
+game.active_scene_key = "menu"
+
+# Create the play button + header
+font = Font("Arial")
+header = Text((450, 200), font, 50, "pygame-topdownengine", (255, 255, 255))
+
+# Define play button and make it start the game on click.
+play_btn = Button((450, 350), on_click=lambda: setattr(game, "active_scene_key", "gameplay")) 
+
+# Make the size of the play button 150x50 pixels.
+play_btn.image = pg.Surface((150, 50))
+
+# Make the play button have a black background.
+play_btn.image.fill((0, 0, 0)) 
+
+# Add text to the play button.
+font.draw_text("PLAY", 75, 25, 40, play_btn.image, (255, 255, 255))
+
+# Add the header + play button to the main menu
+container = UIContainer()
+container.add_ui_element(header)
+container.add_ui_element(play_btn)
+game.scenes["menu"].ui_containers.append(container)
+```
+
 ## The Player
-Now that we have a Game instance, the next thing we will define is the Player. This code gives the player keyboard movement and animations (using the package's premade animations). It uses a MobileObject, which is a subclass of the GameObject class with extra movement features. For reference, GameObject is the base class for all in-world objects in the engine.
+Now that we have a Game instance and we have made our main menu, the next thing we will define is the Player. This code gives the player keyboard movement and animations (using the package's premade animations). It uses a MobileObject, which is a subclass of the GameObject class with extra movement features. For reference, GameObject is the base class for all in-world objects in the engine.
 ```
 # Define a MobileObject to be the Player + Enable Camera Tracking
 player = tde.MobileObject(
