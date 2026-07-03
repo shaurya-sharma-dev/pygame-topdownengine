@@ -14,6 +14,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `BaseScene` and `GameplayScene` classes which are used to define scenes, which control the `Game` class's execution loop. For instance, the `GameplayScene` will render and update all `GameObjects` while a different scene could act as the main menu.
 - `UIContainer`, `BaseUIElement`, `Button`, and `Text` classes to allow for an object-oriented way to build UIs that are integrated into the engine.
 
+### Changed
+- **Breaking:** Rename `GameObject.hitboxes` to `GameObject.world_colliders`.
+
 ### Fixed
 - `BaseController` class docstring and `StaticController.update` docstring to refer to `MobileObject` instead of `MobileObj` (which was the old name).
 - Camera offset in debug rendering logic.

@@ -24,7 +24,4 @@ class EnvObject(GameObject):
             self.frame_size = frame_size
 
         super().__init__(*groups)
-
-        # Colliders are relative to the EnvObject.
-        # Meanwhile, hitboxes are in world space.
         self.colliders = colliders

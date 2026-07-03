@@ -28,8 +28,8 @@ class GameObject(pg.sprite.Sprite):
         anim_speed (float): Animation speed.
         current_animation (str): Current animation.
         obj_shadow (str|None): Shadow size being used (or None for no shadow).
-        colliders (list[pg.Rect|pg.FRect]): List of hitboxes relative to the `GameObject`.
-        hitboxes (list[pg.Rect|pg.FRect]): List of world-space hitboxes in the current frame.
+        colliders (list[pg.Rect|pg.FRect]): List of colliders relative to the `GameObject`.
+        world_colliders (list[pg.Rect|pg.FRect]): List of world-space colliders in the current frame.
 
         current_frame (pg.Surface): Current animation frame surface.
         image (pg.Surface): Image for drawing (includes `current_frame` and the shadow).
@@ -211,10 +211,10 @@ class GameObject(pg.sprite.Sprite):
         return [tde_math.scale_rect(r, 1/self.SCALE)]
     
     @property
-    def hitboxes(self) -> list[pg.Rect]:
-        """Return a list of hitbox Rects in world-space, as opposed to
-        GameObj.colliders, which uses relative positioning to the
-        GameObj itself."""
+    def world_colliders(self) -> list[pg.Rect]:
+        """Return a list of collider Rects in world-space, as opposed to
+        GameObject.colliders, which uses relative positioning to the
+        GameObject itself."""
         return [
             pg.Rect(c.left + self.position.x - c.width//2, c.top + self.position.y - c.height - self.elevation, c.width, c.height)
             for c in self.colliders
@@ -235,11 +235,11 @@ class GameObject(pg.sprite.Sprite):
         return_value = False
         while collision_found:
             collision_found = False
-            for self_hitbox in self.hitboxes:  # always fresh
+            for self_hitbox in self.world_colliders:  # always fresh
                 for game_obj in game.game_object_group:
                     if game_obj is self or not game_obj.CAUSES_COLLISIONS or (game_obj.z + game_obj.height) <= self.z:
                         continue
-                    for other_hitbox in game_obj.hitboxes:
+                    for other_hitbox in game_obj.world_colliders:
                         if self_hitbox.colliderect(other_hitbox):
                             if moving_x:
                                 if moving_right:
@@ -253,7 +253,7 @@ class GameObject(pg.sprite.Sprite):
                                     self.position.y += other_hitbox.bottom - self_hitbox.top
                             collision_found = True
                             return_value = True
-                            break  # restart with fresh hitboxes
+                            break  # restart with fresh world_colliders
                     if collision_found:
                         break
                 if collision_found:
@@ -264,12 +264,12 @@ class GameObject(pg.sprite.Sprite):
     def _handle_elevation(self, game: Game) -> None:
         self.elevation = 0
 
-        for self_hitbox in self.hitboxes:
+        for self_hitbox in self.world_colliders:
             for game_obj in game.game_object_group:
                 if game_obj is self or not game_obj.CAUSES_COLLISIONS:
                     continue
 
-                for other_hitbox in game_obj.hitboxes:
+                for other_hitbox in game_obj.world_colliders:
                     if self_hitbox.colliderect(other_hitbox):
                         self.elevation = max(self.elevation, game_obj.height + game_obj.elevation)
 
