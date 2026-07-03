@@ -1,19 +1,10 @@
 import pygame as pg
 from .math import scale_rect
-from .ui import UIContainer
 
 class BaseScene:
     def __init__(self, game):
         self.game = game
-        self._ui_containers = []
-
-    @property
-    def ui_containers(self) -> list[UIContainer]:
-        return self._ui_containers
-    
-    @ui_containers.setter
-    def ui_containers(self, new_containers: list[UIContainer]):
-        self._ui_containers = new_containers
+        self.ui_containers = []
 
     def handle_event(self, event: pg.Event):
         for container in self.ui_containers:
