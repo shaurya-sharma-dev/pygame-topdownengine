@@ -1,6 +1,7 @@
 from __future__ import annotations
 import pygame as pg
 from collections.abc import Callable
+from .font import Font
 
 class UIContainer:
     def __init__(self):
@@ -27,8 +28,7 @@ class UIContainer:
             surface.blit(e.image, e.rect)
 
 class BaseUIElement:
-    def __init__(self, game, position: pg.typing.Point, align: str="center", image: pg.Surface=None):
-        self.game = game
+    def __init__(self, position: pg.typing.Point, align: str="center", image: pg.Surface=None):
         self.containers = set()
         self._image = image
         if self._image is None:
@@ -60,8 +60,8 @@ class BaseUIElement:
         pass
 
 class Button(BaseUIElement):
-    def __init__(self, game, position: pg.typing.Point, align: str="center", image: pg.Surface=None, on_click: Callable[[], None]=None, hover_highlight_strength: int=100):
-        super().__init__(game, position, align, image)
+    def __init__(self, position: pg.typing.Point, align: str="center", image: pg.Surface=None, on_click: Callable[[], None]=None, hover_highlight_strength: int=100):
+        super().__init__(position, align, image)
         self.on_click = on_click
         self.hover_highlight_strength = hover_highlight_strength
 
@@ -84,3 +84,8 @@ class Button(BaseUIElement):
     def handle_event(self, event: pg.Event) -> None:
         if event.type == pg.MOUSEBUTTONUP and self.is_mouse_over() and self.on_click is not None:
             self.on_click()
+
+class Text(BaseUIElement):
+    def __init__(self, position: pg.typing.Point, font: Font, size: int, text: str, color: pg.typing.ColorLike, align: str="center"):
+        image = font._render(size, text, color)
+        super().__init__(position, align, image)
