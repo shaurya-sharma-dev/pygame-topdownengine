@@ -39,6 +39,11 @@ class BaseUIElement:
     @property
     def image(self) -> pg.Surface:
         return self._image
+    
+    @image.setter
+    def image(self, new_image: pg.Surface):
+        self._image = new_image
+        self.rect = new_image.get_rect(**{self.align: getattr(self.rect, self.align)})
 
     def add_container(self, container: UIContainer) -> None:
         self.containers.add(container)
@@ -71,11 +76,6 @@ class Button(BaseUIElement):
             return highlighted_image
         
         return self._image
-
-    @image.setter
-    def image(self, new_image: pg.Surface):
-        self._image = new_image
-        self.rect = new_image.get_rect(**{self.align: getattr(self.rect, self.align)})
 
     def is_mouse_over(self) -> bool:
         return self.rect.collidepoint(pg.mouse.get_pos())
