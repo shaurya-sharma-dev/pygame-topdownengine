@@ -34,6 +34,7 @@ class BaseUIElement:
         if self._image is None:
             self._image = pg.Surface((1,1), pg.SRCALPHA)
         self.rect = self._image.get_rect(**{align: position})
+        self.align = align
 
     @property
     def image(self) -> pg.Surface:
@@ -61,7 +62,20 @@ class Button(BaseUIElement):
 
     @property
     def image(self) -> pg.Surface:
-        return (self._image.copy().fill((self.hover_highlight_strength, self.hover_highlight_strength, self.hover_highlight_strength, 0), special_flags=pg.BLEND_RGBA_ADD) or self._image) if self.is_mouse_over() else self._image
+        if self.is_mouse_over():
+            highlighted_image = self._image.copy()
+            highlighted_image.fill(
+                (self.hover_highlight_strength, self.hover_highlight_strength, self.hover_highlight_strength, 0), 
+                special_flags=pg.BLEND_RGBA_ADD
+            )
+            return highlighted_image
+        
+        return self._image
+
+    @image.setter
+    def image(self, new_image: pg.Surface):
+        self._image = new_image
+        self.rect = new_image.get_rect(**{self.align: getattr(self.rect, self.align)})
 
     def is_mouse_over(self) -> bool:
         return self.rect.collidepoint(pg.mouse.get_pos())
