@@ -8,6 +8,11 @@ from .game import Game
 from .game_object import GameObject
 from .mobile_object import MobileObject
 from .env_object import EnvObject
+from .scenes import BaseScene, GameplayScene
+from .visual_utils import VisualUtils
+from .font import Font
+from .camera import Camera
+from .asset_paths import PACKAGE_ROOT, ASSETS_DIR
 
 # __version__ attribute
 # This only works if the package is installed.
