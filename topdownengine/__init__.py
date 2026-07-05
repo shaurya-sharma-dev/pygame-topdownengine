@@ -8,3 +8,14 @@ from .game import Game
 from .game_object import GameObject
 from .mobile_object import MobileObject
 from .env_object import EnvObject
+
+# __version__ attribute
+# This only works if the package is installed.
+# (E.g. pip install -e .)
+
+from importlib.metadata import version, PackageNotFoundError
+
+try:
+    __version__ = version("pygame-topdownengine")
+except PackageNotFoundError:
+    __version__ = "unknown"
