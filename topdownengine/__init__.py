@@ -19,3 +19,6 @@ try:
     __version__ = version("pygame-topdownengine")
 except PackageNotFoundError:
     __version__ = "unknown"
+
+# Clean namespace
+del version, PackageNotFoundError
