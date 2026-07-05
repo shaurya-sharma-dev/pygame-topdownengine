@@ -13,9 +13,12 @@ Whenever you are submitting a bug report, always include the following:
 - the expected behavior vs. the actual behavior
 
 ### Feature Requests
-Whenever you are submitting a feature request, consider the core problem you are trying to solve and why the feature would be beneficial for the entire package. 
+Whenever you are submitting a feature request, consider the core problem you are trying to solve and why the feature would be beneficial for the entire package. Make sure your feature request isn't outside of scope as well before submitting an issue!
 
-For example, a feature request for a `GameObject` subclass that has health baked-in would be rejected because it's something users can easily implement on their own, it doesn't benefit the package much, if at all, and the requirements users would have for such a class could vary on a case-by-case basic.
+In other words, **do not request highly specific or customizable features**. For example, a request for a subclass of `GameObject` with health would be rejected for the following reasons:
+- **High Customization**: User requirements for a health class vary too much.
+- **Low Value**: It adds little to no value to the core package.
+- **Simple Self-Implementation**: Users can easily build this functionality on their own.
 
 ## Pull Requests
 For any pull request that does more than one of the following, you **MUST** submit an issue first (see the Issues section above):
