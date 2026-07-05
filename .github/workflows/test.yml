@@ -11,6 +11,8 @@ on:
       - '!**/LICENSE' # Exclude LICENSE
       - '!**/README.md' # Exclude README
       - '!**/CHANGELOG.md' # Exclude CHANGELOG
+      - '!**/CONTRIBUTING.md' # Exclude CONTRIBUTING.md
+      - '!**/.gitignore' # Exclude .gitignore
       
   pull_request:
     branches: [ "main" ]
@@ -22,6 +24,8 @@ on:
       - '!**/LICENSE' # Exclude LICENSE
       - '!**/README.md' # Exclude README
       - '!**/CHANGELOG.md' # Exclude CHANGELOG
+      - '!**/CONTRIBUTING.md' # Exclude CONTRIBUTING.md
+      - '!**/.gitignore' # Exclude .gitignore
 
 jobs:
   run-tests:
