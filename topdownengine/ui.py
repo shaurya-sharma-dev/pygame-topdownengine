@@ -16,14 +16,15 @@ class UIContainer:
             raise TypeError("Elements must be subclasses of the BaseUIElement class.")
         
         self._elements.add(element)
-        element.containers.add(self)
+        element._containers.add(self)
 
     def remove_ui_element(self, element: BaseUIElement) -> None:
         self._elements.remove(element)
-        element.containers.remove(self)
+        element._containers.remove(self)
 
     def remove_all_ui_elements(self) -> None:
-        self._elements.clear()
+        for element in self.elements:
+            self.remove_ui_element(element)
 
     def handle_event(self, event: pg.Event) -> None:
         for e in self.elements:
@@ -39,12 +40,16 @@ class UIContainer:
 
 class BaseUIElement:
     def __init__(self, position: pg.typing.Point, align: str="center", image: pg.Surface=None):
-        self.containers = set()
+        self._containers = set()
         self._image = image
         if self._image is None:
             self._image = pg.Surface((1,1), pg.SRCALPHA)
         self.rect = self._image.get_rect(**{align: position})
         self.align = align
+
+    @property
+    def containers(self) -> set[UIContainer]:
+        return self._containers
 
     @property
     def image(self) -> pg.Surface:
@@ -56,12 +61,15 @@ class BaseUIElement:
         self.rect = new_image.get_rect(**{self.align: getattr(self.rect, self.align)})
 
     def add_container(self, container: UIContainer) -> None:
-        self.containers.add(container)
-        container.elements.add(self)
+        if not isinstance(container, UIContainer):
+            raise TypeError("Containers must be instances of UIContainer.")
+        
+        self._containers.add(container)
+        container._elements.add(self)
 
     def remove_container(self, container: UIContainer) -> None:
-        self.containers.remove(container)
-        container.elements.remove(self)
+        self._containers.remove(container)
+        container._elements.remove(self)
 
     def handle_event(self, event: pg.Event) -> None:
         pass
