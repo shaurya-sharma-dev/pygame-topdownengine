@@ -5,15 +5,25 @@ from .font import Font
 
 class UIContainer:
     def __init__(self):
-        self.elements = set()
+        self._elements = set()
+
+    @property
+    def elements(self) -> set[BaseUIElement]:
+        return self._elements
     
     def add_ui_element(self, element: BaseUIElement) -> None:
-        self.elements.add(element)
+        if not isinstance(element, BaseUIElement):
+            raise TypeError("Elements must be subclasses of the BaseUIElement class.")
+        
+        self._elements.add(element)
         element.containers.add(self)
 
     def remove_ui_element(self, element: BaseUIElement) -> None:
-        self.elements.remove(element)
+        self._elements.remove(element)
         element.containers.remove(self)
+
+    def remove_all_ui_elements(self) -> None:
+        self._elements.clear()
 
     def handle_event(self, event: pg.Event) -> None:
         for e in self.elements:
