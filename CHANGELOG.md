@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+- `UIContainer.remove_all_ui_elements` method that removes all elements from that UIContainer.
+
+### Changed
+- `UIContainer.elements` to a managed attribute so that it can no longer be set directly.
+- `UIContainer.add_ui_element` to validate elements before adding them to the container.
+
 ## [0.3.0]
 
 ### Added
