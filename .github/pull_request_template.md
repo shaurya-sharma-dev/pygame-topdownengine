@@ -5,6 +5,7 @@
 <!-- Link to the issue(s) fixed or addressed by this PR. Use Fixes #123 or Closes #123 -->
 
 ## Type of Change
+<!-- To check one of these boxes, put a lowercase "x" with no trailing or leading spaces inside the brackets. -->
 - [ ] Refactor (non-breaking change that refactors internal code without affecting the public API)
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
