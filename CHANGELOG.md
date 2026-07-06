@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 ### Added
 - `UIContainer.remove_all_ui_elements` method that removes all elements from that UIContainer.
 - `BaseUIElement.remove_from_all_containers` method that removes an element from all containers.
+- `__version__` string attribute in top-level package namespace.
+- `BaseScene`, `GameplayScene`, `Font`, `Camera`, `PACKAGE_ROOT` and `ASSETS_DIR` to the top-level package namespace for easier imports.
 
 ### Changed
 - **Breaking:** `UIContainer.elements` and `BaseUIElement.containers` to managed attributes so that it can no longer be set directly.
