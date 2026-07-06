@@ -23,15 +23,15 @@ class UIContainer:
         element._containers.remove(self)
 
     def remove_all_ui_elements(self) -> None:
-        for element in self.elements:
+        for element in self.elements.copy():
             self.remove_ui_element(element)
 
     def handle_event(self, event: pg.Event) -> None:
-        for e in self.elements:
+        for e in self.elements.copy():
             e.handle_event(event)
     
     def update(self, dt: float) -> None:
-        for e in self.elements:
+        for e in self.elements.copy():
             e.update(dt)
 
     def render(self, surface: pg.Surface) -> None:
@@ -72,7 +72,7 @@ class BaseUIElement:
         container._elements.remove(self)
 
     def remove_from_all_containers(self) -> None:
-        for container in self.containers:
+        for container in self.containers.copy():
             self.remove_container(container)
 
     def handle_event(self, event: pg.Event) -> None:
