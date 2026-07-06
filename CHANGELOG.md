@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `BaseUIElement.remove_from_all_containers` method that removes an element from all containers.
 
 ### Changed
-- `UIContainer.elements` and `BaseUIElement.containers` to managed attributes so that it can no longer be set directly.
+- **Breaking:** `UIContainer.elements` and `BaseUIElement.containers` to managed attributes so that it can no longer be set directly.
 - `UIContainer.add_ui_element` to validate elements before adding them to the container.
 - `BaseUIElement.add_container` to validate containers before adding the element to them.
 
