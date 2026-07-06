@@ -71,6 +71,10 @@ class BaseUIElement:
         self._containers.remove(container)
         container._elements.remove(self)
 
+    def remove_from_all_containers(self) -> None:
+        for container in self.containers:
+            self.remove_container(container)
+
     def handle_event(self, event: pg.Event) -> None:
         pass
     
