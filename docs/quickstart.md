@@ -3,6 +3,11 @@
 ## Introduction
 In this quickstart, we will be guiding you towards creating a Player character you can move with WASD on your keyboard, a secondary character that will attempt to follow the Player, and a solid object the Player can collide with and jump over.
 
+<figure markdown="span" style="text-align: center;">
+    <img src="./images/quickstart.png" alt="Finished Program" width=500>
+    <figcaption>The player (a `MobileObject`) jumping onto a collidable object (an `EnvObject`) while being chased by the enemy (another `MobileObject`).</figcaption>
+</figure>
+
 ## Importing Dependencies
 Let's get the ball rolling! Before we can do anything however, we will need to import the engine and pygame-ce.
 ```
