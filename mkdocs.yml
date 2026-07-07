@@ -1,0 +1,16 @@
+site_name: pygame-topdownengine Documentation
+site_url: https://shaurya-sharma-dev.github.io/pygame-topdownengine/
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Quickstart: quickstart.md
+  - API Reference
+    - api/mobile_object.md

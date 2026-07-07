@@ -1,7 +1,3 @@
----
-layout: page
-title: "Installation"
----
 # Installation
 
 ## Prerequisites

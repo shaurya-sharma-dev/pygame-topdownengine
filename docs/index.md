@@ -1,7 +1,3 @@
----
-layout: page
-title: "Introduction"
----
 # Introduction
 
 This is the documentation for the pygame-topdownengine package. 
