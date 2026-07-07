@@ -9,18 +9,18 @@ nav = [
   { "Installation" = "installation.md" },
   { "Quickstart" = "quickstart.md" },
   { "API Reference" = [
-    { "topdownengine.asset_paths" = "api\\asset_paths.md" },
-    { "topdownengine.camera" = "api\\camera.md" },
-    { "topdownengine.controls" = "api\\controls.md" },
-    { "topdownengine.env_object" = "api\\env_object.md" },
-    { "topdownengine.font" = "api\\font.md" },
-    { "topdownengine.game_object" = "api\\game_object.md" },
-    { "topdownengine.game" = "api\\game.md" },
-    { "topdownengine.math" = "api\\math.md" },
-    { "topdownengine.mobile_object" = "api\\mobile_object.md" },
-    { "topdownengine.scenes" = "api\\scenes.md" },
-    { "topdownengine.ui" = "api\\ui.md" },
-    { "topdownengine.visual_utils" = "api\\visual_utils.md" }
+    { "topdownengine.asset_paths" = "api\\asset_paths" },
+    { "topdownengine.camera" = "api\\camera" },
+    { "topdownengine.controls" = "api\\controls" },
+    { "topdownengine.env_object" = "api\\env_object" },
+    { "topdownengine.font" = "api\\font" },
+    { "topdownengine.game_object" = "api\\game_object" },
+    { "topdownengine.game" = "api\\game" },
+    { "topdownengine.math" = "api\\math" },
+    { "topdownengine.mobile_object" = "api\\mobile_object" },
+    { "topdownengine.scenes" = "api\\scenes" },
+    { "topdownengine.ui" = "api\\ui" },
+    { "topdownengine.visual_utils" = "api\\visual_utils" }
   ]}
 ]
 
