@@ -12,7 +12,18 @@ class VisualUtils:
         new_frame_width: int=None, 
         new_frame_height: int=None
     ) -> list[pg.Surface]:
-        "Loads an animation from a given file with a given frame width and height"
+        """Loads an animation from a given file with a given frame width and height.
+        
+        Args:
+            filename (str): File path.
+            frame_width (int): Frame width.
+            frame_height (int): Frame height.
+            new_frame_width (int, optional): New frame width. Defaults to None.
+            new_frame_height (int, optional): New frame height. Defaults to None.
+
+        Returns: 
+            list[pygame.Surface]: The animation.
+        """
         sheet = pg.image.load(filename).convert_alpha()
         frames = []
         frame_count = sheet.get_width() // frame_width
@@ -31,7 +42,17 @@ class VisualUtils:
         frame_height: int, 
         scale_to: int|tuple=None
     ) -> list[list[pg.Surface]]:
-        "Loads multiple animations from a given spritesheet with a given frame width and height."
+        """Loads multiple animations from a given spritesheet with a given frame width and height.
+        
+        Args:
+            filename (str): File path.
+            frame_width (int): Frame width.
+            frame_height (int): Frame height.
+            scale_to (int|tuple, optional): Integer/tuple to scale by/to. Defaults to None.
+
+        Returns: 
+            list[list[pygame.Surface]]: The list of animations.
+        """
         sheet = pg.image.load(filename).convert_alpha()
         all_rows = []
         
@@ -61,6 +82,16 @@ class VisualUtils:
         flip_x: bool=False, 
         flip_y: bool=False
     ) -> list[pg.Surface]:
+        """Flip an animation.
+        
+        Args:
+            anim (list[pygame.Surface]): The animation to flip.
+            flip_x (bool, optional): Flip x? Defaults to False.
+            flip_y (bool, optional): Flip y? Defaults to False.
+
+        Returns: 
+            list[pygame.Surface]: The animation.
+        """
         new_anim = []
         for frame in anim:
             new_anim.append(
@@ -78,7 +109,16 @@ class VisualUtils:
         old_color: pg.typing.ColorLike, 
         new_color: pg.typing.ColorLike
     ) -> pg.Surface:
-        "Replace all of one given color in a Surface with another."
+        """Replace all of one given color in a Surface with another.
+        
+        Args:
+            surface (pygame.Surface): The surface to modify.
+            old_color (pg.typing.ColorLike): The old color to replace.
+            new_color (pg.typing.ColorLike): The new color to replace with.
+
+        Returns: 
+            pygame.Surface: The new Surface.
+        """
         surface_new = surface.copy()
         with pg.PixelArray(surface_new) as pixels:
             pixels.replace(old_color, new_color)
@@ -86,7 +126,15 @@ class VisualUtils:
 
     @staticmethod
     def make_img_white(surface: pg.Surface, amount: int=255) -> pg.Surface:
-        "Make a Surface white to a given degree (defaults to 255)."
+        """Whiten a surface to a given degree.
+        
+        Args:
+            surface (pygame.Surface): The surface to modify.
+            amount (int, optional): The degree to whiten by. Defaults to 255.
+
+        Returns: 
+            pygame.Surface: The new Surface.
+        """
         silhouette = surface.copy()
         silhouette.fill((amount, amount, amount, 0), special_flags=pg.BLEND_RGBA_ADD)
         return silhouette
@@ -99,7 +147,15 @@ class VisualUtils:
         end_pos: pg.typing.Point, 
         res: int=256
     ) -> None:
-        "Draw a line that matches the game's pixel resolution."
+        """Draw a line that matches the game's pixel resolution.
+        
+        Args:
+            surface (pygame.Surface): The surface to draw the line on.
+            color (pygame.typing.ColorLike): The color of the line.
+            start_pos (pygame.typing.Point): The start position.
+            end_pos (pygame.typing.Point): The end position.
+            res (int, optional): The amount to divide by. Defaults to 256.
+        """
         sw, sh = surface.get_size()
         if sw > sh:
             lw, lh = res, int(res * (sh / sw))
@@ -120,7 +176,13 @@ class VisualUtils:
         thickness: int, 
         outline_color: pg.typing.ColorLike
     ) -> pg.Surface:
-        "Create an outline of a given thickness and color on a Surface."
+        """Create an outline of a given thickness and color on a Surface.
+        
+        Args:
+            surface (pygame.Surface): The surface to outline.
+            thickness (int): The thickness of the outline.
+            outline_color (pygame.typing.ColorLike): The color of the outline.
+        """
         mask = pg.mask.from_surface(surface)
         mask_surface = mask.to_surface(setcolor=outline_color)
         mask_surface.set_colorkey((0, 0, 0))
