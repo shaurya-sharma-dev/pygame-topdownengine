@@ -3,7 +3,17 @@ import random
 from .game_object import GameObject
 
 class Camera:
+    """Class that represents the Camera.
+
+    Attributes:
+        real_position (pygame.Vector2): The position of the camera, excluding screenshake.
+        screenshake_offset (pygame.Vector2): The current screenshake offset.
+        focus_game_object (GameObject): The GameObject to center the camera on.
+        screenshake (dict[str,float]): Current screenshake dictionary.
+        position (pygame.Vector2): The position of the camera, factoring screenshake.
+    """
     def __init__(self):
+        "Initialize the camera."
         self.real_position = pg.Vector2()
         self.screenshake_offset = pg.Vector2()
         self.focus_game_object = None
@@ -11,9 +21,15 @@ class Camera:
 
     @property
     def position(self) -> pg.Vector2:
+        "Get the position of the camera with screenshake."
         return self.real_position + (self.screenshake_offset if self.screenshake["duration"] > 0 else pg.Vector2())
 
     def update(self, dt: float):
+        """Update the Camera.
+
+        Args:
+            dt (float): The deltatime.
+        """
         if self.screenshake["duration"] > 0:
             self.screenshake_offset = pg.Vector2(
                 random.uniform(-self.screenshake["intensity"], self.screenshake["intensity"]),
