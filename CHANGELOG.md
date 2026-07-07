@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `UIContainer.add_ui_element` to validate elements before adding them to the container.
 - `BaseUIElement.add_container` to validate containers before adding the element to them.
 
-## [0.3.0]
+## [0.3.0] - 2026-07-03
 
 ### Added
 - New `example-cliff.png` asset to assets folder.
