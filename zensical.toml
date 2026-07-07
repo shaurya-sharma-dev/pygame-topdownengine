@@ -43,8 +43,4 @@ name = "mkdocstrings"
 
 [plugins.config.handlers.python]
 paths = ["topdownengine"]
-
-[plugins.config.handlers.python.options]
-docstring_style = "google"
-show_root_heading = true
-show_source = true
+options = { docstring_style = "google", show_source = true }
