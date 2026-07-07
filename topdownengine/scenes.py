@@ -29,7 +29,7 @@ class BaseScene:
     def update(self, dt: float):
         """Update the scene.
         
-        Attributes:
+        Args:
             dt (float): The deltatime.
         """
         for container in self.ui_containers:
@@ -44,7 +44,7 @@ class GameplayScene(BaseScene):
     def update(self, dt):
         """Update the GameplayScene.
         
-        Attributes:
+        Args:
             dt (float): The deltatime.
         """
         super().update(dt)
