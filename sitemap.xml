@@ -13,7 +13,51 @@
          <lastmod>2026-07-07</lastmod>
     </url>
     <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/asset_paths/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/camera/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/controls/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/env_object/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/font/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/game/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/game_object/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/math/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
          <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/mobile_object/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/scenes/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/ui/</loc>
+         <lastmod>2026-07-07</lastmod>
+    </url>
+    <url>
+         <loc>https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/visual_utils/</loc>
          <lastmod>2026-07-07</lastmod>
     </url>
 </urlset>
