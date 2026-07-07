@@ -1,3 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+
+# Editable package files
+pygame_topdownengine.egg-info
