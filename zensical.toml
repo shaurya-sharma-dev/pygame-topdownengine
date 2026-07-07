@@ -52,7 +52,5 @@ name = "autorefs"
 
 [[plugins]]
 name = "mkdocstrings"
-
-[plugins.config.handlers.python]
-paths = ["topdownengine"]
 options = { docstring_style = "google", show_source = true }
+paths = ["topdownengine"]
