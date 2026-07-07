@@ -1,6 +1,8 @@
 site_name: pygame-topdownengine Documentation
 site_url: https://shaurya-sharma-dev.github.io/pygame-topdownengine/
 
+repo_url: https://github.com/shaurya-sharma-dev/pygame-topdownengine/
+
 theme:
   name: material
 
