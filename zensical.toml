@@ -27,6 +27,18 @@ nav = [
 [theme]
 variant = "modern"
 
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+
 [features]
 navigation_tabs = true
 navigation_sections = true
