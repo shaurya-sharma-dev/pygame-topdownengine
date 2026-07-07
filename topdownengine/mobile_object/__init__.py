@@ -9,12 +9,6 @@ class MobileObject(GameObject):
     """Subclass of GameObject that serves as a wrapper around Controllers with some 
     extra movement functionality.
 
-    Args:
-        controller (BaseController): The controller the MobileObject should use.
-        animation_paths (dict[str,str], optional): The animation paths to load animations from. Defaults to None.
-        frame_size (tuple[int]|None, optional): The frame size to use to load/generate animations. Defaults to None.
-        directional_anims (bool, optional): Whether or not to load and use directional animations. Defaults to False.
-
     Attributes:
         animation_paths (dict[str,str]|None): The paths animations were loaded from.
         frame_size (tuple[int]|None): The frame size used to load/generate animations.
@@ -28,9 +22,16 @@ class MobileObject(GameObject):
         controller: Any,
         animation_paths: dict[str,str]|None=None, 
         frame_size: tuple[int]|None=None, 
-        directional_anims: bool=False, 
-        *groups: Any
+        directional_anims: bool=False
     ) -> None:
+        """Initialize the MobileObject.
+
+        Args:
+            controller (BaseController): The controller the MobileObject should use.
+            animation_paths (dict[str,str], optional): The animation paths to load animations from. Defaults to None.
+            frame_size (tuple[int]|None, optional): The frame size to use to load/generate animations. Defaults to None.
+            directional_anims (bool, optional): Whether or not to load and use directional animations. Defaults to False.
+        """
         # Set animation paths dict and frame size before calling super().__init__()
         # This make it automatically load in the animations without
         # having to call it a second time.
@@ -41,11 +42,17 @@ class MobileObject(GameObject):
         if self.directional_anims:
             self.current_dir = "d"
 
-        super().__init__(*groups)
+        super().__init__()
         self.controller = controller
         self.jump_vel = 0.75
 
     def update(self, dt: float, game: Game) -> None:
+        """This method updates the MobileObject instance.
+        
+        Args:
+            dt (float): The deltatime.
+            game (Game): The Game object.
+        """
         self.controller.update(self, dt)
         super().update(dt, game)
         if self.velocity.length():
@@ -66,5 +73,8 @@ class MobileObject(GameObject):
             self.current_animation = "idle"
 
     def jump(self) -> None:
+        """This method sets the MobileObject's z velocity to the jump velocity
+        if the MobileObject is grounded (MobileObject.elevation == MobileObject.z).
+        """
         if self.elevation == self.z:
             self.z_vel = self.jump_vel
