@@ -14,7 +14,7 @@ on:
       - '!**/CONTRIBUTING.md' # Exclude CONTRIBUTING.md
       - '!**/CODE_OF_CONDUCT.md' # Exclude CODE OF CONDUCT
       - '!**/.gitignore' # Exclude .gitignore
-      - '!**/mkdocs.yml' # Exclude mkdocs.yml
+      - '!**/zensical.toml' # Exclude zensical.toml
       
   pull_request:
     branches: [ "main" ]
@@ -29,7 +29,7 @@ on:
       - '!**/CONTRIBUTING.md' # Exclude CONTRIBUTING.md
       - '!**/CODE_OF_CONDUCT.md' # Exclude CODE OF CONDUCT
       - '!**/.gitignore' # Exclude .gitignore
-      - '!**/mkdocs.yml' # Exclude mkdocs.yml
+      - '!**/zensical.toml' # Exclude zensical.toml
 
 jobs:
   run-tests:
