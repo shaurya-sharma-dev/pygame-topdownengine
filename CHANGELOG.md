@@ -10,12 +10,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `UIContainer.remove_all_ui_elements` method that removes all elements from that UIContainer.
 - `BaseUIElement.remove_from_all_containers` method that removes an element from all containers.
 - `__version__` string attribute in top-level package namespace.
-- `BaseScene`, `GameplayScene`, `Font`, `Camera`, `PACKAGE_ROOT` and `ASSETS_DIR` to the top-level package namespace for easier imports.
+- The following to the top-level package namespace for easier imports:
+    - `BaseScene`
+    - `GameplayScene`
+    - `Font`
+    - `Camera`
+    - `PACKAGE_ROOT`
+    - `ASSETS_DIR`
+- Comprehensive docstrings to the following:
+    - `MobileObject` methods
+    - Controller classes
+    - `Camera` class
+    - `KeyboardInputManager`
+    - `MoreKeysPressed`
+    - `EnvObject`
+    - `Font`
+    - `GameObject`
+    - `Game`
+    - `BaseScene`
+    - `GameplayScene`
+    - `UIContainer`
+    - `BaseUIElement`
+    - `Button`
+    - `VisualUtils`
 
 ### Changed
 - **Breaking:** `UIContainer.elements` and `BaseUIElement.containers` to managed attributes so that it can no longer be set directly.
 - `UIContainer.add_ui_element` to validate elements before adding them to the container.
 - `BaseUIElement.add_container` to validate containers before adding the element to them.
+
+### Removed
+- **Breaking:** `groups` parameter from the `__init__` methods of `GameObject`, `MobileObject`, and `EnvObject`.
 
 ## [0.3.0] - 2026-07-03
 
