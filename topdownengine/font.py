@@ -1,7 +1,19 @@
 import pygame as pg
 
 class Font:
+    """A class built on top of pygame.Font that allows for caching of different sizes, prebuilt word wrap, and other features.
+        
+    Attributes:
+        path (str): The path to load from. If there is no font at that path, it will load a system font of that name.
+    """
+
     def __init__(self, path: str):
+        """Initialize the Font object.
+        
+        Args:
+            path (str): The path to load from. If there is no font at that path, it will load a system font of that name.
+        """
+        
         self.path = path
         self._sizes = {}
 
@@ -18,7 +30,16 @@ class Font:
         return self._sizes[size]
     
     def wrap(self, line: str, size: int, max_width: int) -> list[str]:
-        """Break a single string into multiple lines based on width."""
+        """Break a single string into multiple lines based on width.
+        
+        Args:
+            line (str): The string to wrap.
+            size (int): The fontsize to use for calculations.
+            max_width (int): The maximum width for each wrapped line.
+            
+        Returns:
+            list[str]: The list of wrapped lines.
+        """
         lines = []
         current_line = ""
         fnt = self._get_size(size)
@@ -66,7 +87,20 @@ class Font:
         return self._get_size(size).render(text, True, color)
 
     def draw_text(self, text: str, x: int, y: int, size: int, surface: pg.Surface, color: pg.typing.ColorLike, align: str="center") -> None:
-        "Draws text to a surface."
+        """Draws text to a surface.
+        
+        Args:
+            text (str): The text to render to the surface.
+            x (int): The x-position.
+            y (int): The y-position.
+            size (int): The font size to use.
+            surface (pygame.Surface): The surface to render to.
+            color (pygame.typing.ColorLike): The color to use.
+            align (str): The alignment to use. Defaults to "center".
+            
+        Raises:
+            ValueError: If an invalid align argument is passed into the method.
+        """
         surf = self._render(size, text, color)
 
         try:
