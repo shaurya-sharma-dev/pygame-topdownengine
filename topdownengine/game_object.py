@@ -43,8 +43,9 @@ class GameObject(pg.sprite.Sprite):
     VELOCITY_DEADZONE = 0.2
     CAUSES_COLLISIONS = False
 
-    def __init__(self, *groups: pg.sprite.Group) -> None:
-        super().__init__(*groups)
+    def __init__(self) -> None:
+        "Initialize the GameObject."
+        super().__init__()
 
         # Position, Z-Axis, Velocity
         self.position = pg.Vector2()
@@ -140,7 +141,7 @@ class GameObject(pg.sprite.Sprite):
 
     @property
     def current_frame(self) -> pg.Surface:
-        "Current animation frame the GameObj is on."
+        "Current animation frame the GameObject is on."
         if getattr(self, "directional_anims", False):
             current_anim = self.animations[f"{self.current_animation}_{self.current_dir}"]
         else:
@@ -189,6 +190,7 @@ class GameObject(pg.sprite.Sprite):
     
     @property
     def draw_index(self) -> tuple[int|float]:
+        "The draw index of the GameObject."
         return (self.elevation, self.rect.bottom)
     
     # Collisions
@@ -221,7 +223,7 @@ class GameObject(pg.sprite.Sprite):
         ]
 
     def _handle_collision(self, dir: pg.Vector2, game: Game) -> bool:
-        """Checks for collisions and moves the GameObj. Returns whether a collision occured or not."""
+        """Checks for collisions and moves the GameObject. Returns whether a collision occured or not."""
         if dir.x and dir.y:
             raise ValueError("Both axes cannot be moved in one step. Move them in separate method calls.")
         
@@ -275,6 +277,12 @@ class GameObject(pg.sprite.Sprite):
 
     # Update
     def update(self, dt: float, game: Game) -> None:
+        """This method updates the GameObject instance.
+        
+        Args:
+            dt (float): The deltatime.
+            game (Game): The Game object.
+        """
         # Gravity
         self.z_vel -= self.gravity * dt
         self.z += self.z_vel * dt
