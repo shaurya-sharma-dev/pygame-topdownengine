@@ -15,6 +15,7 @@ class KeyboardInputManager:
     """
 
     def __init__(self) -> None:
+        "Initialize KeyboardInputManager."
         self.keybinds = {
             "Move Right": pg.K_d,
             "Move Left": pg.K_a,
@@ -25,12 +26,14 @@ class KeyboardInputManager:
         self.non_hold_inputs = []
 
     def serialize(self) -> dict:
+        "Serialize the keybinds."
         return {
             k: pg.key.name(v) if type(v) == int else v
             for k, v in self.keybinds.items()
         }
     
     def deserialize(self, data: dict) -> None:
+        "Deserialize the keybinds into this object."
         for k, v in data.items():
             try:
                 self.keybinds[k] = pg.key.key_code(v)
@@ -38,7 +41,11 @@ class KeyboardInputManager:
                 self.keybinds[k] = v
     
     def get_input(self) -> list[str]:
-        "Returns all inputs to execute logic for. MUST be called after pg.event.get()."
+        """Returns all inputs to execute logic for. MUST be called after pg.event.get().
+        
+        Returns:
+            list[str]: The inputs to execute logic for.
+        """
         self.keys = pg.key.get_pressed()
         self.just_pressed_keys = pg.key.get_just_pressed()
         inputs = []
@@ -96,10 +103,6 @@ class NoKeysPressed:
 
 class MoreKeysPressed:
     """Emulates a pygame ScancodeWrapper where given keys are always pressed.
-
-    Args:
-        wrapper: The wrapper to add keys to.
-        pressed_keys: The keys to add to the wrapper.
         
     Attributes:
         wrapper: The base wrapper that keys were added to.
@@ -107,6 +110,12 @@ class MoreKeysPressed:
     """
 
     def __init__(self, wrapper: pg.key.ScancodeWrapper, pressed_keys: set[int]) -> None: 
+        """Initialize the MoreKeysPressed object.
+        
+        Args:
+            wrapper: The wrapper to add keys to.
+            pressed_keys: The keys to add to the wrapper.
+        """
         self.wrapper = wrapper
         self.pressed_keys = pressed_keys
 
