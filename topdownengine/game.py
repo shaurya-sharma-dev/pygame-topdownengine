@@ -11,7 +11,7 @@ class Game:
         screen (pygame.Surface): The primary display Surface.
         is_running (bool): Boolean flag to control execution.
         clock (pygame.time.Clock): Controls framerate and handles deltatime.
-        fps (int): Integer that controls how much FPS the Game should have
+        fps (int): Integer that controls how much FPS the Game should have.
         game_object_group (pygame.sprite.Group): Stores all GameObjects.
         game_speed_percentage (float): The speed percentage for execution, ranging from `0` to `1`.
         debug (bool): If `True`, debug rendering will be enabled.
@@ -35,6 +35,18 @@ class Game:
         target_scale: int=1,
         extra_features: list[str]=[]
     ) -> None:
+        """Initialize the GameObject.
+    
+        Args:
+            screen_width (int): The initial screen width.
+            screen_height (int): The initial screen height.
+            window_title (str): The window title. Defaults to "pygame-topdownengine".
+            window_title (str): The window icon path. Defaults to None.
+            fps (int): Integer that controls how much FPS the Game should have.
+            debug (bool): If `True`, debug rendering will be enabled. Defaults to False.
+            target_scale (int): The target scale for the original window size. Defaults to 1.
+            extra_features (list[str]): List of extra features to add at runtime. You MUST set it during instantiation. Defaults to [].
+        """
         # Enabled features
         self.extra_features = extra_features
         for item in extra_features:
@@ -92,6 +104,7 @@ class Game:
         self.active_scene_key = "gameplay"
 
     def handle_events(self) -> None:
+        "Handle events."
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.is_running = False
@@ -103,19 +116,34 @@ class Game:
             self.scenes[self.active_scene_key].handle_event(event)
 
     def set_target_scale(self, target_scale: int):
+        """Sets the target scale.
+        
+        Args:
+            target_scale (int): The new target scale for the original screen dimensions.
+        
+        Returns:
+            float: The new scale for the current window size.
+        """
         self.target_scale = target_scale
         return self.target_scale * (self.screen.width / self.og_width)
     
     def update(self, dt: float) -> None:
+        """Perform the update loop.
+        
+        Args:
+            dt (float): The deltatime.
+        """
         self.camera.update(dt)
         self.scenes[self.active_scene_key].update(dt)
 
     def render(self) -> None:
+        "Render everything to the screen."
         self.screen.fill(self.bg_color)
         self.scenes[self.active_scene_key].render()
         pg.display.flip()
 
     def run(self) -> None:
+        "Run the gameloop."
         while self.is_running:
             dt = self.clock.tick(self.fps) * self.game_speed_percentage
             self.handle_events()
