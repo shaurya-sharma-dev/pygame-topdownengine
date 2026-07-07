@@ -50,7 +50,11 @@ name = "search"
 [[plugins]]
 name = "autorefs"
 
-[[plugins]]
-name = "mkdocstrings"
-options = { docstring_style = "google", show_source = true }
+[project.plugins.mkdocstrings.handlers.python]
+inventories = ["https://docs.python.org/3/objects.inv"]
 paths = ["topdownengine"]
+
+[project.plugins.mkdocstrings.handlers.python.options]
+docstring_style = "google"
+inherited_members = true
+show_source = true
