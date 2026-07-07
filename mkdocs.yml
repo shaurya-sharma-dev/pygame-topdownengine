@@ -12,5 +12,5 @@ nav:
   - Home: index.md
   - Installation: installation.md
   - Quickstart: quickstart.md
-  - API Reference
-    - api\mobile_object.md
+  - API Reference:
+    - topdownengine.mobile_object: api\mobile_object.md
