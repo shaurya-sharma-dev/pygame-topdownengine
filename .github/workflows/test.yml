@@ -14,6 +14,7 @@ on:
       - '!**/CONTRIBUTING.md' # Exclude CONTRIBUTING.md
       - '!**/CODE_OF_CONDUCT.md' # Exclude CODE OF CONDUCT
       - '!**/.gitignore' # Exclude .gitignore
+      - '!**/mkdocs.yml' # Exclude mkdocs.yml
       
   pull_request:
     branches: [ "main" ]
@@ -28,6 +29,7 @@ on:
       - '!**/CONTRIBUTING.md' # Exclude CONTRIBUTING.md
       - '!**/CODE_OF_CONDUCT.md' # Exclude CODE OF CONDUCT
       - '!**/.gitignore' # Exclude .gitignore
+      - '!**/mkdocs.yml' # Exclude mkdocs.yml
 
 jobs:
   run-tests:
