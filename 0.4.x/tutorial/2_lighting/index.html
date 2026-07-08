@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://shaurya-sharma-dev.github.io/pygame-topdownengine/api/asset_paths/">
+        <link rel="canonical" href="https://shaurya-sharma-dev.github.io/pygame-topdownengine/tutorial/2_lighting/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>topdownengine.asset_paths Reference - pygame-topdownengine Documentation</title>
+        <title>Making Your First Game, Part 2: Lighting - pygame-topdownengine Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#topdownengineasset_paths-reference" class="md-skip">
+        <a href="#making-your-first-game-part-2-lighting" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              topdownengine.asset_paths Reference
+              Making Your First Game, Part 2: Lighting
             
           </span>
         </div>
@@ -519,7 +519,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api\asset_paths" class="md-nav__link">
+      <a href="../../api/asset_paths" class="md-nav__link">
         
   
   
@@ -546,7 +546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../camera" class="md-nav__link">
+      <a href="../../api/camera" class="md-nav__link">
         
   
   
@@ -573,7 +573,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../controls" class="md-nav__link">
+      <a href="../../api/controls" class="md-nav__link">
         
   
   
@@ -600,7 +600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../env_object" class="md-nav__link">
+      <a href="../../api/env_object" class="md-nav__link">
         
   
   
@@ -627,7 +627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../font" class="md-nav__link">
+      <a href="../../api/font" class="md-nav__link">
         
   
   
@@ -654,7 +654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../game_object" class="md-nav__link">
+      <a href="../../api/game_object" class="md-nav__link">
         
   
   
@@ -681,7 +681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../game" class="md-nav__link">
+      <a href="../../api/game" class="md-nav__link">
         
   
   
@@ -708,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../math" class="md-nav__link">
+      <a href="../../api/math" class="md-nav__link">
         
   
   
@@ -735,7 +735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mobile_object" class="md-nav__link">
+      <a href="../../api/mobile_object" class="md-nav__link">
         
   
   
@@ -762,7 +762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scenes" class="md-nav__link">
+      <a href="../../api/scenes" class="md-nav__link">
         
   
   
@@ -789,7 +789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ui" class="md-nav__link">
+      <a href="../../api/ui" class="md-nav__link">
         
   
   
@@ -816,7 +816,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../visual_utils" class="md-nav__link">
+      <a href="../../api/visual_utils" class="md-nav__link">
         
   
   
@@ -884,10 +884,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#topdownengine.asset_paths" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        asset_paths
+        Introduction
       </span>
     </span>
   </a>
@@ -895,10 +895,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#topdownengine.asset_paths.ASSETS_DIR" class="md-nav__link">
+  <a href="#but-first-lets-talk-scenes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        ASSETS_DIR
+        But first... , let's talk scenes
       </span>
     </span>
   </a>
@@ -906,10 +906,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#topdownengine.asset_paths.PACKAGE_ROOT" class="md-nav__link">
+  <a href="#light-it-up" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        PACKAGE_ROOT
+        Light it up!
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-global-alpha" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The Global Alpha
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#light-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Light Sources
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Conclusion
       </span>
     </span>
   </a>
@@ -934,87 +967,35 @@
   
 
 
-<h1 id="topdownengineasset_paths-reference">topdownengine.asset_paths Reference<a class="headerlink" href="#topdownengineasset_paths-reference" title="Permanent link">&para;</a></h1>
-
-
-<div class="doc doc-object doc-module">
-
-
-
-<a id="topdownengine.asset_paths"></a>
-    <div class="doc doc-contents first">
-
-
-
-
-
-
-
-
-
-
-<div class="doc doc-children">
-
-
-
-
-
-
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h2 id="topdownengine.asset_paths.ASSETS_DIR" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">ASSETS_DIR</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
-  </span>
-
-<a href="#topdownengine.asset_paths.ASSETS_DIR" class="headerlink" title="Permanent link">&para;</a></h2>
-
-
-    <div class="doc doc-contents ">
-
-        <p>The folder that represents the assets directory of the package.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h2 id="topdownengine.asset_paths.PACKAGE_ROOT" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">PACKAGE_ROOT</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
-  </span>
-
-<a href="#topdownengine.asset_paths.PACKAGE_ROOT" class="headerlink" title="Permanent link">&para;</a></h2>
-
-
-    <div class="doc doc-contents ">
-
-        <p>The folder that represents the root directory of the package.</p>
-
-    </div>
-
-</div>
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-</div>
+<h1 id="making-your-first-game-part-2-lighting">Making Your First Game, Part 2: Lighting<a class="headerlink" href="#making-your-first-game-part-2-lighting" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>This tutorial series will guide you towards making your first game in pygame-topdownengine! If you haven't completed the previous tutorial in this series, go back and finish that one and then come back here.</p>
+<p>In this tutorial, we will be guiding you towards the (very simple) steps it takes to add lighting to your game in pygame-topdownengine. We will be continuing from the code from the previous tutorial, which you can find <a href="../1_quickstart/">here</a>.</p>
+<h2 id="but-first-lets-talk-scenes">But first... , let's talk scenes<a class="headerlink" href="#but-first-lets-talk-scenes" title="Permanent link">&para;</a></h2>
+<p>In the last tutorial, we briefly went over the role of scenes in the engine. This time, let's talk more in depth.</p>
+<p>All scenes are subclasses from the <code>BaseScene</code> class. Scenes have to define three methods: <code>handle_event</code>, <code>update</code>, and <code>render</code>. The <code>handle_event</code> method is called by the <code>Game</code> class during the event loop, and it takes in a <code>pygame.Event</code> object. The <code>update</code> method is called by the <code>Game</code> class during the update loop and takes in deltatime as a <code>float</code>. Finally, the <code>render</code> method is called by the <code>Game</code> class during rendering after the screen has been filled with <code>Game.bg_color</code>. It takes in no parameter.</p>
+<p>For most projects, you will likely need to make your own scene classes, seeing as they control updates and rendering. However, for this tutorial, we will only be using the <code>BaseScene</code> class for the main menu and the <code>GameplayScene</code> class for the actual gameplay itself.</p>
+<h2 id="light-it-up">Light it up!<a class="headerlink" href="#light-it-up" title="Permanent link">&para;</a></h2>
+<p>Now this whole talk about scenes may have you wondering, <em>What does this remotely have to with lighting?</em> Actually, a lot. The built-in lighting system that the engine comes with is actually integrated into the <code>GameplayScene</code>. The pre-built lighting system works by drawing a semi-transparent black <code>Surface</code> on top of the entire screen. Each <code>GameObject</code> has a <code>light_radius</code> attribute that is set to <code>0</code> on initialization. Using the <code>position</code> and <code>light_radius</code> of each <code>GameObject</code>, the <code>GameplayScene</code> draws circular "cut-outs" into the black <code>Surface</code> before it is blitted to the screen. The "cut-outs" are only drawn if <code>light_radius</code> is greater than <code>0</code>.</p>
+<h2 id="the-global-alpha">The Global Alpha<a class="headerlink" href="#the-global-alpha" title="Permanent link">&para;</a></h2>
+<p>The alpha value of the <code>GameplayScene</code>'s black overlay (before light sources) is controlled by the <code>GameplayScene.global_alpha</code> attribute. On initialization, it is set to <code>0</code>, which is why there was no lighting generated by the code from the previous tutorial.</p>
+<p>Let's start writing code! Right before the <code>game.run</code> call from the previous tutorial code, add this code:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># Lighting
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>game.scenes[&quot;gameplay&quot;].global_alpha = 150
+</span></code></pre></div></p>
+<p>As explained in the previous tutorial, the <code>GameplayScene</code> object is stored in <code>Game.scenes["gameplay"]</code> by default. So, this code simply retrieves that <code>GameplayScene</code> object and sets the <code>global_alpha</code> attribute to <code>150</code>.</p>
+<p>If you run the code right now, you should see the exact same menu as before. Once you click play, you should see the exact same gameplay, the only catch being that everything looks much darker now.</p>
+<blockquote>
+<p><strong>NOTE:</strong> The <code>global_alpha</code> attribute must be between <code>0</code> and <code>255</code>, inclusively.</p>
+</blockquote>
+<h2 id="light-sources">Light Sources<a class="headerlink" href="#light-sources" title="Permanent link">&para;</a></h2>
+<p>Now that we have darkness, let's add light sources! Remember, to add light sources, all you need to do is set any <code>GameObject</code>'s <code>light_radius</code> attribute to a number greater than <code>0</code>. Right after the <code>global_alpha</code> assignment, add this code to make both the player and enemy light sources:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>player.light_radius = 24
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>enemy.light_radius = 24
+</span></code></pre></div></p>
+<p>If you run the code now, you should see that both the player and enemy both have smooth circles of light around them. You should also notice that jumping will move the light up with you.</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>As always, you can view the example code on <a href="https://github.com/shaurya-sharma-dev/pygame-topdownengine/blob/main/examples/lighting_system.py">GitHub</a>.</p>
 
 
 
