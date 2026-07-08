@@ -60,8 +60,8 @@ $CHANGELOG_FILE = "$TARGET_DIR/changelog/index.html"
 Remove-Item -Path "$DestinationPath/deploy.ps1"
 
 # Make root redirect.
-Write-Host "Setting root index.html redirect to /$Version/..." -ForegroundColor Gray
-$RedirectHtml = "<meta http-equiv='refresh' content='0; url=./$Version/'>"
+Write-Host "Setting root index.html redirect to /latest/..." -ForegroundColor Gray
+$RedirectHtml = "<meta http-equiv='refresh' content='0; url=./latest/'>"
 Set-Content -Path "$TARGET_DIR\index.html" -Value $RedirectHtml
 
 # Copy docs-versions.json into the built site as versions.json
