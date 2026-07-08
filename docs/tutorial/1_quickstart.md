@@ -1,10 +1,12 @@
-# Quickstart
+# Making Your First Game, Part 1: Quickstart
 
 ## Introduction
-In this quickstart, we will be guiding you towards creating a Player character you can move with WASD on your keyboard, a secondary character that will attempt to follow the Player, and a solid object the Player can collide with and jump over.
+This tutorial series will guide you towards making your first game in pygame-topdownengine! This tutorial series assumes you have prior Python programming experience and have decent knowledge of pygame-ce terminology (`Surface`, `Rect`, etc.).
+
+In this quickstart, we will be guiding you towards creating a player character you can move with WASD on your keyboard, a secondary character that will attempt to follow the player, and a solid object the player can collide with and jump over.
 
 <figure markdown="span" style="text-align: center;">
-    <img src="./images/quickstart.png" alt="Finished Program" width=500>
+    <img src="../images/quickstart.png" alt="Finished Program for This Tutorial" width=500>
     <figcaption>The player (a `MobileObject`) jumping onto a collidable object (an `EnvObject`) while being chased by the enemy (another `MobileObject`).</figcaption>
 </figure>
 
@@ -30,7 +32,7 @@ from topdownengine.font import Font
 ```
 
 ## The Game Class
-Great! Now that we have imported everything, let's define the first thing you will define in every project you make. The Game class mainly functions as a wrapper for updates and rendering, but it is also used by individual GameObjects for a variety of things.
+Great! Now that we have imported everything, let's define the first thing you will define in every project you make. The Game class mainly functions as a wrapper for updates and rendering, but it is also used by individual `GameObject`s for a variety of things.
 ```
 # Define an instance of the Game class
 game = tde.Game(
@@ -72,8 +74,12 @@ container.add_ui_element(play_btn)
 game.scenes["menu"].ui_containers.append(container)
 ```
 
+> **TIP:** The `BaseScene` is the base class for all "scenes" in the engine. A "scene" controls the update loop and rendering of the game. By default, the `Game` class defines a `GameplayScene` object at `Game.scenes["gameplay"]`. The `GameplayScene` has very basic logic that updates and renders all `GameObject`s. This is why we set the `active_scene_key` to `"gameplay"` when the play button is pressed. Every scene has the same UI capabilities we used to create our main menu, including the `GameplayScene`.
+
 ## The Player
-Now that we have a Game instance and we have made our main menu, the next thing we will define is the Player. This code gives the player keyboard movement and animations (using the package's premade animations). It uses a MobileObject, which is a subclass of the GameObject class with extra movement features. For reference, GameObject is the base class for all in-world objects in the engine.
+Now that we have a `Game` instance and we have made our main menu, the next thing we will define is the Player. The base class for every in-world object in the engine is the `GameObject` class. However, in this tutorial, we won't be instantiating it directly. For example, to define the player, which we will do in a moment, we will use the `MobileObject` class, which is a subclass of `GameObject` with extra movement features.
+
+This code gives the player keyboard movement and animations (using the package's premade animations).
 ```
 # Define a MobileObject to be the Player + Enable Camera Tracking
 player = tde.MobileObject(
@@ -87,7 +93,7 @@ game.camera.focus_game_object = player
 ```
 
 ## The Enemy
-Now let's make the character that follows you. For the purposes of this tutorial, let's call it the "enemy". This code makes the enemy follow the player and uses the same animations as the Player itself.
+Now let's make the `MobileObject` that follows you. For the purposes of this tutorial, let's call it the "enemy". This code makes the enemy follow the player and uses the same animations as the player.
 ```
 # Define a MobileObject to follow the Player
 enemy = tde.MobileObject(
@@ -98,7 +104,7 @@ enemy = tde.MobileObject(
 ```
 
 ## EnvObject
-Now let's define a box the player can collide with and jump over. Essentially, this code will make the box 32x32 in world space, give it a shadow, and set its position away from (0, 0), which is the default position for all GameObjects. The EnvObject class is a subclass of the GameObject class, similar to MobileObject.
+Another subclass of `GameObject` is `EnvObject`. It is used to define environmental objects and decorations. Using it, let's define a box the player can collide with and jump over. Essentially, this code will make the box 32x32 in world space, give it a shadow, and set its position away from (0, 0), which is the default position for all `GameObject`s.
 ```
 env_object = tde.EnvObject(
     animation_paths={
@@ -111,7 +117,7 @@ env_object.obj_shadow = "32x16"
 ```
 
 ## Adding Them to the Game
-Now, we need to add these three to the actual game itself. In order to do that, we add each one to the Game instance's `game_object_group`.
+Now, we need to add these three to the `Game` itself. In order to do that, we add each one to the `Game` instance's `game_object_group` attribute.
 ```
 # Add them to the game object group
 game.game_object_group.add(player, env_object, enemy)
@@ -124,7 +130,7 @@ tde.GameObject.SUBPIXEL = True
 ```
 
 ## Execution
-You made it! If you got to this point in this tutorial, you're almost there. Before everything's well and done, we need to actually run the game. To do that, we call the `run` method on the Game instance as shown below:
+You made it! If you got to this point in this tutorial, you're almost there. Before everything's well and done, we need to actually run the game. To do that, we call the `run` method on the `Game` instance as shown below:
 
 ```
 # Run the game

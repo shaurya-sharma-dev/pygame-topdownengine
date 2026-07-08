@@ -9,7 +9,10 @@ nav = [
   { "Changelog" = "..\\changelog" },
   { "Getting Started" = [
     { "Installation" = "installation.md" },
-    { "Quickstart" = "quickstart.md" }
+    { "Making Your First Game" = [
+      { "Part 1: Quickstart" = "1_quickstart.md" },
+      { "Part 2: Lighting" = "2_lighting.md" }
+    ]}
   ]},
   { "API Reference" = [
     { "topdownengine.asset_paths" = "api\\asset_paths" },
