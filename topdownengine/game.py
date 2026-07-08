@@ -20,6 +20,8 @@ class Game:
         extra_features (list[str]): List of extra features to add at runtime. You MUST set it during instantiation.
         camera (Camera): Camera object to use when rendering.
         bg_color (pygame.typing.ColorLike): Color to fill the screen with at the start of every draw cycle.
+        scenes (dict[str, BaseScene]): Dictionary of all scene objects.
+        active_scene_key (str): The dictionary key for the current active scene.
         active_scene (BaseScene): The active scene.
     """
 
