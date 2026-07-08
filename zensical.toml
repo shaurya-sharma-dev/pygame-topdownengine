@@ -6,8 +6,11 @@ repo_name = "pygame-topdownengine"
 
 nav = [
   { "Home" = "index.md" },
-  { "Installation" = "installation.md" },
-  { "Quickstart" = "quickstart.md" },
+  { "Changelog" = "changelog.md" },
+  { "Getting Started" = [
+    { "Installation" = "installation.md" },
+    { "Quickstart" = "quickstart.md" }
+  ]},
   { "API Reference" = [
     { "topdownengine.asset_paths" = "api\\asset_paths" },
     { "topdownengine.camera" = "api\\camera" },
@@ -23,6 +26,11 @@ nav = [
     { "topdownengine.visual_utils" = "api\\visual_utils" }
   ]}
 ]
+
+[project.extra.version]
+provider = "mike"   # Uses mike
+alias = true        # Shows aliases (like 'latest') next to the number
+default = "latest"  # The version to fall back on
 
 [theme]
 variant = "modern"
