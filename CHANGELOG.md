@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-07-08
+
+### Fixed
+- Build settings to exclude tests, examples, and docs from being added to the wheel.
+- `Game.update` to use accumalated deltatime. This ensures that physics are deterministic and prevents bugs in the engine where increased deltatime could break the physics engine.
+
 ## [0.4.0] - 2026-07-07
 
 ### Added
@@ -135,7 +141,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `KeyboardInputManager` class to easily get keyboard input and `NoKeysPressed` and `MoreKeysPressed` classes to allow for manipulating the input stream.
 - `assets/` folder with predefined assets. It currently houses shadows and an example player sprite.
 
-[unreleased]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.0...HEAD
+[unreleased]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.0...0.4.1
 [0.4.0]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.3.0...0.4.0
 [0.3.0]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.2.1...0.3.0
 [0.2.1]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.2.0...v0.2.1
