@@ -41,6 +41,33 @@ class BaseScene:
             container.render(self.game.screen)
     
 class GameplayScene(BaseScene):
+    """A scene that updates and renders all `GameObject` instances.
+        
+    Attributes:
+        global_alpha (int): The global alpha for lighting.
+    """
+    
+    def __init__(self, game):
+        """Initialize the GameplayScene.
+        
+        Args:
+            game (Game): The game object to use.
+        """
+        super().__init__(game)
+        self.global_alpha = 0
+        self._light_filters = {}
+    
+    def get_light(self, radius: int):
+        if not radius in self._light_filters: self._light_filters[radius] = self.create_light(radius)
+        return self._light_filters[(radius)]
+
+    def create_light(self, radius: int):
+        surface = pg.Surface((max(radius * 2, 1), max(radius * 2, 1)), pg.SRCALPHA)
+        for i in range(int(radius), 0, -1):
+            alpha = 255 * (1 - i / radius)
+            pg.draw.circle(surface, (0, 0, 0, alpha), (radius, radius), i)
+        return surface
+
     def update(self, dt):
         """Update the GameplayScene.
         
@@ -52,9 +79,24 @@ class GameplayScene(BaseScene):
 
     def render(self):
         "Render the GameplayScene."
-        super().render()
+        overlay = pg.Surface(self.game.screen.size, pg.SRCALPHA)
+        overlay.fill((0, 0, 0, self.global_alpha))
+
         for game_obj in sorted(self.game.game_object_group.sprites(), key=lambda g: g.draw_index):
-            self.game.screen.blit(game_obj.image, game_obj.rect.move(-self.game.camera.position * game_obj.SCALE))
+            cr = game_obj.rect.move(-self.game.camera.position * game_obj.SCALE)
+            self.game.screen.blit(game_obj.image, cr)
+            if self.global_alpha > 0 and game_obj.light_radius > 0:
+                scaled_lr = game_obj.light_radius * game_obj.SCALE
+                overlay.blit(
+                    self.get_light(
+                        scaled_lr
+                    ), 
+                    (
+                        cr.centerx - scaled_lr, 
+                        cr.top
+                    ), 
+                    special_flags=pg.BLEND_RGBA_SUB
+                )
         
         # Draw debug in a separate loop so that it is drawn over images.
         if self.game.debug:
@@ -67,3 +109,7 @@ class GameplayScene(BaseScene):
                         scale_rect(collider.move(-self.game.camera.position), game_obj.SCALE),
                         1
                     )
+
+        self.game.screen.blit(overlay, (0, 0))
+
+        super().render() # Draw UI

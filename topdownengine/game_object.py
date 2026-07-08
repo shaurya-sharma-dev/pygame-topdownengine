@@ -26,6 +26,7 @@ class GameObject(pg.sprite.Sprite):
 
         frame (float): Current animation frame.
         anim_speed (float): Animation speed.
+        light_radius (float): The light radius of the GameObject. If it is <= 0, there will be no light.
         current_animation (str): Current animation.
         obj_shadow (str|None): Shadow size being used (or None for no shadow).
         colliders (list[pg.Rect|pg.FRect]): List of colliders relative to the `GameObject`.
@@ -59,6 +60,7 @@ class GameObject(pg.sprite.Sprite):
         # Visuals
         self.frame = 0
         self.anim_speed = 0.25
+        self.light_radius = 0
         if getattr(self, "animation_paths", None) is not None:
             self.current_animation = list(self.animation_paths.keys())[0]
         else:
