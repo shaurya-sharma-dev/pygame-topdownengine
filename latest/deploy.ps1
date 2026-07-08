@@ -54,7 +54,7 @@ Move-Item -Path "$DestinationPath/changelog" -Destination $TARGET_DIR -Force
 
 # For the changelog file, replace all url references of the version to latest.
 $CHANGELOG_FILE = "$TARGET_DIR/changelog/index.html"
-(Get-Content -Path $CHANGELOG_FILE) -replace 'href="../', "../latest/" | Set-Content -Path $CHANGELOG_FILE
+(Get-Content -Path $CHANGELOG_FILE) -replace 'href="../', 'href="../latest/' | Set-Content -Path $CHANGELOG_FILE
 
 # Remove deploy script from build
 Remove-Item -Path "$DestinationPath/deploy.ps1"
