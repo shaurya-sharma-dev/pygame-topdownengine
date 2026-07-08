@@ -106,6 +106,9 @@ class Game:
         }
         self.active_scene_key = "gameplay"
 
+        # Accumalated Deltatime
+        self._accumulated_deltatime = 0
+
     @property
     def active_scene(self) -> BaseScene:
         "The active scene."
@@ -141,8 +144,24 @@ class Game:
         Args:
             dt (float): The deltatime.
         """
-        self.camera.update(dt)
-        self.active_scene.update(dt)
+        # Convert dt from milliseconds to seconds.
+        dt = dt / 1000
+
+        # Add a cap to one frame's dt to prevent infinite lag spirals
+        if (dt > 0.25): dt = 0.25
+
+        # Add processed dt to accumulater
+        self._accumulated_deltatime += dt
+        
+        # Execute the update logic in steps of 1 / FPS
+        while self._accumulated_deltatime >= 1 / self.fps:
+            # Use 1000 / self.fps for update functions because
+            # they still use milliseconds.
+            self.camera.update(1000 / self.fps)
+            self.active_scene.update(1000 / self.fps)
+
+            # Subtract from accumulated deltatime in seconds.
+            self._accumulated_deltatime -= 1 / self.fps
 
     def render(self) -> None:
         "Render everything to the screen."
