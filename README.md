@@ -17,6 +17,10 @@ pygame-topdownengine is a 2.5D engine for top-down games. It is designed to be h
 - Toggleable `Game.debug` attribute to render colliders during development.
 
 ## Quickstart
+<p align="center">
+    <img src="./docs/images/quickstart.png" alt="Finished Program" width=300><br>
+    The player (a `MobileObject`) jumping onto a collidable object (an `EnvObject`) while being chased by the enemy (another `MobileObject`).
+</p>
 This code makes a Player character, a secondary character that will attempt to follow the Player character, and a solid object the Player can collide with and jump over.
 ```
 import topdownengine as tde
