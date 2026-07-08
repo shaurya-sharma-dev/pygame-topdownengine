@@ -88,12 +88,10 @@ class GameplayScene(BaseScene):
             if self.global_alpha > 0 and game_obj.light_radius > 0:
                 scaled_lr = game_obj.light_radius * game_obj.SCALE
                 overlay.blit(
-                    self.get_light(
-                        scaled_lr
-                    ), 
+                    self.get_light(scaled_lr), 
                     (
                         cr.centerx - scaled_lr, 
-                        cr.top
+                        cr.bottom - scaled_lr - game_obj.z * game_obj.SCALE - game_obj.current_frame.height / 2 + game_obj.elevation * game_obj.SCALE
                     ), 
                     special_flags=pg.BLEND_RGBA_SUB
                 )
