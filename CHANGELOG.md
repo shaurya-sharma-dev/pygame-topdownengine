@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-07-07
+
 ### Added
 - `UIContainer.remove_all_ui_elements` method that removes all elements from that UIContainer.
 - `BaseUIElement.remove_from_all_containers` method that removes an element from all containers.
@@ -34,6 +36,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
     - `Button`
     - `VisualUtils`
 - `Game.active_scene` managed property that automatically returns the active scene from the `Game.scenes` dictionary.
+- `GameObject.light_radius` attribute for new lighting system (see below).
+- Lighting system in `GameplayScene` that uses `GameObject.light_radius` to determine light sources.
 
 ### Changed
 - **Breaking:** `UIContainer.elements` and `BaseUIElement.containers` to managed attributes so that it can no longer be set directly.
@@ -131,7 +135,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `KeyboardInputManager` class to easily get keyboard input and `NoKeysPressed` and `MoreKeysPressed` classes to allow for manipulating the input stream.
 - `assets/` folder with predefined assets. It currently houses shadows and an example player sprite.
 
-[unreleased]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.3.0...0.4.0
 [0.3.0]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.2.1...0.3.0
 [0.2.1]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.1.0...v0.2.0
