@@ -18,7 +18,7 @@ pygame-topdownengine is a 2.5D engine for top-down games. It is designed to be h
 
 ## Quickstart
 <div align="center">
-    <img src="./docs/images/quickstart.png" alt="Finished Program" width=300><br>
+    <img src="https://raw.githubusercontent.com/shaurya-sharma-dev/pygame-topdownengine/refs/heads/main/docs/images/quickstart.png" alt="Finished Program" width=300><br>
     The player (a <code>MobileObject</code>) jumping onto a collidable object (an <code>EnvObject</code>) while being chased by the enemy (another <code>MobileObject</code>).
 </div>
 <br>
