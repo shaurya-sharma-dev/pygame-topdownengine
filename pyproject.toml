@@ -64,10 +64,14 @@ Changelog = "https://github.com/shaurya-sharma-dev/pygame-topdownengine/blob/mai
 Documentation = "https://shaurya-sharma-dev.github.io/pygame-topdownengine/"
 
 [tool.setuptools]
-packages = { find = {} }
 include-package-data = true
 
 [tool.setuptools.package-data]
 "*" = ["py.typed", "assets/**/*"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["topdownengine*"]
+exclude = ["tests*", "testing*"]
 
 [tool.setuptools_scm] 
