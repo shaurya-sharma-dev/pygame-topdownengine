@@ -126,7 +126,7 @@ class Game:
                 GameObject.set_scale(self.target_scale, self)
             self.active_scene.handle_event(event)
 
-    def set_target_scale(self, target_scale: int):
+    def set_target_scale(self, target_scale: int) -> float:
         """Sets the target scale.
         
         Args:

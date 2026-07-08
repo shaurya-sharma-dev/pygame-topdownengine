@@ -7,7 +7,7 @@ class UIContainer:
     """Class to store a collection of UI elements.
     
     Attributes:
-        elements (set[BaseUIElement]) - The set of all elements in this container. This is a managed property.
+        elements (set[BaseUIElement]): The set of all elements in this container. This is a managed property.
     """
 
     def __init__(self):
@@ -79,8 +79,8 @@ class BaseUIElement:
     """Base class for UI elements.
     
     Attributes:
-        containers (set[UIContainer]) - The set of all containers that contain this element. This is a managed property.
-        image (pygame.Surface) - The surface of the element. This is a managed property.
+        containers (set[UIContainer]): The set of all containers that contain this element. This is a managed property.
+        image (pygame.Surface): The surface of the element. This is a managed property.
     """
 
     def __init__(self, position: pg.typing.Point, align: str="center", image: pg.Surface=None):

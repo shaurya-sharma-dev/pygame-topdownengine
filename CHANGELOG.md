@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- Added missing return typehint to `Game.set_target_scale`.
+- Incorrect formatting for docstrings in the `UIContainer` and `BaseUIElement` classes.
+
 ## [0.4.2] - 2026-07-08
 
 ### Fixed
