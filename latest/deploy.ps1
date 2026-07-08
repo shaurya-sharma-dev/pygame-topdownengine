@@ -49,6 +49,9 @@ Write-Host "Moving changelog to $TARGET_DIR/changelog..." -ForegroundColor Cyan
 if (-not (Test-Path -Path $DestinationPath)) {
     New-Item -ItemType Directory -Path $DestinationPath -Force
 }
+if (Test-Path -Path "$DestinationPath/changelog") {
+    Remove-Item -Path "$DestinationPath/changelog" -Recurse -Force
+}
 Move-Item -Path "$DestinationPath/changelog" -Destination $TARGET_DIR -Force
 
 # For the changelog file, replace all url references of the version to latest.
