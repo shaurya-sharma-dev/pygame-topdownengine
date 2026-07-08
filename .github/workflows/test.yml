@@ -35,21 +35,22 @@ on:
 
 jobs:
   run-tests:
-    name: Test on ${{ matrix.os }}
+    name: Test on ${{ matrix.os }} with Python ${{ matrix.python }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.12.10", "3.13", "3.14"]
 
     runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python 3.12.10
+      - name: Set up Python ${{ matrix.python }}
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12.10"
+          python-version: ${{ matrix.python }}
           cache: "pip"
 
       - name: Install package and dependencies
