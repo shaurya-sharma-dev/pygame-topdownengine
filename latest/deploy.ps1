@@ -45,12 +45,10 @@ Remove-Item -Path "site" -Recurse -Force # Clean up old build folder
 
 # Remove changelog copy from docs folder and copy the changelog folder generated for the deploy into the root site.
 Remove-Item -Path ".\docs\changelog.md"
+Remove-Item -Path "$TARGET_DIR/changelog" -Recurse
 Write-Host "Moving changelog to $TARGET_DIR/changelog..." -ForegroundColor Cyan
 if (-not (Test-Path -Path $DestinationPath)) {
     New-Item -ItemType Directory -Path $DestinationPath -Force
-}
-if (Test-Path -Path "$DestinationPath/changelog") {
-    Remove-Item -Path "$DestinationPath/changelog" -Recurse -Force
 }
 Move-Item -Path "$DestinationPath/changelog" -Destination $TARGET_DIR -Force
 
