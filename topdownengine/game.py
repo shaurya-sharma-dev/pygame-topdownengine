@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 import pygame as pg
-from .scenes import GameplayScene
+from .scenes import GameplayScene, BaseScene
 
 class Game:
     """Acts as the central core of the game and manages the core loop and gamestate.
@@ -20,6 +20,7 @@ class Game:
         extra_features (list[str]): List of extra features to add at runtime. You MUST set it during instantiation.
         camera (Camera): Camera object to use when rendering.
         bg_color (pygame.typing.ColorLike): Color to fill the screen with at the start of every draw cycle.
+        active_scene (BaseScene): The active scene.
     """
 
     VALID_EXTRA_FEATURES = {"resize",}
@@ -103,6 +104,11 @@ class Game:
         }
         self.active_scene_key = "gameplay"
 
+    @property
+    def active_scene(self) -> BaseScene:
+        "The active scene."
+        return self.scenes[self.active_scene_key]
+
     def handle_events(self) -> None:
         "Handle events."
         for event in pg.event.get():
@@ -113,7 +119,7 @@ class Game:
                 # We import GameObject in handle_events to prevent a circular import.
                 from .game_object import GameObject
                 GameObject.set_scale(self.target_scale, self)
-            self.scenes[self.active_scene_key].handle_event(event)
+            self.active_scene.handle_event(event)
 
     def set_target_scale(self, target_scale: int):
         """Sets the target scale.
@@ -134,12 +140,12 @@ class Game:
             dt (float): The deltatime.
         """
         self.camera.update(dt)
-        self.scenes[self.active_scene_key].update(dt)
+        self.active_scene.update(dt)
 
     def render(self) -> None:
         "Render everything to the screen."
         self.screen.fill(self.bg_color)
-        self.scenes[self.active_scene_key].render()
+        self.active_scene.render()
         pg.display.flip()
 
     def run(self) -> None:

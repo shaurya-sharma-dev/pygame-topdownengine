@@ -33,6 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
     - `BaseUIElement`
     - `Button`
     - `VisualUtils`
+- `Game.active_scene` managed property that automatically returns the active scene from the `Game.scenes` dictionary.
 
 ### Changed
 - **Breaking:** `UIContainer.elements` and `BaseUIElement.containers` to managed attributes so that it can no longer be set directly.
