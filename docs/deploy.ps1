@@ -1,7 +1,9 @@
 # Configuration
 param (
     [Parameter(Mandatory = $true, HelpMessage = "Enter the version name")]
-    [string]$Version
+    [string]$Version,
+
+    [switch]$latest
 )
 
 $TARGET_DIR = "built-docs" # Build directory
@@ -36,17 +38,30 @@ Write-Host "Building version '$Version' using Zensical..." -ForegroundColor Cyan
 zensical build --clean
 $DestinationPath = "$TARGET_DIR/$Version"
 Copy-Item -Path "site/*" -Destination $DestinationPath -Recurse -Force
+if ($latest) {
+    Copy-Item -Path "site/*" -Destination "$TARGET_DIR/latest" -Recurse -Force
+}
 Remove-Item -Path "site" -Recurse -Force # Clean up old build folder
 
-# Remove changelog copy
+# Remove changelog copy from docs folder and copy the changelog folder generated for the deploy into the root site.
 Remove-Item -Path ".\docs\changelog.md"
+Remove-Item -Path "$TARGET_DIR/changelog" -Recurse
+Write-Host "Moving changelog to $TARGET_DIR/changelog..." -ForegroundColor Cyan
+if (-not (Test-Path -Path $DestinationPath)) {
+    New-Item -ItemType Directory -Path $DestinationPath -Force
+}
+Move-Item -Path "$DestinationPath/changelog" -Destination $TARGET_DIR -Force
+
+# For the changelog file, replace all url references of the version to latest.
+$CHANGELOG_FILE = "$TARGET_DIR/changelog/index.html"
+(Get-Content -Path $CHANGELOG_FILE) -replace 'href="../', 'href="../latest/' | Set-Content -Path $CHANGELOG_FILE
 
 # Remove deploy script from build
-Remove-Item -Path "$TARGET_DIR/$Version/deploy.ps1"
+Remove-Item -Path "$DestinationPath/deploy.ps1"
 
 # Make root redirect.
-Write-Host "Setting root index.html redirect to /$Version/..." -ForegroundColor Gray
-$RedirectHtml = "<meta http-equiv='refresh' content='0; url=./$Version/'>"
+Write-Host "Setting root index.html redirect to /latest/..." -ForegroundColor Gray
+$RedirectHtml = "<meta http-equiv='refresh' content='0; url=./latest/'>"
 Set-Content -Path "$TARGET_DIR\index.html" -Value $RedirectHtml
 
 # Copy docs-versions.json into the built site as versions.json
