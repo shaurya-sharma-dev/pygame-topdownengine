@@ -34,8 +34,9 @@ Copy-Item -Path ".\CHANGELOG.md" -Destination ".\docs\changelog.md"
 # Zensical build.
 Write-Host "Building version '$Version' using Zensical..." -ForegroundColor Cyan
 zensical build --clean
-New-Item -ItemType Directory -Path "$TARGET_DIR/$Version" -Force | Out-Null
-Move-Item -Path "site/*" -Destination "$TARGET_DIR/$Version" -Force
+$DestinationPath = "$TARGET_DIR/$Version"
+Copy-Item -Path "site/*" -Destination $DestinationPath -Recurse -Force
+Remove-Item -Path "site" -Recurse -Force # Clean up old build folder
 
 # Remove changelog copy
 Remove-Item -Path ".\docs\changelog.md"
