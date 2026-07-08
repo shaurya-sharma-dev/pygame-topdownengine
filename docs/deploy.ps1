@@ -4,7 +4,7 @@ param (
     [string]$Version
 )
 
-$TARGET_DIR = "site" # Build directory
+$TARGET_DIR = "built-docs" # Build directory
 $REMOTE_URL = (git remote get-url origin) # Automatically grabs repo URL
 
 # Clean up old files
@@ -33,7 +33,9 @@ Copy-Item -Path ".\CHANGELOG.md" -Destination ".\docs\changelog.md"
 
 # Zensical build.
 Write-Host "Building version '$Version' using Zensical..." -ForegroundColor Cyan
-zensical build --clean --site-dir "$TARGET_DIR/$Version"
+zensical build --clean
+New-Item -ItemType Directory -Path "$TARGET_DIR/$Version" -Force | Out-Null
+Move-Item -Path "site/*" -Destination "$TARGET_DIR/$Version" -Force
 
 # Remove changelog copy
 Remove-Item -Path ".\docs\changelog.md"
