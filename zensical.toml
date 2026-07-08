@@ -10,8 +10,8 @@ nav = [
   { "Getting Started" = [
     { "Installation" = "installation.md" },
     { "Making Your First Game" = [
-      { "Part 1: Quickstart" = "1_quickstart.md" },
-      { "Part 2: Lighting" = "2_lighting.md" }
+      { "Part 1: Quickstart" = "tutorial\\1_quickstart" },
+      { "Part 2: Lighting" = "tutorial\\2_lighting" }
     ]}
   ]},
   { "API Reference" = [
