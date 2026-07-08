@@ -41,6 +41,9 @@ Remove-Item -Path "site" -Recurse -Force # Clean up old build folder
 # Remove changelog copy
 Remove-Item -Path ".\docs\changelog.md"
 
+# Remove deploy script from build
+Remove-Item -Path "$TARGET_DIR/$Version/deploy.ps1"
+
 # Make root redirect.
 Write-Host "Setting root index.html redirect to /$Version/..." -ForegroundColor Gray
 $RedirectHtml = "<meta http-equiv='refresh' content='0; url=./$Version/'>"
