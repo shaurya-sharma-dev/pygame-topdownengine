@@ -3,17 +3,17 @@
 
 import pygame as pg
 
-def lerp(start: float|pg.Vector2, end: float|pg.Vector2, t: float) -> float:
+def lerp(start: float|pg.Vector2, end: float|pg.Vector2, t: float) -> pg.Vector2|float:
     """This function linearly interpolates two floats or Vectors. Accepts t values
     outside of the [0, 1] range. The start and end MUST be the same type.
     
     Args:
-        start (float|pg.Vector2): Start Vector2/float
-        end (float|pg.Vector2): End Vector2/float
+        start (float|pygame.Vector2): Start Vector2/float
+        end (float|pygame.Vector2): End Vector2/float
         t (float): Interpolation weight
 
     Returns: 
-        pg.Vector2|float: The interpolated Vector2/float
+        pygame.Vector2|float: The interpolated Vector2/float
 
     Raises:
         TypeError: If `start` and `end` are not the same type.
@@ -26,11 +26,11 @@ def scale_rect(rect: pg.Rect|pg.FRect, scalar: int|float) -> pg.Rect|pg.FRect:
     """This function scales a Rect's position and size by a given scalar.
     
     Args:
-        rect (pg.Rect|pg.FRect): The Rect object to scale
+        rect (pygame.Rect|pygame.FRect): The Rect object to scale
         scalar (int|float): The number to scale by
 
     Returns:
-        pg.Rect|pg.FRect: The scaled Rect object
+        pygame.Rect|pygame.FRect: The scaled Rect object
 
     Raises:
         ValueError: If `scalar` <= 0.

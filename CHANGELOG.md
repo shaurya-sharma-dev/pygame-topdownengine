@@ -42,6 +42,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 ### Removed
 - **Breaking:** `groups` parameter from the `__init__` methods of `GameObject`, `MobileObject`, and `EnvObject`.
 
+### Fixed
+- Docstrings of `topdownengine.math.scale_rect` and `topdownengine.math.lerp` to use "pygame" instead of "pg".
+- Return typehint of `topdownengine.math.lerp` to be `pygame.Vector2|float` instead of just `float`.
+
 ## [0.3.0] - 2026-07-03
 
 ### Added
