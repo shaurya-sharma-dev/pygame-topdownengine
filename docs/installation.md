@@ -6,8 +6,7 @@ In order to use pygame-topdownengine, you will need the following installed:
 - Python 3.12.10+
 - pygame-ce 2.5.7+
 
-
-!!! warning "pygame vs pygame-ce"
+!!! warning "pygame vs. pygame-ce"
     The `pip install` command will automatically install pygame-ce if you 
     do not have it currently installed. If you already have the original 
     pygame package installed, you **MUST** uninstall it before attempting 
