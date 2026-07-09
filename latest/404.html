@@ -19,7 +19,27 @@
     
     
       
-        <title>pygame-topdownengine Documentation</title>
+        <title>pygame-topdownengine Documentation</title> <script>
+    (function() {
+        const originalOpen = window.XMLHttpRequest.prototype.open;
+        const routeTable = {
+            "/search.json": "/pygame-topdownengine/search.json",
+            "/versions.json": "/pygame-topdownengine/versions.json"
+        };
+
+        window.XMLHttpRequest.prototype.open = function(method, url, ...args) {
+            let finalUrl = url;
+            for (const originalPath in routeTable) {
+                if (url.includes(originalPath)) {
+                    finalUrl = url.replaceAll(originalPath, routeTable[originalPath]);
+                    console.log(`[Rerouted]: ${url} -> ${finalUrl}`);
+                    break;
+                }
+            }
+            return originalOpen.apply(this, [method, finalUrl, ...args]);
+        };
+    })();
+</script>
       
     
     
@@ -50,7 +70,7 @@
       
     
     
-    <script>__md_scope=new URL("/pygame-topdownengine/latest",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    <script>__md_scope=new URL("/pygame-topdownengine",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
     
       
 
