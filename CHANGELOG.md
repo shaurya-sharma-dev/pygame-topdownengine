@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Changed
+- Performed an internal refactor of `Camera` class.
+
 ### Fixed
 - Incorrect docstring for the `image` parameter in the `BaseUIElement.__init__` method.
 - `Camera` class docstring to state that the `focus_game_object` attribute can be `None`.
