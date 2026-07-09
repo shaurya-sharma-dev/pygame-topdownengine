@@ -23,8 +23,8 @@
     (function() {
         const originalOpen = window.XMLHttpRequest.prototype.open;
         const routeTable = {
-            "/search.json": "/pygame-topdownengine/search.json",
-            "/versions.json": "/pygame-topdownengine/versions.json"
+            "/search.json": "/pygame-topdownengine/search-404.json",
+            "/versions.json": "/pygame-topdownengine/versions-404.json"
         };
 
         window.XMLHttpRequest.prototype.open = function(method, url, ...args) {

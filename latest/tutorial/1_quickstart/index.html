@@ -1077,9 +1077,16 @@
 </span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>container.add_ui_element(play_btn)
 </span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>game.scenes[&quot;menu&quot;].ui_containers.append(container)
 </span></code></pre></div></p>
-<blockquote>
-<p><strong>TIP:</strong> The <code>BaseScene</code> is the base class for all "scenes" in the engine. A "scene" controls the update loop and rendering of the game. By default, the <code>Game</code> class defines a <code>GameplayScene</code> object at <code>Game.scenes["gameplay"]</code>. The <code>GameplayScene</code> has very basic logic that updates and renders all <code>GameObject</code>s. This is why we set the <code>active_scene_key</code> to <code>"gameplay"</code> when the play button is pressed. Every scene has the same UI capabilities we used to create our main menu, including the <code>GameplayScene</code>.</p>
-</blockquote>
+<div class="admonition info">
+<p class="admonition-title">Scenes</p>
+<p>The <code>BaseScene</code> is the base class for all "scenes" in the engine. A "scene" 
+controls the update loop and rendering of the game. By default, the <code>Game</code> class 
+defines a <code>GameplayScene</code> object at <code>Game.scenes["gameplay"]</code>. The <code>GameplayScene</code> 
+has very basic logic that updates and renders all <code>GameObject</code>s. This is why we 
+set the <code>active_scene_key</code> to <code>"gameplay"</code> when the play button is pressed. Every 
+scene has the same UI capabilities we used to create our main menu, including the 
+<code>GameplayScene</code>.</p>
+</div>
 <h2 id="the-player">The Player<a class="headerlink" href="#the-player" title="Permanent link">&para;</a></h2>
 <p>Now that we have a <code>Game</code> instance and we have made our main menu, the next thing we will define is the Player. The base class for every in-world object in the engine is the <code>GameObject</code> class. However, in this tutorial, we won't be instantiating it directly. For example, to define the player, which we will do in a moment, we will use the <code>MobileObject</code> class, which is a subclass of <code>GameObject</code> with extra movement features.</p>
 <p>This code gives the player keyboard movement and animations (using the package's premade animations).

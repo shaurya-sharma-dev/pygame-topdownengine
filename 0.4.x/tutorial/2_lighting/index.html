@@ -985,9 +985,10 @@
 </span></code></pre></div></p>
 <p>As explained in the previous tutorial, the <code>GameplayScene</code> object is stored in <code>Game.scenes["gameplay"]</code> by default. So, this code simply retrieves that <code>GameplayScene</code> object and sets the <code>global_alpha</code> attribute to <code>150</code>.</p>
 <p>If you run the code right now, you should see the exact same menu as before. Once you click play, you should see the exact same gameplay, the only catch being that everything looks much darker now.</p>
-<blockquote>
-<p><strong>NOTE:</strong> The <code>global_alpha</code> attribute must be between <code>0</code> and <code>255</code>, inclusively.</p>
-</blockquote>
+<div class="admonition info">
+<p class="admonition-title">global_alpha</p>
+<p>The <code>global_alpha</code> attribute must be between <code>0</code> and <code>255</code>, inclusively.</p>
+</div>
 <h2 id="light-sources">Light Sources<a class="headerlink" href="#light-sources" title="Permanent link">&para;</a></h2>
 <p>Now that we have darkness, let's add light sources! Remember, to add light sources, all you need to do is set any <code>GameObject</code>'s <code>light_radius</code> attribute to a number greater than <code>0</code>. Right after the <code>global_alpha</code> assignment, add this code to make both the player and enemy light sources:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>player.light_radius = 24
