@@ -19,16 +19,11 @@ import topdownengine as tde
 # The first import allows for keyboard-based movement and the second one allows for AI-based movement.
 from topdownengine.mobile_object.controller import KeyboardInputController, MovementAIController
 
-# We will need this for pre-made animations the package comes with.
-from topdownengine.asset_paths import ASSETS_DIR
-
 # pygame-ce provides us with some really helpful utilities.
 import pygame as pg
 
 # We will need this for the main menu.
-from topdownengine.scenes import BaseScene
 from topdownengine.ui import Button, UIContainer, Text
-from topdownengine.font import Font
 ```
 
 ## The Game Class
@@ -48,23 +43,16 @@ game.bg_color = (40, 229, 30) # Give it a background color
 Before we get started with anything else, let's implement a (very basic) main menu. In our main menu, we will add a very basic header/title and a play button.
 ```
 # Define main menu using a BaseScene instance + set the active scene to the main menu
-game.scenes["menu"] = BaseScene(game)
+game.scenes["menu"] = tde.BaseScene(game)
 game.active_scene_key = "menu"
 
 # Create the play button + header
-font = Font("Arial")
+font = tde.Font("Arial")
 header = Text((450, 200), font, 50, "pygame-topdownengine", (255, 255, 255))
 
-# Define play button and make it start the game on click.
-play_btn = Button((450, 350), on_click=lambda: setattr(game, "active_scene_key", "gameplay")) 
-
-# Make the size of the play button 150x50 pixels.
+play_btn = Button((450, 350), on_click=lambda: setattr(game, "active_scene_key", "gameplay"))
 play_btn.image = pg.Surface((150, 50))
-
-# Make the play button have a black background.
-play_btn.image.fill((0, 0, 0)) 
-
-# Add text to the play button.
+play_btn.image.fill((0, 0, 0))
 font.draw_text("PLAY", 75, 25, 40, play_btn.image, (255, 255, 255))
 
 # Add the header + play button to the main menu
@@ -92,8 +80,8 @@ This code gives the player keyboard movement and animations (using the package's
 player = tde.MobileObject(
     controller=KeyboardInputController(), 
     animation_paths={
-        "idle": ASSETS_DIR / "example-player" / "idle.png",
-        "walk": ASSETS_DIR / "example-player" / "walk.png"
+        "idle": tde.ASSETS_DIR / "example-player" / "idle.png",
+        "walk": tde.ASSETS_DIR / "example-player" / "walk.png"
     }, frame_size=(16, 16), directional_anims=True
 )
 game.camera.focus_game_object = player
@@ -115,7 +103,7 @@ Another subclass of `GameObject` is `EnvObject`. It is used to define environmen
 ```
 env_object = tde.EnvObject(
     animation_paths={
-        "idle": ASSETS_DIR / "example-cliff.png"
+        "idle": tde.ASSETS_DIR / "example-cliff.png"
     },
     frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)]
 )

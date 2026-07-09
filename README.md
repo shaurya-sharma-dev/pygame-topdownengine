@@ -27,11 +27,8 @@ This code makes a Player character, a secondary character that will attempt to f
 ```
 import topdownengine as tde
 from topdownengine.mobile_object.controller import KeyboardInputController, MovementAIController
-from topdownengine.asset_paths import ASSETS_DIR
 import pygame as pg
-from topdownengine.scenes import BaseScene
 from topdownengine.ui import Button, UIContainer, Text
-from topdownengine.font import Font
 
 # Define an instance of the Game class
 game = tde.Game(
@@ -43,11 +40,11 @@ game = tde.Game(
 game.bg_color = (40, 229, 30)
 
 # Define main menu using a BaseScene instance + set the active scene to the main menu
-game.scenes["menu"] = BaseScene(game)
+game.scenes["menu"] = tde.BaseScene(game)
 game.active_scene_key = "menu"
 
 # Create the play button + header
-font = Font("Arial")
+font = tde.Font("Arial")
 header = Text((450, 200), font, 50, "pygame-topdownengine", (255, 255, 255))
 
 play_btn = Button((450, 350), on_click=lambda: setattr(game, "active_scene_key", "gameplay"))
@@ -65,8 +62,8 @@ game.scenes["menu"].ui_containers.append(container)
 player = tde.MobileObject(
     controller=KeyboardInputController(), 
     animation_paths={
-        "idle": ASSETS_DIR / "example-player" / "idle.png",
-        "walk": ASSETS_DIR / "example-player" / "walk.png"
+        "idle": tde.ASSETS_DIR / "example-player" / "idle.png",
+        "walk": tde.ASSETS_DIR / "example-player" / "walk.png"
     }, frame_size=(16, 16), directional_anims=True
 )
 game.camera.focus_game_object = player
@@ -81,7 +78,7 @@ enemy = tde.MobileObject(
 # Define an EnvObject
 env_object = tde.EnvObject(
     animation_paths={
-        "idle": ASSETS_DIR / "example-cliff.png"
+        "idle": tde.ASSETS_DIR / "example-cliff.png"
     },
     frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)]
 )
