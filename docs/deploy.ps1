@@ -1,12 +1,10 @@
 # Configuration
 param (
     [Parameter(Mandatory = $true, HelpMessage = "Enter the version name")]
-    [string]$Version,
-
-    [switch]$latest
+    [string]$Version
 )
 
-& "$PSScriptRoot\build.ps1" -Version $Version -latest:$latest
+& "$PSScriptRoot\build.ps1" -Version $Version
 
 # Push to gh-pages branch.
 Write-Host "Pushing and forcing update to gh-pages..." -ForegroundColor Green

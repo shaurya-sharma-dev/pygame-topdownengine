@@ -1,13 +1,20 @@
 # Configuration
 param (
     [Parameter(Mandatory = $true, HelpMessage = "Enter the version name")]
-    [string]$Version,
-
-    [switch]$latest
+    [string]$Version
 )
 
 $TARGET_DIR = "built-docs" # Build directory
 $REMOTE_URL = (git remote get-url origin) # Automatically grabs repo URL
+
+python "$PSScriptRoot\check_latest.py" "$Version" > $null
+$latest = ($LASTEXITCODE -eq 0)
+
+if ($latest){
+    Write-Host "Auto-detected that this is the latest version." -ForegroundColor Cyan
+} else {
+    Write-Host "Auto-detected that this is NOT the latest version." -ForegroundColor Cyan
+}
 
 # Clean up old files
 Write-Host "Cleaning old directory..." -ForegroundColor Cyan
