@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- Incorrect docstring for the `image` parameter in the `BaseUIElement.__init__` method.
+
 ## [0.4.3] - 2026-07-09
 
 ### Fixed
