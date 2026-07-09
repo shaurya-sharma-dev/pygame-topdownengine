@@ -72,15 +72,19 @@ $CHANGELOG_FILE = "$TARGET_DIR/changelog/index.html"
 (Get-Content -Path $CHANGELOG_FILE) -replace 'href="../', 'href="../latest/' | Set-Content -Path $CHANGELOG_FILE
 (Get-Content -Path $CHANGELOG_FILE) -replace '../assets/javascripts', '../latest/assets/javascripts' | Set-Content -Path $CHANGELOG_FILE
 
-# Remove scripts from build
+# Remove scripts + version.json from build
 Remove-Item -Path "$DestinationPath/deploy.ps1"
 Remove-Item -Path "$DestinationPath/build.ps1"
 Remove-Item -Path "$DestinationPath/check_latest.py"
+Remove-Item -Path "$DestinationPath/build_404_assets.py"
+Remove-Item -Path "$DestinationPath/versions.json"
 
 if ($latest) {
     Remove-Item -Path "$TARGET_DIR/latest/deploy.ps1"
     Remove-Item -Path "$TARGET_DIR/latest/build.ps1"
     Remove-Item -Path "$TARGET_DIR/latest/check_latest.py"
+    Remove-Item -Path "$TARGET_DIR/latest/build_404_assets.py"
+    Remove-Item -Path "$TARGET_DIR/latest/versions.json"
 }
 
 # Make root redirect.
@@ -92,11 +96,40 @@ Set-Content -Path "$TARGET_DIR\index.html" -Value $RedirectHtml
 Write-Host "Creating 404 page..." -ForegroundColor Gray
 $NotFoundRedirectHtml = "<meta http-equiv='refresh' content='0; url=/pygame-topdownengine/latest/404.html'>"
 Set-Content -Path "$TARGET_DIR\404.html" -Value $NotFoundRedirectHtml
+
+$ScriptInjectionLocation = '<title>pygame-topdownengine Documentation</title>'
+$FakeFileScript = @'
+<script>
+    (function() {
+        const originalOpen = window.XMLHttpRequest.prototype.open;
+        const routeTable = {
+            "/search.json": "/pygame-topdownengine/search-404.json",
+            "/versions.json": "/pygame-topdownengine/versions-404.json"
+        };
+
+        window.XMLHttpRequest.prototype.open = function(method, url, ...args) {
+            let finalUrl = url;
+            for (const originalPath in routeTable) {
+                if (url.includes(originalPath)) {
+                    finalUrl = url.replaceAll(originalPath, routeTable[originalPath]);
+                    console.log(`[Rerouted]: ${url} -> ${finalUrl}`);
+                    break;
+                }
+            }
+            return originalOpen.apply(this, [method, finalUrl, ...args]);
+        };
+    })();
+</script>
+'@
+
 (Get-Content -Path "$TARGET_DIR\latest\404.html") -replace '<a href="/pygame-topdownengine/latest/..', '<a href="/pygame-topdownengine' | Set-Content -Path "$TARGET_DIR\latest\404.html"
 (Get-Content -Path "$TARGET_DIR\latest\404.html") -replace '<a href="/pygame-topdownengine(?!/latest)', '<a href="/pygame-topdownengine/latest' | Set-Content -Path "$TARGET_DIR\latest\404.html"
+(Get-Content -Path "$TARGET_DIR\latest\404.html") -replace $ScriptInjectionLocation, "$ScriptInjectionLocation $FakeFileScript" | Set-Content -Path "$TARGET_DIR\latest\404.html"
+
+python "$PSScriptRoot\build_404_assets.py" "$TARGET_DIR"
 
 # Copy assets folder.
 Copy-Item -Path "$TARGET_DIR\latest\assets" -Destination "$TARGET_DIR\assets" -Recurse -Force
 
-# Copy docs-versions.json into the built site as versions.json
-Copy-Item -Path ".\docs-versions.json" -Destination "$TARGET_DIR/versions.json" -Force
+# Copy versions.json into the built site
+Copy-Item -Path ".\docs\versions.json" -Destination "$TARGET_DIR/versions.json" -Force

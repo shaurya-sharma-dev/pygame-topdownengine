@@ -3,7 +3,7 @@ import json
 
 def verify_latest_alias(target_version):
     try:
-        with open("docs-versions.json", 'r') as f:
+        with open("./docs/versions.json", 'r') as f:
             data = json.load(f)
         
         for version in data:
