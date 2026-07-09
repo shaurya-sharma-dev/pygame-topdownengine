@@ -8,7 +8,7 @@ class Camera:
     Attributes:
         real_position (pygame.Vector2): The position of the camera, excluding screenshake.
         screenshake_offset (pygame.Vector2): The current screenshake offset.
-        focus_game_object (GameObject): The GameObject to center the camera on.
+        focus_game_object (GameObject|None): The GameObject to center the camera on. If None, the Camera will not center on any GameObject.
         screenshake (dict[str,float]): Current screenshake dictionary.
         position (pygame.Vector2): The position of the camera, factoring screenshake.
     """
