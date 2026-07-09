@@ -2,6 +2,7 @@ from __future__ import annotations
 import pygame as pg
 from collections.abc import Callable
 from .font import Font
+from .visual_utils import VisualUtils
 
 class UIContainer:
     """Class to store a collection of UI elements.
@@ -164,15 +165,11 @@ class Button(BaseUIElement):
         super().__init__(position, align, image)
         self.on_click = on_click
         self.hover_highlight_strength = hover_highlight_strength
+        self._enable_hover = False
 
     def _get_image(self) -> pg.Surface:
-        if self.is_mouse_over():
-            highlighted_image = self._image.copy()
-            highlighted_image.fill(
-                (self.hover_highlight_strength, self.hover_highlight_strength, self.hover_highlight_strength, 0), 
-                special_flags=pg.BLEND_RGBA_ADD
-            )
-            return highlighted_image
+        if self._enable_hover and self.is_mouse_over():
+            return VisualUtils.make_img_white(self._image, self.hover_highlight_strength)
         
         return self._image
     
@@ -185,6 +182,9 @@ class Button(BaseUIElement):
     def handle_event(self, event: pg.Event) -> None:
         if event.type == pg.MOUSEBUTTONUP and self.is_mouse_over() and self.on_click is not None:
             self.on_click()
+
+    def update(self, dt: float) -> None:
+        self._enable_hover = True
 
 class Text(BaseUIElement):
     def __init__(self, position: pg.typing.Point, font: Font, size: int, text: str, color: pg.typing.ColorLike, align: str="center"):
