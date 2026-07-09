@@ -52,7 +52,7 @@ header = Text((450, 200), font, 50, "pygame-topdownengine", (255, 255, 255))
 
 play_btn = Button((450, 350), on_click=lambda: setattr(game, "active_scene_key", "gameplay"))
 play_btn.image = pg.Surface((150, 50))
-play_btn.image.fill((0, 0, 0))
+play_btn.image.fill((50, 100, 100))
 font.draw_text("PLAY", 75, 25, 40, play_btn.image, (255, 255, 255))
 
 # Add the header + play button to the main menu
