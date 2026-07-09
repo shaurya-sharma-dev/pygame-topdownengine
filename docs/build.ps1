@@ -70,6 +70,7 @@ Move-Item -Path "$DestinationPath/changelog" -Destination $TARGET_DIR -Force
 # For the changelog file, replace all url references of the version to latest.
 $CHANGELOG_FILE = "$TARGET_DIR/changelog/index.html"
 (Get-Content -Path $CHANGELOG_FILE) -replace 'href="../', 'href="../latest/' | Set-Content -Path $CHANGELOG_FILE
+(Get-Content -Path $CHANGELOG_FILE) -replace '../assets/javascripts', '../latest/assets/javascripts' | Set-Content -Path $CHANGELOG_FILE
 
 # Remove scripts from build
 Remove-Item -Path "$DestinationPath/deploy.ps1"
@@ -87,10 +88,15 @@ Write-Host "Setting root index.html redirect to /latest/..." -ForegroundColor Gr
 $RedirectHtml = "<meta http-equiv='refresh' content='0; url=./latest/'>"
 Set-Content -Path "$TARGET_DIR\index.html" -Value $RedirectHtml
 
-# Make 404 page
+# Make 404 page.
 Write-Host "Creating 404 page..." -ForegroundColor Gray
-Copy-Item -Path "$TARGET_DIR\latest\404.html" -Destination "$TARGET_DIR\404.html"
-(Get-Content -Path "$TARGET_DIR\404.html") -replace '/pygame-topdownengine/assets', '/pygame-topdownengine/latest/assets' | Set-Content -Path "$TARGET_DIR\404.html"
+$NotFoundRedirectHtml = "<meta http-equiv='refresh' content='0; url=/pygame-topdownengine/latest/404.html'>"
+Set-Content -Path "$TARGET_DIR\404.html" -Value $NotFoundRedirectHtml
+(Get-Content -Path "$TARGET_DIR\latest\404.html") -replace '<a href="/pygame-topdownengine/latest/..', '<a href="/pygame-topdownengine' | Set-Content -Path "$TARGET_DIR\latest\404.html"
+(Get-Content -Path "$TARGET_DIR\latest\404.html") -replace '<a href="/pygame-topdownengine(?!/latest)', '<a href="/pygame-topdownengine/latest' | Set-Content -Path "$TARGET_DIR\latest\404.html"
+
+# Copy assets folder.
+Copy-Item -Path "$TARGET_DIR\latest\assets" -Destination "$TARGET_DIR\assets" -Recurse -Force
 
 # Copy docs-versions.json into the built site as versions.json
 Copy-Item -Path ".\docs-versions.json" -Destination "$TARGET_DIR/versions.json" -Force
