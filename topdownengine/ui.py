@@ -89,7 +89,7 @@ class BaseUIElement:
         Args:
             position (pygame.typing.Point): The position of the element.
             align (str): The alignment of the element.
-            image (pygame.Surface, optional): The image to use for the button.
+            image (pygame.Surface, optional): The image to use for the element.
         """
         self._containers = set()
         self._image = image
