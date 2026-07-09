@@ -1,10 +1,11 @@
 # Configuration
 param (
     [Parameter(Mandatory = $true, HelpMessage = "Enter the version name")]
-    [string]$Version
+    [string]$Version,
+    [Parameter(Mandatory = $true, HelpMessage = "Enter the finished build path")]
+    [string]$TARGET_DIR
 )
 
-$TARGET_DIR = "built-docs" # Build directory
 $REMOTE_URL = (git remote get-url origin) # Automatically grabs repo URL
 
 python "$PSScriptRoot\check_latest.py" "$Version" > $null

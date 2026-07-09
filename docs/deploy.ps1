@@ -4,7 +4,8 @@ param (
     [string]$Version
 )
 
-& "$PSScriptRoot\build.ps1" -Version $Version
+$TARGET_DIR = "built-docs" # Build directory
+& "$PSScriptRoot\build.ps1" -Version $Version -TARGET_DIR $TARGET_DIR
 
 # Push to gh-pages branch.
 Write-Host "Pushing and forcing update to gh-pages..." -ForegroundColor Green
