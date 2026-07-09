@@ -70,10 +70,15 @@ Move-Item -Path "$DestinationPath/changelog" -Destination $TARGET_DIR -Force
 $CHANGELOG_FILE = "$TARGET_DIR/changelog/index.html"
 (Get-Content -Path $CHANGELOG_FILE) -replace 'href="../', 'href="../latest/' | Set-Content -Path $CHANGELOG_FILE
 
-# Remove deploy script from build
+# Remove scripts from build
 Remove-Item -Path "$DestinationPath/deploy.ps1"
+Remove-Item -Path "$DestinationPath/build.ps1"
+Remove-Item -Path "$DestinationPath/check_latest.py"
+
 if ($latest) {
     Remove-Item -Path "$TARGET_DIR/latest/deploy.ps1"
+    Remove-Item -Path "$TARGET_DIR/latest/build.ps1"
+    Remove-Item -Path "$TARGET_DIR/latest/check_latest.py"
 }
 
 # Make root redirect.
