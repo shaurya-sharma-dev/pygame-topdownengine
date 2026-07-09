@@ -100,7 +100,7 @@ In order to install pygame-topdownengine, make sure Python and pip are both inst
 ```
 pip install pygame-topdownengine
 ```
-If you would like to view the documentation page on installation, which also has information about dependencies and virtual environments, click [here](https://shaurya-sharma-dev.github.io/pygame-topdownengine/installation.html).
+If you would like to view the documentation page on installation, which also has information about dependencies and virtual environments, click [here](https://shaurya-sharma-dev.github.io/pygame-topdownengine/latest/installation).
 
 ## License
 This library is distributed under the MIT license, which can be found in the root of this repository under the `LICENSE` file.
