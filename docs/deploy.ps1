@@ -39,6 +39,10 @@ zensical build --clean
 $DestinationPath = "$TARGET_DIR/$Version"
 Copy-Item -Path "site/*" -Destination $DestinationPath -Recurse -Force
 if ($latest) {
+    If ((Test-Path "$TARGET_DIR/latest")) { 
+        Remove-Item -Path "$TARGET_DIR/latest" -Recurse -Force # Wipe latest folder
+        New-Item -Path "$TARGET_DIR/latest" -ItemType Directory
+    }
     Copy-Item -Path "site/*" -Destination "$TARGET_DIR/latest" -Recurse -Force
 }
 Remove-Item -Path "site" -Recurse -Force # Clean up old build folder
@@ -46,6 +50,9 @@ Remove-Item -Path "site" -Recurse -Force # Clean up old build folder
 # Remove changelog copy from docs folder and copy the changelog folder generated for the deploy into the root site.
 Remove-Item -Path ".\docs\changelog.md"
 Remove-Item -Path "$TARGET_DIR/changelog" -Recurse
+if ($latest) {
+    Remove-Item -Path "$TARGET_DIR/latest/changelog" -Recurse
+}
 Write-Host "Moving changelog to $TARGET_DIR/changelog..." -ForegroundColor Cyan
 if (-not (Test-Path -Path $DestinationPath)) {
     New-Item -ItemType Directory -Path $DestinationPath -Force
@@ -58,6 +65,9 @@ $CHANGELOG_FILE = "$TARGET_DIR/changelog/index.html"
 
 # Remove deploy script from build
 Remove-Item -Path "$DestinationPath/deploy.ps1"
+if ($latest) {
+    Remove-Item -Path "$TARGET_DIR/latest/deploy.ps1"
+}
 
 # Make root redirect.
 Write-Host "Setting root index.html redirect to /latest/..." -ForegroundColor Gray
