@@ -18,14 +18,14 @@ class EnvObject(GameObject):
         self,
         animation_paths: dict[str,str]|None=None, 
         frame_size: tuple[int]|None=None, 
-        colliders: list[pg.Rect]=[]
+        colliders: list[pg.Rect]=None
     ) -> None:
         """Initialize the EnvObject.
         
         Args:
             animation_paths (dict[str,str], optional): The animation paths to load animations from. Defaults to None.
             frame_size (tuple[int]|None, optional): The frame size to use to load/generate animations. Defaults to None.
-            colliders (list[pygame.Rect]|None, optional): The list of colliders of the EnvObject, relative to itself. Defaults to [].
+            colliders (list[pygame.Rect]|None, optional): The list of colliders of the EnvObject, relative to itself. If it is set to None, there will be no colliders. Defaults to None.
         """
         # Set animation paths dict and frame size before calling super().__init__()
         # This make it automatically load in the animations without
@@ -35,4 +35,4 @@ class EnvObject(GameObject):
             self.frame_size = frame_size
 
         super().__init__()
-        self.colliders = colliders
+        self.colliders = colliders if colliders is not None else []
