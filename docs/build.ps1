@@ -86,5 +86,10 @@ Write-Host "Setting root index.html redirect to /latest/..." -ForegroundColor Gr
 $RedirectHtml = "<meta http-equiv='refresh' content='0; url=./latest/'>"
 Set-Content -Path "$TARGET_DIR\index.html" -Value $RedirectHtml
 
+# Make 404 page
+Write-Host "Creating 404 page..." -ForegroundColor Gray
+Copy-Item -Path "$TARGET_DIR\latest\404.html" -Destination "$TARGET_DIR\404.html"
+(Get-Content -Path "$TARGET_DIR\404.html") -replace '/pygame-topdownengine/assets', '/pygame-topdownengine/latest/assets' | Set-Content -Path "$TARGET_DIR\404.html"
+
 # Copy docs-versions.json into the built site as versions.json
 Copy-Item -Path ".\docs-versions.json" -Destination "$TARGET_DIR/versions.json" -Force
