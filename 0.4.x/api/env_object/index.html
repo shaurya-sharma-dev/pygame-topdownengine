@@ -1051,6 +1051,14 @@
 
 
 <h1 id="topdownengineenv_object-reference">topdownengine.env_object Reference<a class="headerlink" href="#topdownengineenv_object-reference" title="Permanent link">&para;</a></h1>
+<div class="admonition bug">
+<p class="admonition-title">Resolved: Mutable Default Argument Bug (Fixed in v0.4.3)</p>
+<p>Prior to version 0.4.3, omitting the <code>colliders</code> argument in the <code>EnvObject</code>
+initialization caused colliders to persist across separate instances due to
+a mutable default list. </p>
+<p>The default argument has been changed to <code>None</code> and now safely initializes 
+a fresh, empty list for every individual instance.</p>
+</div>
 
 
 <div class="doc doc-object doc-module">
@@ -1173,14 +1181,14 @@
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>        <span class="bp">self</span><span class="p">,</span>
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>        <span class="n">animation_paths</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">str</span><span class="p">]</span><span class="o">|</span><span class="kc">None</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>        <span class="n">frame_size</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">|</span><span class="kc">None</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>        <span class="n">colliders</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pg</span><span class="o">.</span><span class="n">Rect</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>        <span class="n">colliders</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pg</span><span class="o">.</span><span class="n">Rect</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the EnvObject.</span>
 </span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>
 </span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">        Args:</span>
 </span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">            animation_paths (dict[str,str], optional): The animation paths to load animations from. Defaults to None.</span>
 </span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="sd">            frame_size (tuple[int]|None, optional): The frame size to use to load/generate animations. Defaults to None.</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">            colliders (list[pygame.Rect]|None, optional): The list of colliders of the EnvObject, relative to itself. Defaults to [].</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">            colliders (list[pygame.Rect]|None, optional): The list of colliders of the EnvObject, relative to itself. If it is set to None, there will be no colliders. Defaults to None.</span>
 </span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a>        <span class="c1"># Set animation paths dict and frame size before calling super().__init__()</span>
 </span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>        <span class="c1"># This make it automatically load in the animations without</span>
@@ -1190,7 +1198,7 @@
 </span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">frame_size</span> <span class="o">=</span> <span class="n">frame_size</span>
 </span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>
 </span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">colliders</span> <span class="o">=</span> <span class="n">colliders</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">colliders</span> <span class="o">=</span> <span class="n">colliders</span> <span class="k">if</span> <span class="n">colliders</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -1323,7 +1331,7 @@ GameObject itself.</p>
 
 
 <h3 id="topdownengine.env_object.EnvObject.__init__" class="doc doc-heading">
-            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">animation_paths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">frame_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colliders</span><span class="o">=</span><span class="p">[])</span></code>
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">animation_paths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">frame_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colliders</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#topdownengine.env_object.EnvObject.__init__" class="headerlink" title="Permanent link">&para;</a></h3>
 
@@ -1385,11 +1393,11 @@ GameObject itself.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The list of colliders of the EnvObject, relative to itself. Defaults to [].</p>
+                <p>The list of colliders of the EnvObject, relative to itself. If it is set to None, there will be no colliders. Defaults to None.</p>
               </div>
             </td>
             <td>
-                  <code>[]</code>
+                  <code>None</code>
             </td>
           </tr>
       </tbody>
@@ -1423,14 +1431,14 @@ GameObject itself.</p>
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>    <span class="bp">self</span><span class="p">,</span>
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="n">animation_paths</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">str</span><span class="p">]</span><span class="o">|</span><span class="kc">None</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="n">frame_size</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">|</span><span class="kc">None</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="n">colliders</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pg</span><span class="o">.</span><span class="n">Rect</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="n">colliders</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pg</span><span class="o">.</span><span class="n">Rect</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize the EnvObject.</span>
 </span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>
 </span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">    Args:</span>
 </span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">        animation_paths (dict[str,str], optional): The animation paths to load animations from. Defaults to None.</span>
 </span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="sd">        frame_size (tuple[int]|None, optional): The frame size to use to load/generate animations. Defaults to None.</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">        colliders (list[pygame.Rect]|None, optional): The list of colliders of the EnvObject, relative to itself. Defaults to [].</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">        colliders (list[pygame.Rect]|None, optional): The list of colliders of the EnvObject, relative to itself. If it is set to None, there will be no colliders. Defaults to None.</span>
 </span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="c1"># Set animation paths dict and frame size before calling super().__init__()</span>
 </span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="c1"># This make it automatically load in the animations without</span>
@@ -1440,7 +1448,7 @@ GameObject itself.</p>
 </span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">frame_size</span> <span class="o">=</span> <span class="n">frame_size</span>
 </span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>
 </span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">colliders</span> <span class="o">=</span> <span class="n">colliders</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">colliders</span> <span class="o">=</span> <span class="n">colliders</span> <span class="k">if</span> <span class="n">colliders</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
