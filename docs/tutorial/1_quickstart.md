@@ -87,6 +87,13 @@ player = tde.MobileObject(
 game.camera.focus_game_object = player
 ```
 
+!!! info "The Camera"
+    The `game.camera` attribute represents the `Camera` instance used for rendering. 
+    The `Camera` class has a `focus_game_object` attribute. If `focus_game_object` is 
+    set to a `GameObject` instance, the `Camera` will begin tracking that `GameObject`. 
+    The `Camera` class also has other features like screenshake, but those are outside 
+    of the scope of this tutorial.
+
 ## The Enemy
 Now let's make the `MobileObject` that follows you. For the purposes of this tutorial, let's call it the "enemy". This code makes the enemy follow the player and uses the same animations as the player.
 ```
@@ -118,7 +125,7 @@ Now, we need to add these three to the `Game` itself. In order to do that, we ad
 game.game_object_group.add(player, env_object, enemy)
 ```
 
-## Subpixel vs Pixel-Perfect Rendering
+## Subpixel vs. Pixel-Perfect Rendering
 pygame-topdownengine offers both pixel-perfect rendering and subpixel rendering out of the box. By default, pixel-perfect rendering is used. However, if you want subpixel rendering to make it more smooth, you can do that with this code:
 ```
 tde.GameObject.SUBPIXEL = True
