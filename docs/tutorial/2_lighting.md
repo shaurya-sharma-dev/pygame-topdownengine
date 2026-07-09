@@ -28,7 +28,8 @@ As explained in the previous tutorial, the `GameplayScene` object is stored in `
 
 If you run the code right now, you should see the exact same menu as before. Once you click play, you should see the exact same gameplay, the only catch being that everything looks much darker now.
 
-> **NOTE:** The `global_alpha` attribute must be between `0` and `255`, inclusively.
+!!! info "global_alpha"
+    The `global_alpha` attribute must be between `0` and `255`, inclusively.
 
 ## Light Sources
 Now that we have darkness, let's add light sources! Remember, to add light sources, all you need to do is set any `GameObject`'s `light_radius` attribute to a number greater than `0`. Right after the `global_alpha` assignment, add this code to make both the player and enemy light sources:

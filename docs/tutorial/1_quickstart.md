@@ -74,7 +74,14 @@ container.add_ui_element(play_btn)
 game.scenes["menu"].ui_containers.append(container)
 ```
 
-> **TIP:** The `BaseScene` is the base class for all "scenes" in the engine. A "scene" controls the update loop and rendering of the game. By default, the `Game` class defines a `GameplayScene` object at `Game.scenes["gameplay"]`. The `GameplayScene` has very basic logic that updates and renders all `GameObject`s. This is why we set the `active_scene_key` to `"gameplay"` when the play button is pressed. Every scene has the same UI capabilities we used to create our main menu, including the `GameplayScene`.
+!!! info "Scenes"
+    The `BaseScene` is the base class for all "scenes" in the engine. A "scene" 
+    controls the update loop and rendering of the game. By default, the `Game` class 
+    defines a `GameplayScene` object at `Game.scenes["gameplay"]`. The `GameplayScene` 
+    has very basic logic that updates and renders all `GameObject`s. This is why we 
+    set the `active_scene_key` to `"gameplay"` when the play button is pressed. Every 
+    scene has the same UI capabilities we used to create our main menu, including the 
+    `GameplayScene`.
 
 ## The Player
 Now that we have a `Game` instance and we have made our main menu, the next thing we will define is the Player. The base class for every in-world object in the engine is the `GameObject` class. However, in this tutorial, we won't be instantiating it directly. For example, to define the player, which we will do in a moment, we will use the `MobileObject` class, which is a subclass of `GameObject` with extra movement features.
