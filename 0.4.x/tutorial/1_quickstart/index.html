@@ -975,7 +975,7 @@
   <a href="#subpixel-vs-pixel-perfect-rendering" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Subpixel vs Pixel-Perfect Rendering
+        Subpixel vs. Pixel-Perfect Rendering
       </span>
     </span>
   </a>
@@ -1056,7 +1056,7 @@
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>play_btn = Button((450, 350), on_click=lambda: setattr(game, &quot;active_scene_key&quot;, &quot;gameplay&quot;))
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>play_btn.image = pg.Surface((150, 50))
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>play_btn.image.fill((0, 0, 0))
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>play_btn.image.fill((50, 100, 100))
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>font.draw_text(&quot;PLAY&quot;, 75, 25, 40, play_btn.image, (255, 255, 255))
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a># Add the header + play button to the main menu
@@ -1088,6 +1088,14 @@ scene has the same UI capabilities we used to create our main menu, including th
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>)
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>game.camera.focus_game_object = player
 </span></code></pre></div></p>
+<div class="admonition info">
+<p class="admonition-title">The Camera</p>
+<p>The <code>game.camera</code> attribute represents the <code>Camera</code> instance used for rendering. 
+The <code>Camera</code> class has a <code>focus_game_object</code> attribute. If <code>focus_game_object</code> is 
+set to a <code>GameObject</code> instance, the <code>Camera</code> will begin tracking that <code>GameObject</code>. 
+The <code>Camera</code> class also has other features like screenshake, but those are outside 
+of the scope of this tutorial.</p>
+</div>
 <h2 id="the-enemy">The Enemy<a class="headerlink" href="#the-enemy" title="Permanent link">&para;</a></h2>
 <p>Now let's make the <code>MobileObject</code> that follows you. For the purposes of this tutorial, let's call it the "enemy". This code makes the enemy follow the player and uses the same animations as the player.
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a># Define a MobileObject to follow the Player
@@ -1113,7 +1121,7 @@ scene has the same UI capabilities we used to create our main menu, including th
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a># Add them to the game object group
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>game.game_object_group.add(player, env_object, enemy)
 </span></code></pre></div></p>
-<h2 id="subpixel-vs-pixel-perfect-rendering">Subpixel vs Pixel-Perfect Rendering<a class="headerlink" href="#subpixel-vs-pixel-perfect-rendering" title="Permanent link">&para;</a></h2>
+<h2 id="subpixel-vs-pixel-perfect-rendering">Subpixel vs. Pixel-Perfect Rendering<a class="headerlink" href="#subpixel-vs-pixel-perfect-rendering" title="Permanent link">&para;</a></h2>
 <p>pygame-topdownengine offers both pixel-perfect rendering and subpixel rendering out of the box. By default, pixel-perfect rendering is used. However, if you want subpixel rendering to make it more smooth, you can do that with this code:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>tde.GameObject.SUBPIXEL = True
 </span></code></pre></div></p>

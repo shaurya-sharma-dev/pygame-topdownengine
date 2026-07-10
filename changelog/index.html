@@ -16,24 +16,44 @@
         
       
       
-      <link rel="icon" href="../latest/assets/images/favicon.png">
+      <link rel="icon" href="../0.4.x/assets/images/favicon.png">
       <meta name="generator" content="zensical-0.0.47">
     
     
       
-        <title>Changelog - pygame-topdownengine Documentation</title>
+        <title>Changelog - pygame-topdownengine Documentation</title> <script>
+    (function() {
+        const originalOpen = window.XMLHttpRequest.prototype.open;
+        const routeTable = {
+            "/search.json": "/search-changelog.json",
+            "/versions.json": "/pygame-topdownengine/versions-404.json"
+        };
+
+        window.XMLHttpRequest.prototype.open = function(method, url, ...args) {
+            let finalUrl = url;
+            for (const originalPath in routeTable) {
+                if (url.includes(originalPath)) {
+                    finalUrl = url.replaceAll(originalPath, routeTable[originalPath]);
+                    console.log(`[Rerouted]: ${url} -> ${finalUrl}`);
+                    break;
+                }
+            }
+            return originalOpen.apply(this, [method, finalUrl, ...args]);
+        };
+    })();
+</script>
       
     
     
       
         
       
-      <link rel="stylesheet" href="../latest/assets/stylesheets/modern/main.5e19f6ca.min.css">
+      <link rel="stylesheet" href="../0.4.x/assets/stylesheets/modern/main.5e19f6ca.min.css">
       
         
           
         
-        <link rel="stylesheet" href="../latest/assets/stylesheets/modern/palette.dfe2e883.min.css">
+        <link rel="stylesheet" href="../0.4.x/assets/stylesheets/modern/palette.dfe2e883.min.css">
       
       
 
@@ -262,7 +282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/../changelog" class="md-nav__link">
+      <a href="../0.4.x/../changelog" class="md-nav__link">
         
   
   
@@ -333,7 +353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/installation/" class="md-nav__link">
+      <a href="../0.4.x/installation/" class="md-nav__link">
         
   
   
@@ -405,7 +425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/tutorial/1_quickstart" class="md-nav__link">
+      <a href="../0.4.x/tutorial/1_quickstart" class="md-nav__link">
         
   
   
@@ -432,7 +452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/tutorial/2_lighting" class="md-nav__link">
+      <a href="../0.4.x/tutorial/2_lighting" class="md-nav__link">
         
   
   
@@ -519,7 +539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/asset_paths" class="md-nav__link">
+      <a href="../0.4.x/api/asset_paths" class="md-nav__link">
         
   
   
@@ -546,7 +566,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/camera" class="md-nav__link">
+      <a href="../0.4.x/api/camera" class="md-nav__link">
         
   
   
@@ -573,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/controls" class="md-nav__link">
+      <a href="../0.4.x/api/controls" class="md-nav__link">
         
   
   
@@ -600,7 +620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/env_object" class="md-nav__link">
+      <a href="../0.4.x/api/env_object" class="md-nav__link">
         
   
   
@@ -627,7 +647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/font" class="md-nav__link">
+      <a href="../0.4.x/api/font" class="md-nav__link">
         
   
   
@@ -654,7 +674,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/game_object" class="md-nav__link">
+      <a href="../0.4.x/api/game_object" class="md-nav__link">
         
   
   
@@ -681,7 +701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/game" class="md-nav__link">
+      <a href="../0.4.x/api/game" class="md-nav__link">
         
   
   
@@ -708,7 +728,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/math" class="md-nav__link">
+      <a href="../0.4.x/api/math" class="md-nav__link">
         
   
   
@@ -735,7 +755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/mobile_object" class="md-nav__link">
+      <a href="../0.4.x/api/mobile_object" class="md-nav__link">
         
   
   
@@ -762,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/scenes" class="md-nav__link">
+      <a href="../0.4.x/api/scenes" class="md-nav__link">
         
   
   
@@ -789,7 +809,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/ui" class="md-nav__link">
+      <a href="../0.4.x/api/ui" class="md-nav__link">
         
   
   
@@ -816,7 +836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../latest/api/visual_utils" class="md-nav__link">
+      <a href="../0.4.x/api/visual_utils" class="md-nav__link">
         
   
   
@@ -892,8 +912,30 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Unreleased">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#044-2026-07-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        0.4.4 - 2026-07-09
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.4.4 - 2026-07-09">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#fixed" class="md-nav__link">
@@ -1019,7 +1061,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#changed" class="md-nav__link">
+  <a href="#changed_1" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         Changed
@@ -1080,7 +1122,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#changed_1" class="md-nav__link">
+  <a href="#changed_2" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         Changed
@@ -1208,7 +1250,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#changed_2" class="md-nav__link">
+  <a href="#changed_3" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         Changed
@@ -1269,7 +1311,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#changed_3" class="md-nav__link">
+  <a href="#changed_4" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         Changed
@@ -1383,10 +1425,17 @@
 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
 <p>All notable changes to this project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/2.0.0/">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<h2 id="unreleased"><a href="https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.3...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
+<h2 id="unreleased"><a href="https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.4...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
+<h2 id="044-2026-07-09"><a href="https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.3...v0.4.4">0.4.4</a> - 2026-07-09<a class="headerlink" href="#044-2026-07-09" title="Permanent link">&para;</a></h2>
+<h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Performed an internal refactor of <code>Camera</code> class.</li>
+</ul>
 <h3 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Incorrect docstring for the <code>image</code> parameter in the <code>BaseUIElement.__init__</code> method.</li>
+<li><code>Camera</code> class docstring to state that the <code>focus_game_object</code> attribute can be <code>None</code>.</li>
+<li>Bug in <code>Button</code> class where the <code>image</code> would corrupt if the mouse was hovering over it during the first frame.</li>
 </ul>
 <h2 id="043-2026-07-09"><a href="https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.2...v0.4.3">0.4.3</a> - 2026-07-09<a class="headerlink" href="#043-2026-07-09" title="Permanent link">&para;</a></h2>
 <h3 id="fixed_1">Fixed<a class="headerlink" href="#fixed_1" title="Permanent link">&para;</a></h3>
@@ -1443,7 +1492,7 @@
 <li><code>GameObject.light_radius</code> attribute for new lighting system (see below).</li>
 <li>Lighting system in <code>GameplayScene</code> that uses <code>GameObject.light_radius</code> to determine light sources.</li>
 </ul>
-<h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h3>
+<h3 id="changed_1">Changed<a class="headerlink" href="#changed_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Breaking:</strong> <code>UIContainer.elements</code> and <code>BaseUIElement.containers</code> to managed attributes so that it can no longer be set directly.</li>
 <li><code>UIContainer.add_ui_element</code> to validate elements before adding them to the container.</li>
@@ -1466,7 +1515,7 @@
 <li><code>BaseScene</code> and <code>GameplayScene</code> classes which are used to define scenes, which control the <code>Game</code> class's execution loop. For instance, the <code>GameplayScene</code> will render and update all <code>GameObjects</code> while a different scene could act as the main menu.</li>
 <li><code>UIContainer</code>, <code>BaseUIElement</code>, <code>Button</code>, and <code>Text</code> classes to allow for an object-oriented way to build UIs that are integrated into the engine.</li>
 </ul>
-<h3 id="changed_1">Changed<a class="headerlink" href="#changed_1" title="Permanent link">&para;</a></h3>
+<h3 id="changed_2">Changed<a class="headerlink" href="#changed_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Breaking:</strong> Rename <code>GameObject.hitboxes</code> to <code>GameObject.world_colliders</code>.</li>
 </ul>
@@ -1501,7 +1550,7 @@
 <ul>
 <li><code>Game.debug</code> boolean attribute which draws the <code>hitboxes</code> of all <code>GameObject</code> instances in <code>Game.game_object_group</code>.</li>
 </ul>
-<h3 id="changed_2">Changed<a class="headerlink" href="#changed_2" title="Permanent link">&para;</a></h3>
+<h3 id="changed_3">Changed<a class="headerlink" href="#changed_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Breaking:</strong> Renamed <code>MobileObj</code> to <code>MobileObject</code>.</li>
 <li><strong>Breaking:</strong> Renamed the <code>topdownengine.mobile_obj</code> subpackage to <code>topdownengine.mobile_object</code>.</li>
@@ -1521,7 +1570,7 @@
 <ul>
 <li>Google-style docstrings to <code>MobileObj</code>, <code>scale_rect</code>, <code>lerp</code>, <code>KeyboardInputController</code>, and <code>MoreKeysPressed</code>.</li>
 </ul>
-<h3 id="changed_3">Changed<a class="headerlink" href="#changed_3" title="Permanent link">&para;</a></h3>
+<h3 id="changed_4">Changed<a class="headerlink" href="#changed_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Internal logic of <code>GameObject.generate_colliders</code> to remove unused <code>frame</code> variable.</li>
 <li><code>KeyboardInputManager</code> so that <code>KeyboardInputManager.keys</code> and <code>KeyboardInputManager.just_pressed_keys</code> are no longer defined in <code>__init__</code>.</li>
@@ -1602,10 +1651,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":[],"search":"../latest/assets/javascripts/workers/search.b6b7e04f.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"alias":true,"default":"latest","provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":[],"search":"../assets/javascripts/workers/search.b6b7e04f.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"alias":true,"default":"latest","provider":"mike"}}</script>
     
     
-      <script src="../latest/assets/javascripts/bundle.0df4f2d0.min.js"></script>
+      <script src="../assets/javascripts/bundle.0df4f2d0.min.js"></script>
       
     
   </body>
