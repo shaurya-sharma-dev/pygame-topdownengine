@@ -301,6 +301,6 @@ class GameObject(pg.sprite.Sprite):
         if not self.velocity.length():
             return
         
-        self._handle_collision(pg.Vector2(self.velocity.x, 0), game)
-        self._handle_collision(pg.Vector2(0, self.velocity.y), game)
+        self._handle_collision(pg.Vector2(self.velocity.x * (dt * game.fps / 1000), 0), game)
+        self._handle_collision(pg.Vector2(0, self.velocity.y * (dt * game.fps / 1000)), game)
         self._handle_elevation(game)
