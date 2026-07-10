@@ -4,8 +4,7 @@
 import pygame as pg
 import pytest
 import topdownengine as tde
-from topdownengine.mobile_object.controller import KeyboardInputController
-from topdownengine.asset_paths import ASSETS_DIR
+from topdownengine.mobile_object.controller import BaseController
 from topdownengine.controls import MoreKeysPressed
 
 # Fixtures
@@ -19,13 +18,8 @@ def game():
 @pytest.fixture
 def mobile_object():
     return tde.MobileObject(
-        controller=KeyboardInputController(), 
-        animation_paths={
-            "idle": ASSETS_DIR / "example-player" / "idle.png",
-            "walk": ASSETS_DIR / "example-player" / "walk.png"
-        },
-        frame_size=(16, 16),
-        directional_anims=True
+        controller=BaseController(),
+        frame_size=(16, 16)
     )
 
 # This code "monkey patches" pygame-ce to replace get_pressed with a custom

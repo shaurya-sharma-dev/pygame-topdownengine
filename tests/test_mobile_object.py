@@ -3,7 +3,7 @@
 
 import os
 
-# Set dummy drivers before importing pygame
+# Set dummy drivers before importing pygame-ce
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
@@ -11,14 +11,15 @@ import topdownengine as tde
 import pytest
 import pygame as pg
 from conftest import FAKED_KEYS
+from topdownengine.mobile_object.controller import KeyboardInputController
 
 # Jump Tests
-def test_can_jump_while_grounded(game: tde.Game, mobile_object: tde.MobileObject):
+def test_does_jump_if_jump_called_while_grounded(game: tde.Game, mobile_object: tde.MobileObject):
     mobile_object.elevation = mobile_object.z = 0
     mobile_object.jump()
     assert mobile_object.z_vel == mobile_object.jump_vel
 
-def test_cannot_jump_while_airborne(game: tde.Game, mobile_object: tde.MobileObject):
+def test_does_not_jump_if_jump_called_while_airborne(game: tde.Game, mobile_object: tde.MobileObject):
     mobile_object.elevation = 0
     mobile_object.z = 10
     mobile_object.jump()
@@ -26,22 +27,28 @@ def test_cannot_jump_while_airborne(game: tde.Game, mobile_object: tde.MobileObj
 
 # 2D Movement Tests
 MOVEMENT_TEST_ARGS = [
-    pg.Vector2(1, 0), # Right
-    pg.Vector2(0, 1), # Down
+    pg.Vector2(1, 0),  # Right
+    pg.Vector2(0, 1),  # Down
     pg.Vector2(-1, 0), # Left
     pg.Vector2(0, -1), # Up
-    pg.Vector2(1, 1), # Down-Right
+    pg.Vector2(1, 1),  # Down-Right
     pg.Vector2(1, -1), # Up-Right
     pg.Vector2(-1, 1), # Down-Left
     pg.Vector2(-1, -1) # Up-Left
 ]
 @pytest.mark.parametrize("dir", MOVEMENT_TEST_ARGS)
-def test_movement(game: tde.Game, mobile_object: tde.MobileObject, dir: pg.Vector2):
+def test_velocity_matches_direction_if_stationary_with_keyboard_input_controller_active(game: tde.Game, mobile_object: tde.MobileObject, dir: pg.Vector2):
+    mobile_object.controller = KeyboardInputController()
+    game.game_object_group.add(mobile_object)
+
     def step(key, condition):
         FAKED_KEYS.clear()
         FAKED_KEYS.add(key)
-        game.handle_events()
-        mobile_object.update(60, game)
+        
+        # For some reason, this line fixes an error where pytest says mobile_object is undefined during the eval call.
+        mobile_object
+
+        game.update(17)
         assert eval(condition)
 
     if dir.x == 1:
