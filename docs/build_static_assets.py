@@ -42,7 +42,7 @@ with open(versioned_search_path, "r") as f:
 # Build search-404.json.
 for i, entry in enumerate(search_data["items"]):
     location = entry["location"]
-    # Undo the "../changelog/..." we wrote above, rewrite as absolute
+    # Rewrite URLs as absolute paths.
     if location.startswith("../changelog/") or location == "../changelog":
         relative = location[len("../"):]  # strip leading "../"
         search_data["items"][i]["location"] = f"/pygame-topdownengine/{relative}"
@@ -57,7 +57,7 @@ print(f"Written {target_dir}/search-404.json")
 # Build search-changelog.json.
 for i, entry in enumerate(changelog_search_data["items"]):
     location = entry["location"]
-    # Undo the "../changelog/..." we wrote above, rewrite as absolute
+    # Rewrite URLs so that changelog search links dont have /pygame-topdownengine/ twice.
     if location.startswith("../changelog/") or location == "../changelog":
         relative = location[len("../"):]  # strip leading "../"
         changelog_search_data["items"][i]["location"] = f"{relative}"
