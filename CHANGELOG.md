@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- Bug in `GameObject.update` where it did not use deltatime while moving by `GameObject.velocity`.
+
 ## [0.4.4] - 2026-07-09
 
 ### Changed
