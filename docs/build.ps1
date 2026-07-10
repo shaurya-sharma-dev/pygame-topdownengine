@@ -41,6 +41,22 @@ if (-not $?) {
 # Copy changelog into docs folder.
 Copy-Item -Path ".\CHANGELOG.md" -Destination ".\docs\changelog.md"
 
+# Add last build date notification to changelog.
+$d = (Get-Date).ToUniversalTime()
+$suffix = switch ($d.Day) { {$_ -in 11,12,13} {'th'}; {($_ % 10) -eq 1} {'st'}; {($_ % 10) -eq 2} {'nd'}; {($_ % 10) -eq 3} {'rd'}; Default {'th'} }
+$DateFormatted = ("{0:MMMM d}$suffix, {0:yyyy @ hh:mm tt}" -f $d)
+
+$ChangelogWarningNotice = @"
+# Changelog
+
+!!! info `"Last Build Date`"
+    This changelog page was last built on $DateFormatted UTC. If you need more up-to date
+    changelog information, please use the [CHANGELOG.md](https://github.com/shaurya-sharma-dev/pygame-topdownengine/blob/main/CHANGELOG.md)
+    file on GitHub.
+"@
+
+(Get-Content -Path ".\docs\changelog.md") -replace "# Changelog", $ChangelogWarningNotice | Set-Content -Path ".\docs\changelog.md"
+
 # Zensical build.
 Write-Host "Building version '$Version' using Zensical..." -ForegroundColor Cyan
 zensical build --clean
