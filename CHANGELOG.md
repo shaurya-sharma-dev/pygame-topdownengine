@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [0.4.5] - 2026-07-11
+
 ### Fixed
 - Bug in `GameObject.update` where it did not use deltatime while moving by `GameObject.velocity`.
 
@@ -166,7 +168,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `KeyboardInputManager` class to easily get keyboard input and `NoKeysPressed` and `MoreKeysPressed` classes to allow for manipulating the input stream.
 - `assets/` folder with predefined assets. It currently houses shadows and an example player sprite.
 
-[unreleased]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.4...HEAD
+[unreleased]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.5...HEAD
+[0.4.5]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.4...v0.4.5
 [0.4.4]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.1...v0.4.2
