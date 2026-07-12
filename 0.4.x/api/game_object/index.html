@@ -1051,6 +1051,15 @@
 
 
 <h1 id="topdownenginegame_object-reference">topdownengine.game_object Reference<a class="headerlink" href="#topdownenginegame_object-reference" title="Permanent link">&para;</a></h1>
+<div class="admonition bug">
+<p class="admonition-title">Resolved: Failure to Use Deltatime in <code>update</code> method (Fixed in v0.4.5)</p>
+<p>Prior to version 0.4.5, the <code>GameObject</code> class failed to use deltatime when
+using the <code>GameObject.velocity</code> attribute to move the <code>GameObject</code>'s position.</p>
+<p>The <code>velocity</code> is now multiplied by <code>dt * game.fps / 1000</code> where <code>dt</code> is in milliseconds
+and <code>game</code> is the active <code>Game</code> instance. This ensures that physics operates the same as
+prior versions (assuming optimal framerate), except that deltatime is now being applied 
+correctly.</p>
+</div>
 
 
 <div class="doc doc-object doc-module">
