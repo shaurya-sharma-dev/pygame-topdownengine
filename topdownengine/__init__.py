@@ -5,7 +5,7 @@
 framework. It allows for the quick creation of 2.5D top-down games."""
 
 from .game import Game
-from .game_object import GameObject
+from .game_object import GameObject, GameObjectGroup
 from .mobile_object import MobileObject
 from .env_object import EnvObject
 from .scenes import BaseScene, GameplayScene
