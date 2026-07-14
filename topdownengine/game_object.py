@@ -1,12 +1,13 @@
 # Copyright (c) 2026 Shaurya Sharma
 # SPDX-License-Identifier: MIT
 
+from __future__ import annotations
 import pygame as pg
 from .game import Game
 from .visual_utils import VisualUtils
 from topdownengine import math as tde_math
 
-class GameObject(pg.sprite.Sprite):
+class GameObject:
     """This class is the base class for all in-world objects in the engine.
     
     Attributes:
@@ -23,6 +24,7 @@ class GameObject(pg.sprite.Sprite):
         z_vel (float): Current world-space z-velocity of the `GameObject`.
         gravity (float): World-space gravity of the `GameObject`.
         height (float): World-space height of the `GameObject`.
+        groups (set[GameObjectGroup]): All of the groups this GameObject is in.
 
         frame (float): Current animation frame.
         anim_speed (float): Animation speed.
@@ -46,7 +48,7 @@ class GameObject(pg.sprite.Sprite):
 
     def __init__(self) -> None:
         "Initialize the GameObject."
-        super().__init__()
+        self._groups = set()
 
         # Position, Z-Axis, Velocity
         self.position = pg.Vector2()
@@ -73,6 +75,42 @@ class GameObject(pg.sprite.Sprite):
 
         # Collisions
         self.colliders = self.generate_colliders()
+
+    # Game Object Groups
+    @property
+    def groups(self) -> set[GameObjectGroup]:
+        return self._groups
+    
+    @groups.setter
+    def groups(self, new_groups: set[GameObjectGroup]):
+        additions = new_groups - self.groups
+        deletions = self.groups - new_groups
+
+        for deletion in deletions:
+            self._groups.remove(deletion)
+            deletion._game_objects.remove(self)
+
+        for addition in additions:
+            self._groups.add(addition)
+            addition._game_objects.add(self)
+
+    def add_to(self, *groups: GameObjectGroup):
+        """Adds this GameObject instance to these groups.
+        
+        Args:
+            *groups (GameObjectGroup): The groups to add to.
+        """
+        for group in groups:
+            self.groups.add(group)
+
+    def remove_from(self, *groups: GameObjectGroup):
+        """Removes this GameObject instance from these groups.
+        
+        Args:
+            *groups (GameObjectGroup): The groups to remove from.
+        """
+        for group in groups:
+            self.groups.remove(group)
     
     # Visual Methods + Properties
     @classmethod
@@ -137,7 +175,7 @@ class GameObject(pg.sprite.Sprite):
         cls.load_and_scale_shadows()
         if game is None: 
             return
-        for go in game.game_object_group:
+        for go in game.game_object_group.game_objects:
             go.load_animations()
             go.scale_animations()
 
@@ -240,7 +278,7 @@ class GameObject(pg.sprite.Sprite):
         while collision_found:
             collision_found = False
             for self_hitbox in self.world_colliders:  # always fresh
-                for game_obj in game.game_object_group:
+                for game_obj in game.game_object_group.game_objects:
                     if game_obj is self or not game_obj.CAUSES_COLLISIONS or (game_obj.z + game_obj.height) <= self.z:
                         continue
                     for other_hitbox in game_obj.world_colliders:
@@ -269,7 +307,7 @@ class GameObject(pg.sprite.Sprite):
         self.elevation = 0
 
         for self_hitbox in self.world_colliders:
-            for game_obj in game.game_object_group:
+            for game_obj in game.game_object_group.game_objects:
                 if game_obj is self or not game_obj.CAUSES_COLLISIONS:
                     continue
 
@@ -304,3 +342,59 @@ class GameObject(pg.sprite.Sprite):
         self._handle_collision(pg.Vector2(self.velocity.x * (dt * game.fps / 1000), 0), game)
         self._handle_collision(pg.Vector2(0, self.velocity.y * (dt * game.fps / 1000)), game)
         self._handle_elevation(game)
+
+class GameObjectGroup:
+    """A group of GameObject instances.
+    
+    Attributes:
+        game_objects (set): Set containing all of the game objects in this group.
+    """
+
+    def __init__(self):
+        self._game_objects = set()
+    
+    @property
+    def game_objects(self) -> set[GameObject]:
+        return self._game_objects
+    
+    @game_objects.setter
+    def game_objects(self, new_game_objects: set[GameObject]):
+        additions = new_game_objects - self.game_objects
+        deletions = self.game_objects - new_game_objects
+
+        for deletion in deletions:
+            deletion.remove_groups(self)
+
+        for addition in additions:
+            addition.add_groups(self)
+
+    def add(self, *game_objects: GameObject) -> None:
+        """Adds GameObject instances to this group.
+        
+        Args:
+            *game_objects (GameObject): The GameObject instances to add.
+        """
+        for game_object in game_objects:
+            game_object.groups = game_object.groups.union({self,})
+        
+    def remove(self, *game_objects: GameObject) -> None:
+        """Removes GameObject instances to this group.
+        
+        Args:
+            *game_objects (GameObject): The GameObject instances to remove.
+        """
+        for game_object in game_objects:
+            new_groups = game_object.groups
+            new_groups.difference_update({self,})
+            game_object.groups = new_groups
+
+    def update(self, dt: float, game: Game) -> None:
+        """Updates all GameObject instances in this group.
+        
+        Args:
+            dt (float): The deltatime.
+            game (Game): The Game class object.
+        """
+
+        for game_object in self.game_objects:
+            game_object.update(dt, game)

@@ -82,29 +82,29 @@ class GameplayScene(BaseScene):
         overlay = pg.Surface(self.game.screen.size, pg.SRCALPHA)
         overlay.fill((0, 0, 0, self.global_alpha))
 
-        for game_obj in sorted(self.game.game_object_group.sprites(), key=lambda g: g.draw_index):
-            cr = game_obj.rect.move(-self.game.camera.position * game_obj.SCALE)
-            self.game.screen.blit(game_obj.image, cr)
-            if self.global_alpha > 0 and game_obj.light_radius > 0:
-                scaled_lr = game_obj.light_radius * game_obj.SCALE
+        for game_object in sorted(self.game.game_object_group.game_objects, key=lambda g: g.draw_index):
+            cr = game_object.rect.move(-self.game.camera.position * game_object.SCALE)
+            self.game.screen.blit(game_object.image, cr)
+            if self.global_alpha > 0 and game_object.light_radius > 0:
+                scaled_lr = game_object.light_radius * game_object.SCALE
                 overlay.blit(
                     self.get_light(scaled_lr), 
                     (
                         cr.centerx - scaled_lr, 
-                        cr.bottom - scaled_lr - game_obj.z * game_obj.SCALE - game_obj.current_frame.height / 2 + game_obj.elevation * game_obj.SCALE
+                        cr.bottom - scaled_lr - game_object.z * game_object.SCALE - game_object.current_frame.height / 2 + game_object.elevation * game_object.SCALE
                     ), 
                     special_flags=pg.BLEND_RGBA_SUB
                 )
         
         # Draw debug in a separate loop so that it is drawn over images.
         if self.game.debug:
-            for game_obj in self.game.game_object_group.sprites():
+            for game_object in self.game.game_object_group.game_objects:
                 # Draw Colliders
-                for collider in game_obj.world_colliders:
+                for collider in game_object.world_colliders:
                     pg.draw.rect(
                         self.game.screen, 
                         (0, 0, 255), 
-                        scale_rect(collider.move(-self.game.camera.position), game_obj.SCALE),
+                        scale_rect(collider.move(-self.game.camera.position), game_object.SCALE),
                         1
                     )
 

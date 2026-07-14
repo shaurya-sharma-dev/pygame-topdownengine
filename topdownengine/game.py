@@ -83,8 +83,9 @@ class Game:
         # Debug Boolean Flag
         self.debug = debug
 
-        # GameObject Group
-        self.game_object_group = pg.sprite.Group()
+        # GameObject Group (Import Here to Prevent Circular Import)
+        from .game_object import GameObjectGroup
+        self.game_object_group = GameObjectGroup()
 
         # Game Speed Percentage
         self.game_speed_percentage = 1
