@@ -171,7 +171,7 @@ class Game:
         pg.display.flip()
 
     def run(self) -> None:
-        "Run the gameloop."
+        "Run the game loop."
         while self.is_running:
             dt = self.clock.tick(self.fps) * self.game_speed_percentage
             self.handle_events()
