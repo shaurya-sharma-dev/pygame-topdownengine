@@ -1,17 +1,41 @@
 import topdownengine as tde
+import pytest
 
-def test_game_object_can_access_group_if_game_object_was_added_by_group(game: tde.Game): # Add game fixture to initialize display.
-    group = tde.GameObjectGroup()
-    game_object = tde.GameObject()
+# GameObjectGroup Tests
+# We add the game fixture to initialize the display.
 
-    group.add(game_object)
+@pytest.mark.usefixtures("game")
+class TestGameObjectGroup:
+    def test_contains_game_object_if_game_object_was_added_by_group(game: tde.Game):
+        group = tde.GameObjectGroup()
+        game_object = tde.GameObject()
 
-    assert group in game_object.groups
+        group.add(game_object)
 
-def test_group_can_access_game_object_if_group_was_added_by_game_object(game: tde.Game): # Add game fixture to initialize display.
-    group = tde.GameObjectGroup()
-    game_object = tde.GameObject()
+        assert group in game_object.groups
 
-    game_object.add_to(group)
+    def test_contains_game_object_if_group_was_added_by_game_object(game: tde.Game):
+        group = tde.GameObjectGroup()
+        game_object = tde.GameObject()
 
-    assert game_object in group.game_objects
+        game_object.add_to(group)
+
+        assert game_object in group.game_objects
+
+    def test_does_not_contain_game_object_if_removed_by_game_object(game: tde.Game):
+        group = tde.GameObjectGroup()
+        game_object = tde.GameObject()
+
+        game_object.add_to(group)
+        game_object.remove_from(group)
+
+        assert game_object not in group.game_objects
+
+    def test_does_not_contain_game_object_if_removed_by_group(game: tde.Game):
+        group = tde.GameObjectGroup()
+        game_object = tde.GameObject()
+
+        game_object.add_to(group)
+        group.remove(game_object)
+
+        assert game_object not in group.game_objects
