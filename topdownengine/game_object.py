@@ -384,9 +384,7 @@ class GameObjectGroup:
             *game_objects (GameObject): The GameObject instances to remove.
         """
         for game_object in game_objects:
-            new_groups = game_object.groups
-            new_groups.difference_update({self,})
-            game_object.groups = new_groups
+            game_object.groups = game_object.groups.difference({self,})
 
     def update(self, dt: float, game: Game) -> None:
         """Updates all GameObject instances in this group.
