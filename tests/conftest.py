@@ -24,8 +24,7 @@ def game():
 @pytest.fixture
 def mobile_object():
     return tde.MobileObject(
-        controller=BaseController(),
-        frame_size=(16, 16)
+        controller=BaseController()
     )
 
 # This code "monkey patches" pygame-ce to replace get_pressed with a custom
