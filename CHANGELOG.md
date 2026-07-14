@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+- New `Camera` hook methods `update_screenshake`, `track_game_object`, and `handle_bounds` for easier `Camera` subclassing.
+- `SmoothTrackerCamera` subclass of `Camera` for smooth tracking.
+- `GameObjectGroup` class to group and update `GameObject` instances together.
+
+### Changed
+- **Breaking:** `Game` class to use the `GameObjectGroup` class for `Game.game_object_group` instead of using `pygame.sprite.Group`.
+- **Breaking** `GameObject` no longer subclasses `pygame.sprite.Sprite`.
+
+### Fixed
+- Bug where the `Game` class would update the camera before updating the active scene. This has been corrected, so now, the active scene is updated, and then the camera.
+
 ## [0.4.5] - 2026-07-11
 
 ### Fixed
