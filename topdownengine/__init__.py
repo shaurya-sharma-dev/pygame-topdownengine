@@ -11,7 +11,7 @@ from .env_object import EnvObject
 from .scenes import BaseScene, GameplayScene
 from .visual_utils import VisualUtils
 from .font import Font
-from .camera import Camera
+from .camera import Camera, SmoothTrackerCamera
 from .asset_paths import PACKAGE_ROOT, ASSETS_DIR
 
 # __version__ attribute

@@ -84,6 +84,12 @@ player = tde.MobileObject(
         "walk": tde.ASSETS_DIR / "example-player" / "walk.png"
     }, frame_size=(16, 16), directional_anims=True
 )
+
+# The below line of code will change the camera from snapping to the player's position to 
+# smoothly tracking the player's position.
+game.camera = tde.SmoothTrackerCamera()
+
+# Set the game object to track (the player).
 game.camera.focus_game_object = player
 ```
 
@@ -92,7 +98,8 @@ game.camera.focus_game_object = player
     The `Camera` class has a `focus_game_object` attribute. If `focus_game_object` is 
     set to a `GameObject` instance, the `Camera` will begin tracking that `GameObject`. 
     The `Camera` class also has other features like screenshake, but those are outside 
-    of the scope of this tutorial.
+    of the scope of this tutorial. The `SmoothTrackerCamera` class is a subclass of
+    `Camera` with smooth tracking logic, as opposed to `Camera`, which snaps instantly.
 
 ## The Enemy
 Now let's make the `MobileObject` that follows you. For the purposes of this tutorial, let's call it the "enemy". This code makes the enemy follow the player and uses the same animations as the player.

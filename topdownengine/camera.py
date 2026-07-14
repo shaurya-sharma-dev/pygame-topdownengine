@@ -24,7 +24,7 @@ class Camera:
         "Get the position of the camera with screenshake."
         return self.real_position + (self.screenshake_offset if self.screenshake["duration"] > 0 else pg.Vector2())
 
-    def _update_screenshake(self, dt: float) -> None:
+    def update_screenshake(self, dt: float) -> None:
         if self.screenshake["duration"] > 0:
             self.screenshake_offset = pg.Vector2(
                 random.uniform(-self.screenshake["intensity"], self.screenshake["intensity"]),
@@ -32,14 +32,14 @@ class Camera:
             )
         self.screenshake["duration"] = max(0, self.screenshake["duration"] - (dt/1000)) # dt is in milliseconds
 
-    def _track_game_object(self) -> None:
+    def track_game_object(self, dt: float) -> None:
         screen = pg.display.get_surface()
         self.real_position = pg.Vector2(self.focus_game_object.position) - pg.Vector2(
             screen.width / GameObject.SCALE / 2, 
             screen.height / GameObject.SCALE / 2
         )
 
-    def _handle_bounds(self) -> None:
+    def handle_bounds(self) -> None:
         self.real_position.x = max(0, self.position.x)
         self.real_position.y = max(0, self.position.y)
 
@@ -49,10 +49,22 @@ class Camera:
         Args:
             dt (float): The deltatime.
         """        
-        self._update_screenshake(dt)
+        self.update_screenshake(dt)
 
         if self.focus_game_object:
-            self._track_game_object()
+            self.track_game_object(dt)
         
         # Bounds
-        self._handle_bounds()
+        self.handle_bounds()
+
+class SmoothTrackerCamera(Camera):
+    "A subclass of Camera with smoother tracking logic."
+
+    def track_game_object(self, dt: float):
+        screen = pg.display.get_surface()
+        target_position = pg.Vector2(self.focus_game_object.position) - pg.Vector2(
+            screen.width / GameObject.SCALE / 2, 
+            screen.height / GameObject.SCALE / 2
+        )
+
+        self.real_position += (target_position - self.real_position) * (dt / 1000) * 5
