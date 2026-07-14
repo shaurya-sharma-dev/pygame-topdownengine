@@ -158,8 +158,8 @@ class Game:
         while self._accumulated_deltatime >= 1 / self.fps:
             # Use 1000 / self.fps for update functions because
             # they still use milliseconds.
-            self.camera.update(1000 / self.fps)
             self.active_scene.update(1000 / self.fps)
+            self.camera.update(1000 / self.fps)
 
             # Subtract from accumulated deltatime in seconds.
             self._accumulated_deltatime -= 1 / self.fps
