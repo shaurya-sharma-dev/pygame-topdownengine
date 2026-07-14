@@ -6,7 +6,7 @@ import pytest
 
 @pytest.mark.usefixtures("game")
 class TestGameObjectGroup:
-    def test_contains_game_object_if_game_object_was_added_by_group(game: tde.Game):
+    def test_contains_game_object_if_game_object_was_added_by_group(self):
         group = tde.GameObjectGroup()
         game_object = tde.GameObject()
 
@@ -14,7 +14,7 @@ class TestGameObjectGroup:
 
         assert group in game_object.groups
 
-    def test_contains_game_object_if_group_was_added_by_game_object(game: tde.Game):
+    def test_contains_game_object_if_group_was_added_by_game_object(self):
         group = tde.GameObjectGroup()
         game_object = tde.GameObject()
 
@@ -22,7 +22,7 @@ class TestGameObjectGroup:
 
         assert game_object in group.game_objects
 
-    def test_does_not_contain_game_object_if_removed_by_game_object(game: tde.Game):
+    def test_does_not_contain_game_object_if_removed_by_game_object(self):
         group = tde.GameObjectGroup()
         game_object = tde.GameObject()
 
@@ -31,7 +31,7 @@ class TestGameObjectGroup:
 
         assert game_object not in group.game_objects
 
-    def test_does_not_contain_game_object_if_removed_by_group(game: tde.Game):
+    def test_does_not_contain_game_object_if_removed_by_group(self):
         group = tde.GameObjectGroup()
         game_object = tde.GameObject()
 
