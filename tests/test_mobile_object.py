@@ -1,12 +1,6 @@
 # Copyright (c) 2026 Shaurya Sharma
 # SPDX-License-Identifier: MIT
 
-import os
-
-# Set dummy drivers before importing pygame-ce
-os.environ["SDL_VIDEODRIVER"] = "dummy"
-os.environ["SDL_AUDIODRIVER"] = "dummy"
-
 import topdownengine as tde
 import pytest
 import pygame as pg
