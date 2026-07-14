@@ -42,7 +42,7 @@ def test_velocity_matches_direction_if_stationary_with_keyboard_input_controller
         # For some reason, this line fixes an error where pytest says mobile_object is undefined during the eval call.
         mobile_object
 
-        game.update(17)
+        game.update(1000 / game.fps)
         assert eval(condition)
 
     if dir.x == 1:
