@@ -101,7 +101,7 @@ class GameObject:
             *groups (GameObjectGroup): The groups to add to.
         """
         for group in groups:
-            self.groups.add(group)
+            group.add(self)
 
     def remove_from(self, *groups: GameObjectGroup):
         """Removes this GameObject instance from these groups.
@@ -110,7 +110,7 @@ class GameObject:
             *groups (GameObjectGroup): The groups to remove from.
         """
         for group in groups:
-            self.groups.remove(group)
+            group.remove(self)
     
     # Visual Methods + Properties
     @classmethod
