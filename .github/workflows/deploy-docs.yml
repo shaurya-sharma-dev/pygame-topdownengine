@@ -13,8 +13,7 @@ on:
         default: '1.0'
       aliases:
         description: 'Space-separated aliases to assign to this version (e.g., latest)'
-        required: true
-        default: 'latest'
+        required: false
 
 permissions:
   contents: write    # Required to push the built version to the gh-pages branch
@@ -62,7 +61,12 @@ jobs:
       # Run mike to deploy the docs build and apply the user's custom aliases
       - name: Deploy Version via Mike
         run: |
-          mike deploy --push --update-aliases ${{ github.event.inputs.version_name }} ${{ github.event.inputs.aliases }}
+          ALIASES="${{ github.event.inputs.aliases }}"
+          if [ -n "$ALIASES" ]; then
+            mike deploy --push --update-aliases ${{ github.event.inputs.version_name }} $ALIASES
+          else
+            mike deploy --push ${{ github.event.inputs.version_name }}
+          fi
 
       # Force the root landing page path to redirect to /latest
       - name: Set Default Root Path Redirect to /latest
