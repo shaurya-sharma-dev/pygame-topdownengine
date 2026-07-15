@@ -14,6 +14,14 @@ on:
       aliases:
         description: 'Space-separated aliases to assign to this version (e.g., latest)'
         required: false
+      use_latest_config:
+        description: 'Use zensical.toml from main branch instead of the checked-out tag'
+        required: true
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
 
 permissions:
   contents: write    # Required to push the built version to the gh-pages branch
@@ -28,6 +36,14 @@ jobs:
         with:
           ref: ${{ github.event.inputs.git_tag }}
           fetch-depth: 0
+
+      - name: Use Latest zensical.toml (from main)
+        if: ${{ github.event.inputs.use_latest_config == 'true' }}
+        run: |
+          echo "Fetching zensical.toml from main branch..."
+          git fetch origin main
+          git checkout origin/main -- zensical.toml
+          echo "zensical.toml replaced with version from main."
 
       # Set up Python environment (Zensical requires 3.10+)
       - name: Set up Python
