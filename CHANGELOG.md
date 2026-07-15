@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-07-14
+
 ### Added
 - New `Camera` hook methods `update_screenshake`, `track_game_object`, and `handle_bounds` for easier `Camera` subclassing.
 - `SmoothTrackerCamera` subclass of `Camera` for smooth tracking.
@@ -180,7 +182,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `KeyboardInputManager` class to easily get keyboard input and `NoKeysPressed` and `MoreKeysPressed` classes to allow for manipulating the input stream.
 - `assets/` folder with predefined assets. It currently houses shadows and an example player sprite.
 
-[unreleased]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.5...HEAD
+[unreleased]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.5...v0.5.0
 [0.4.5]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.4...v0.4.5
 [0.4.4]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/shaurya-sharma-dev/pygame-topdownengine/compare/v0.4.2...v0.4.3
