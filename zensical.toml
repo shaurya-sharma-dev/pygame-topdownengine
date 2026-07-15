@@ -6,7 +6,6 @@ repo_name = "pygame-topdownengine"
 
 nav = [
   { "Home" = "index.md" },
-  { "Changelog" = "..\\changelog" },
   { "Getting Started" = [
     { "Installation" = "installation.md" },
     { "Making Your First Game" = [
