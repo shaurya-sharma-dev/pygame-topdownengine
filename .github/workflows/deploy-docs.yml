@@ -1,0 +1,70 @@
+name: Deploy Versioned Documentation
+
+on:
+  workflow_dispatch:
+    inputs:
+      git_tag:
+        description: 'The Git tag to build from'
+        required: true
+        default: 'main'
+      version_name:
+        description: 'The version identifier for mike'
+        required: true
+        default: '1.0'
+      aliases:
+        description: 'Space-separated aliases to assign to this version (e.g., latest)'
+        required: true
+        default: 'latest'
+
+permissions:
+  contents: write    # Required to push the built version to the gh-pages branch
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the specific tag or commit requested
+      - name: Checkout Specific Tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.git_tag }}
+          fetch-depth: 0
+
+      # Set up Python environment (Zensical requires 3.10+)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install zensical==0.0.50
+          pip install mkdocstrings-python==2.0.5
+          pip install git+https://github.com/squidfunk/mike.git
+          
+          # Install package so mkdocstrings can successfully import it
+          echo "Installing package..."
+          pip install -e .
+
+      # Configure Git credentials so mike can commit the documentation
+      - name: Configure Git Credentials
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Fetch the gh-pages branch so mike can append to the existing versions
+      - name: Fetch Deployed Docs Branch
+        run: |
+          git fetch origin gh-pages:gh-pages || echo "gh-pages branch does not exist yet."
+
+      # Run mike to deploy the docs build and apply the user's custom aliases
+      - name: Deploy Version via Mike
+        run: |
+          mike deploy --push --update-aliases ${{ github.event.inputs.version_name }} ${{ github.event.inputs.aliases }}
+
+      # Force the root landing page path to redirect to /latest
+      - name: Set Default Root Path Redirect to /latest
+        run: |
+          mike set-default --push latest
