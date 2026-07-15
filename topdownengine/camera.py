@@ -25,6 +25,11 @@ class Camera:
         return self.real_position + (self.screenshake_offset if self.screenshake["duration"] > 0 else pg.Vector2())
 
     def update_screenshake(self, dt: float) -> None:
+        """Update the screenshake offset.
+        
+        Args:
+            dt (float): The deltatime
+        """
         if self.screenshake["duration"] > 0:
             self.screenshake_offset = pg.Vector2(
                 random.uniform(-self.screenshake["intensity"], self.screenshake["intensity"]),
@@ -33,6 +38,11 @@ class Camera:
         self.screenshake["duration"] = max(0, self.screenshake["duration"] - (dt/1000)) # dt is in milliseconds
 
     def track_game_object(self, dt: float) -> None:
+        """Tracks the `focus_game_object` by snapping instantly to it.
+        
+        Args:
+            dt (float): The deltatime
+        """
         screen = pg.display.get_surface()
         self.real_position = pg.Vector2(self.focus_game_object.position) - pg.Vector2(
             screen.width / GameObject.SCALE / 2, 
@@ -40,6 +50,7 @@ class Camera:
         )
 
     def handle_bounds(self) -> None:
+        "Handle camera bounds."
         self.real_position.x = max(0, self.position.x)
         self.real_position.y = max(0, self.position.y)
 
@@ -61,6 +72,11 @@ class SmoothTrackerCamera(Camera):
     "A subclass of Camera with smoother tracking logic."
 
     def track_game_object(self, dt: float):
+        """Tracks the `focus_game_object` by smoothly moving to its position.
+        
+        Args:
+            dt (float): The deltatime
+        """
         screen = pg.display.get_surface()
         target_position = pg.Vector2(self.focus_game_object.position) - pg.Vector2(
             screen.width / GameObject.SCALE / 2, 
