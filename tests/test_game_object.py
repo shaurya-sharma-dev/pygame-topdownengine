@@ -44,6 +44,7 @@ class TestGameObjectGroup:
 
         assert game_object not in group.game_objects
 
+# Velocity Deadzone Tests
 def test_clears_velocity_if_in_velocity_deadzone_range(game: tde.Game):
     game_object = tde.GameObject()
     game.game_object_group.add(game_object)
@@ -61,3 +62,17 @@ def test_does_not_clear_velocity_if_not_in_velocity_deadzone_range(game: tde.Gam
     game.update(1000 / game.fps)
 
     assert game_object.velocity != pg.Vector2()
+
+# Pixel Perfect vs. Subpixel Rendering
+# Add game fixture to initialize display.
+def test_game_object_rect_attribute_is_frect_if_subpixel_rendering_is_enabled(game: tde.Game):
+    tde.GameObject.SUBPIXEL = True
+    game_object = tde.GameObject()
+    assert type(game_object.rect) == pg.FRect
+    tde.GameObject.SUBPIXEL = False
+
+def test_game_object_rect_attribute_is_rect_if_subpixel_rendering_is_disabled(game: tde.Game):
+    # Subpixel rendering is disabled by default.
+
+    game_object = tde.GameObject()
+    assert type(game_object.rect) == pg.Rect
