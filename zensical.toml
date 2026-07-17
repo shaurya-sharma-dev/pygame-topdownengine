@@ -41,13 +41,13 @@ variant = "modern"
 media = "(prefers-color-scheme: light)"
 scheme = "default"                        # Standard light theme variant
 toggle.icon = "lucide/moon"               # The button looks like a moon
-toggle.name = "Switch to dark mode"        # Accessibility tooltip text
+toggle.name = "Switch to dark mode"       # Accessibility tooltip text
 
 [[project.theme.palette]]
 media = "(prefers-color-scheme: dark)"
 scheme = "slate"                          # Zensical's default dark variant
 toggle.icon = "lucide/sun"                # The button looks like a sun
-toggle.name = "Switch to light mode"       # Accessibility tooltip text
+toggle.name = "Switch to light mode"      # Accessibility tooltip text
 
 [features]
 navigation_tabs = true
