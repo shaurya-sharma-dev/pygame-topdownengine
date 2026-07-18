@@ -351,6 +351,7 @@ class GameObjectGroup:
     """
 
     def __init__(self):
+        "Initialize an empty group."
         self._game_objects = set()
     
     @property
