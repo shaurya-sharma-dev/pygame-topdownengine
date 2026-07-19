@@ -113,8 +113,8 @@ class VisualUtils:
         
         Args:
             surface (pygame.Surface): The surface to modify.
-            old_color (pg.typing.ColorLike): The old color to replace.
-            new_color (pg.typing.ColorLike): The new color to replace with.
+            old_color (pygame.typing.ColorLike): The old color to replace.
+            new_color (pygame.typing.ColorLike): The new color to replace with.
 
         Returns: 
             pygame.Surface: The new Surface.
