@@ -4,17 +4,19 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/pygame-topdownengine?version=latest&cacheSeconds=0)](https://pypi.org/project/pygame-topdownengine/)
 [![Types: Typed](https://img.shields.io/pypi/types/pygame-topdownengine?version=latest&cacheSeconds=0)](https://pypi.org/project/pygame-topdownengine/)
 
-pygame-topdownengine is a 2.5D engine for top-down games. It is designed to be highly modular, with most core systems being located in the easily extendible GameObject class. It is built on top of the pygame-ce package, which you can find [here](https://github.com/pygame-community/pygame-ce/tree/main).
+pygame-topdownengine is a 2.5D engine for top-down games, built on top of [pygame-ce](https://github.com/pygame-community/pygame-ce/tree/main). It is designed to be highly modular, with most core systems being located in the monolithic GameObject class. The engine utilizes an OOP architecture for rapid prototyping and development.
 
 ## Features
-- `GameObject` class that contains all of the core systems.
+- Monolithic `GameObject` class that contains all of the core systems.
 - `MobileObject` class that allows for modular movement behavior.
 - `EnvObject` class for environmental decorations or objects.
-- Built in `VisualUtils` class that allows for the easy manipulation of Surfaces.
+- `VisualUtils` class that allows for the easy manipulation of Surfaces.
 - Option to use either pixel-perfect or subpixel rendering.
-- Dynamic scale-setting for all `GameObject` instances.
 - Robust 3D collision detection.
-- Toggleable `Game.debug` attribute to render colliders during development.
+- Debug mode to render colliders during development.
+- Basic lighting system.
+- Customizable camera system.
+- Integrated bare-bones UI system.
 
 ## Quickstart
 <div align="center">
