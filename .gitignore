@@ -4,7 +4,3 @@ __pycache__/
 
 # Editable package files
 pygame_topdownengine.egg-info
-
-# Zensical
-site
-built-docs
