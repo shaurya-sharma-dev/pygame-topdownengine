@@ -10,7 +10,7 @@ authors = [
 ]
 requires-python = ">=3.12.10"
 dependencies = [
-    "pygame-ce >= 2.5.2, < 3.0",
+    "pygame-ce >= 2.5.2, < 2.6",
 ]
 description = "pygame-topdownengine is a 2.5D engine for top-down games."
 readme = "README.md"
