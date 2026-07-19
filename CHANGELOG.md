@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+- Docstrings to `Camera.update_screenshake`, `Camera.track_game_object`, and `Camera.handle_bounds`.
+- Docstring to `SmoothTrackerCamera.track_game_object`.
+- Docstring to `GameObjectGroup.__init__`.
+
+### Fixed
+- `pygame-ce` dependency in `pyproject.toml` to make the minimum version 2.5.2 instead of 2.5.0. Versions before 2.5.2 lack the `pygame.typing` module used for typehints in the package.
+- Docstring in `VisualUtils.replace_color` to refer to `pygame` instead of `pg`.
+
 ## [0.5.0] - 2026-07-14
 
 ### Added
