@@ -3,10 +3,11 @@ Thank you for your interest in contributing to pygame-topdownengine!
 
 Please review the following before making contributions to this project.
 
-> **Note:** Always follow the [Code of Conduct](CODE_OF_CONDUCT.md) when making contributions to this repository.
+> [!NOTE]
+> Always follow the [Code of Conduct](CODE_OF_CONDUCT.md) when making contributions to this repository.
 
 ## Issues
-Whenever you have discovered a bug or would like to request a feature to be added to pygame-topdownengine, please create an issue on GitHub. Regardless of what type of issue you are raising, please make sure to always check for if the issue you are raising already exists and use a descriptive title that clearly describes the issue.
+Please create an issue on GitHub to report bugs and request new features. Regardless of what type of issue you are raising, please make sure to always check for if the issue you are raising already exists and use a descriptive title that clearly describes the issue.
 
 ### Bug Reports
 Whenever you are submitting a bug report, always include the following:
