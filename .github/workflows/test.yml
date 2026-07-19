@@ -4,34 +4,16 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - '**'                  # Include entire repository
-      - '!docs/**'            # Exclude docs/
-      - '!.github/**'         # Exclude .github/
-      - '.github/workflows/test.yml' # Include this workflow file
-      - '!**/LICENSE' # Exclude LICENSE
-      - '!**/README.md' # Exclude README
-      - '!**/CHANGELOG.md' # Exclude CHANGELOG
-      - '!**/CONTRIBUTING.md' # Exclude CONTRIBUTING.md
-      - '!**/CODE_OF_CONDUCT.md' # Exclude CODE OF CONDUCT
-      - '!**/.gitignore' # Exclude .gitignore
-      - '!**/zensical.toml' # Exclude zensical.toml
-      - '!**/docs-versions.json' # Exclude docs-versions.json
+      - 'topdownengine/**'
+      - 'tests/**'
+      - 'pyproject.toml'
       
   pull_request:
     branches: [ "main" ]
     paths:
-      - '**'                  # Include entire repository
-      - '!docs/**'            # Exclude docs/
-      - '!.github/**'         # Exclude .github/
-      - '.github/workflows/test.yml' # Include this workflow file
-      - '!**/LICENSE' # Exclude LICENSE
-      - '!**/README.md' # Exclude README
-      - '!**/CHANGELOG.md' # Exclude CHANGELOG
-      - '!**/CONTRIBUTING.md' # Exclude CONTRIBUTING.md
-      - '!**/CODE_OF_CONDUCT.md' # Exclude CODE OF CONDUCT
-      - '!**/.gitignore' # Exclude .gitignore
-      - '!**/zensical.toml' # Exclude zensical.toml
-      - '!**/docs-versions.json' # Exclude docs-versions.json
+      - 'topdownengine/**'
+      - 'tests/**'
+      - 'pyproject.toml'
 
 jobs:
   run-tests:
