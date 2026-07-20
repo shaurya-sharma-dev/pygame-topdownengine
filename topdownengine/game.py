@@ -12,7 +12,7 @@ class Game:
         is_running (bool): Boolean flag to control execution.
         clock (pygame.time.Clock): Controls framerate and handles deltatime.
         fps (int): Integer that controls how much FPS the Game should have.
-        game_object_group (pygame.sprite.Group): Stores all GameObjects.
+        game_object_group (GameObjectGroup): Stores all GameObjects.
         game_speed_percentage (float): The speed percentage for execution, ranging from `0` to `1`.
         debug (bool): If `True`, debug rendering will be enabled.
         target_scale (int): The target scale for the original window size.
