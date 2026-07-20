@@ -44,7 +44,7 @@ class Game:
             screen_width (int): The initial screen width.
             screen_height (int): The initial screen height.
             window_title (str): The window title. Defaults to "pygame-topdownengine".
-            window_title (str): The window icon path. Defaults to None.
+            window_icon_path (str): The window icon path. Defaults to None.
             fps (int): Integer that controls how much FPS the Game should have.
             debug (bool): If `True`, debug rendering will be enabled. Defaults to False.
             target_scale (int): The target scale for the original window size. Defaults to 1.
