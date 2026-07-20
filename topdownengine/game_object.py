@@ -79,6 +79,7 @@ class GameObject:
     # Game Object Groups
     @property
     def groups(self) -> set[GameObjectGroup]:
+        "All of the groups this GameObject is in."
         return self._groups
     
     @groups.setter
