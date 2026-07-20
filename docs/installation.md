@@ -13,6 +13,15 @@ In order to use pygame-topdownengine, you will need the following installed:
     to install pygame-ce or pygame-topdownengine.
 
 ## Installing pygame-topdownengine
+!!! bug "Resolved: Dependency Error"
+    Prior to version 0.5.1, the `pyproject.toml` file was incorrectly configured
+    to allow for `pygame-ce` versions below 2.5.2. However, version 2.5.2 of `pygame-ce`
+    is required for typehints, and if a version below 2.5.2 is in the environment, the
+    program will crash on import of pygame-topdownengine. 
+
+    The `pyproject.toml` file has been fixed to only allow for `pygame-ce` versions above
+    or equal to 2.5.2.
+
 In order to install pygame-topdownengine, make sure Python and pip are both installed and in PATH. Then, run this command into your terminal:
 ```
 pip install pygame-topdownengine
