@@ -5,7 +5,7 @@ import topdownengine as tde
 import pytest
 import pygame as pg
 from conftest import FAKED_KEYS
-from topdownengine.mobile_object.controller import KeyboardInputController
+from topdownengine.mobile_object.controller import KeyboardInputController, StaticController
 
 # Jump Tests
 def test_does_jump_if_jump_called_while_grounded(game: tde.Game, mobile_object: tde.MobileObject):
@@ -56,3 +56,13 @@ def test_velocity_matches_direction_if_stationary_with_keyboard_input_controller
 
     elif dir.y == -1: 
         step(pg.K_w, "mobile_object.velocity.y < 0")
+
+def test_velocity_does_not_affect_mobile_object_position_if_using_static_controller(game: tde.Game, mobile_object: tde.MobileObject):
+    mobile_object.controller = StaticController()
+    game.game_object_group.add(mobile_object)
+
+    mobile_object.velocity = pg.Vector2(999, 999)
+    game.update(1000 / game.fps)
+
+    assert mobile_object.velocity == pg.Vector2()
+    assert mobile_object.position == pg.Vector2()
