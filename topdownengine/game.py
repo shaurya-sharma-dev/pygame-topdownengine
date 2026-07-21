@@ -97,7 +97,7 @@ class Game:
 
         # Camera (Import Here to Prevent Circular Import)
         from .camera import Camera
-        self.camera = Camera()
+        self.camera = Camera(self)
 
         # Background Color
         self.bg_color = (255, 255, 255)
