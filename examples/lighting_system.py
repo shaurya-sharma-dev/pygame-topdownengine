@@ -7,7 +7,7 @@ from topdownengine.ui import Button, UIContainer, Text
 game = tde.Game(
     screen_width=900, 
     screen_height=650, 
-    window_title="pygame-topdownengine Basic Usage Example",
+    window_title="pygame-topdownengine Lighting System Example",
     target_scale=3 # Add scale of three to make it more visible
 )
 game.bg_color = (40, 229, 30)
