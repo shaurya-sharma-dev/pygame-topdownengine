@@ -149,7 +149,7 @@ class Game:
         dt = dt / 1000
 
         # Add a cap to one frame's dt to prevent infinite lag spirals
-        if (dt > 0.25): dt = 0.25
+        dt = min(dt, 6 / self.fps)
 
         # Add processed dt to accumulater
         self._accumulated_deltatime += dt
