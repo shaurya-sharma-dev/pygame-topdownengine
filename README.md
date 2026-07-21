@@ -68,7 +68,7 @@ player = tde.MobileObject(
         "walk": tde.ASSETS_DIR / "example-player" / "walk.png"
     }, frame_size=(16, 16), directional_anims=True
 )
-# game.camera = tde.SmoothTrackerCamera() # Uncomment to enable Smooth Tracking
+# game.camera = tde.SmoothTrackerCamera(game) # Uncomment to enable Smooth Tracking
 game.camera.focus_game_object = player
 
 # Define a MobileObject to follow the Player
