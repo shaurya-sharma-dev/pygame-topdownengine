@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+- Docstring to `GameObject.groups`.
+
+### Changed
+- Update verbage for `game_speed_percentage` attribute in `Game` class docstring.
+
+### Fixed
+- `Game.update` to make the single-frame dt cap adjust based on target FPS.
+- `game_object_group` attribute type in `Game` class docstring.
+- `window_icon_path` parameter in `Game.__init__` docstring.
+
 ## [0.5.1] - 2026-07-19
 
 ### Added
