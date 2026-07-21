@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Fixed
 - `Game.update` to make the single-frame dt cap adjust based on target FPS.
-- Correct usage of `Game.game_speed_percentage` in `Game.update` and `Game.run` methods.
+- Corrected usage of `Game.game_speed_percentage` in `Game.update` and `Game.run` methods.
 - `game_object_group` attribute type in `Game` class docstring.
 - `window_icon_path` parameter in `Game.__init__` docstring.
 
