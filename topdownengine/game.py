@@ -169,7 +169,7 @@ class Game:
         "Render everything to the screen."
         self.screen.fill(self.bg_color)
         self.active_scene.render()
-        pg.display.flip()
+        self.window.flip()
 
     def run(self) -> None:
         "Run the game loop."
