@@ -87,7 +87,7 @@ player = tde.MobileObject(
 
 # The below line of code will change the camera from snapping to the player's position to 
 # smoothly tracking the player's position.
-game.camera = tde.SmoothTrackerCamera()
+game.camera = tde.SmoothTrackerCamera(game)
 
 # Set the game object to track (the player).
 game.camera.focus_game_object = player
