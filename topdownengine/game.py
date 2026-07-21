@@ -158,8 +158,8 @@ class Game:
         while self._accumulated_deltatime >= 1 / self.fps:
             # Use 1000 / self.fps for update functions because
             # they still use milliseconds.
-            self.active_scene.update(1000 / self.fps)
-            self.camera.update(1000 / self.fps)
+            self.active_scene.update(1000 / self.fps * self.game_speed_percentage)
+            self.camera.update(1000 / self.fps * self.game_speed_percentage)
 
             # Subtract from accumulated deltatime in seconds.
             self._accumulated_deltatime -= 1 / self.fps
@@ -173,7 +173,7 @@ class Game:
     def run(self) -> None:
         "Run the game loop."
         while self.is_running:
-            dt = self.clock.tick(self.fps) * self.game_speed_percentage
+            dt = self.clock.tick(self.fps)
             self.handle_events()
             self.update(dt)
             self.render()
