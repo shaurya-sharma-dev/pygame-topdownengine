@@ -8,6 +8,7 @@ class Game:
     """Acts as the central core of the game and manages the core loop and gamestate.
     
     Attributes:
+        window (pygame.Window): The main Window object.
         screen (pygame.Surface): The primary display Surface.
         is_running (bool): Boolean flag to control execution.
         clock (pygame.time.Clock): Controls framerate and handles deltatime.
@@ -62,15 +63,15 @@ class Game:
         # Initialize pygame-ce
         pg.init()
 
-        # Initialize display
-        if window_icon_path is not None:
-            pg.display.set_icon(pg.image.load(window_icon_path))
+        # Create window object
+        self.window = pg.Window(window_title, (screen_width, screen_height))
+        self.screen = self.window.get_surface()
+        self.window.resizable = "resize" in extra_features
 
-        self.screen = pg.display.set_mode(
-            (screen_width, screen_height), 
-            pg.RESIZABLE if "resize" in extra_features else 0
-        )
-        pg.display.set_caption(window_title)
+        if window_icon_path is not None:
+            self.window.set_icon(pg.image.load(window_icon_path))
+
+        # Store original width for scaling
         self.og_width = screen_width
 
         # Clock + FPS
