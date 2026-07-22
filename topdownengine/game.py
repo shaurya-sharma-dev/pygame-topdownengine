@@ -122,10 +122,19 @@ class Game:
             if event.type == pg.QUIT:
                 self.is_running = False
                 break
-            elif event.type == pg.VIDEORESIZE:                
-                # We import GameObject in handle_events to prevent a circular import.
-                from .game_object import GameObject
-                GameObject.set_scale(self.target_scale, self)
+
+            elif event.type == pg.WINDOWCLOSE:
+                if event.window == self.window:
+                    self.is_running = False
+                    break
+                event.window.destroy()
+
+            elif event.type == pg.WINDOWRESIZED:
+                if event.window == self.window:
+                    # We import GameObject in handle_events to prevent a circular import.
+                    from .game_object import GameObject
+                    GameObject.set_scale(self.target_scale, self)
+
             self.active_scene.handle_event(event)
 
     def set_target_scale(self, target_scale: int) -> float:
