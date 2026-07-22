@@ -75,3 +75,17 @@ include = ["topdownengine*"]
 exclude = ["tests*", "testing*"]
 
 [tool.setuptools_scm] 
+
+[tool.coverage.run]
+relative_files = true
+source = ["."]
+omit = [
+    "tests/*",
+]
+data_file = "reports/coverage/coverage.db"
+
+[tool.coverage.html]
+directory = "reports/coverage/html/"
+
+[tool.coverage.xml]
+output = "reports/coverage/coverage.xml"
