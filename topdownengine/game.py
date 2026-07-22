@@ -141,6 +141,9 @@ class Game:
 
             self.active_scene.handle_event(event)
 
+            for _, scene_key in self.extra_windows.items():
+                self.scenes[scene_key].handle_event(event)
+
     def set_target_scale(self, target_scale: int) -> float:
         """Sets the target scale.
         
