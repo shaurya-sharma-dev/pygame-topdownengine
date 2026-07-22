@@ -9,22 +9,22 @@ class Game:
     
     Attributes:
         window (pygame.Window): The main Window object.
-        extra_windows (dict[pygame.Window, str]): A dictionary of every Window (besides the main window) and its corresponding scene key;
-        screen (pygame.Surface): The primary display Surface.
+        extra_windows (dict[pygame.Window, str]): A dictionary of every Window (besides the main window) and its corresponding scene key.
+        screen (pygame.Surface): The display Surface for the main Window object.
         is_running (bool): Boolean flag to control execution.
         clock (pygame.time.Clock): Controls framerate and handles deltatime.
         fps (int): Integer that controls how much FPS the Game should have.
         game_object_group (GameObjectGroup): Stores all GameObjects.
         game_speed_percentage (float): Coefficient for deltatime, ranging from `0` to `1`.
         debug (bool): If `True`, debug rendering will be enabled.
-        target_scale (int): The target scale for the original window size.
-        og_width (int): Original window width.
+        target_scale (int): The target scale for the original main window size.
+        og_width (int): Original main window width.
         extra_features (list[str]): List of extra features to add at runtime. You MUST set it during instantiation.
         camera (Camera): Camera object to use when rendering.
-        bg_color (pygame.typing.ColorLike): Color to fill the screen with at the start of every draw cycle.
+        bg_color (pygame.typing.ColorLike): Color to fill all windows with at the start of every draw cycle.
         scenes (dict[str, BaseScene]): Dictionary of all scene objects.
-        active_scene_key (str): The dictionary key for the current active scene.
-        active_scene (BaseScene): The active scene.
+        active_scene_key (str): The dictionary key for the current active scene in the main Window object.
+        active_scene (BaseScene): The active scene in the main Window object.
     """
 
     VALID_EXTRA_FEATURES = {"resize",}
