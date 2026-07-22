@@ -3,6 +3,8 @@
 [![PyPI Version](https://img.shields.io/pypi/v/pygame-topdownengine?version=latest&cacheSeconds=0)](https://pypi.org/project/pygame-topdownengine/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pygame-topdownengine?version=latest&cacheSeconds=0)](https://pypi.org/project/pygame-topdownengine/)
 [![Types: Typed](https://img.shields.io/pypi/types/pygame-topdownengine?version=latest&cacheSeconds=0)](https://pypi.org/project/pygame-topdownengine/)
+[![Tests Status](./.github/test-badge.svg)](./reports/junit/junit.xml)
+[![Coverage](./.github/coverage-badge.svg)](./reports/coverage/coverage.xml)
 
 pygame-topdownengine is a 2.5D engine for top-down games, built on top of [pygame-ce](https://github.com/pygame-community/pygame-ce/tree/main). It is designed to be highly modular, with most core systems being located in the monolithic GameObject class. The engine utilizes an OOP architecture for rapid prototyping and development.
 
