@@ -58,10 +58,21 @@ class GameplayScene(BaseScene):
         self._light_filters = {}
     
     def get_light(self, radius: int):
-        if not radius in self._light_filters: self._light_filters[radius] = self.create_light(radius)
+        """Get the cached light surface of a given radius. One will be created and stored if it doesn't already exist.
+        
+        Args:
+            radius (int): The radius of the light.
+        """
+        if not radius in self._light_filters: 
+            self._light_filters[radius] = self.create_light(radius)
         return self._light_filters[(radius)]
 
     def create_light(self, radius: int):
+        """Create a light surface for a given radius.
+                
+        Args:
+            radius (int): The radius of the new light.
+        """
         surface = pg.Surface((max(radius * 2, 1), max(radius * 2, 1)), pg.SRCALPHA)
         for i in range(int(radius), 0, -1):
             alpha = 255 * (1 - i / radius)
