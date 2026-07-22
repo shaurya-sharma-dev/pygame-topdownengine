@@ -50,7 +50,7 @@ def test_clears_velocity_if_in_velocity_deadzone_range(game: tde.Game):
     game.game_object_group.add(game_object)
 
     game_object.velocity = pg.Vector2(game_object.VELOCITY_DEADZONE, 0)
-    game.update(1000 / game.fps)
+    game.update(1000 / game.fps, game.window, game.active_scene)
 
     assert game_object.velocity == pg.Vector2()
 
@@ -59,7 +59,7 @@ def test_does_not_clear_velocity_if_not_in_velocity_deadzone_range(game: tde.Gam
     game.game_object_group.add(game_object)
 
     game_object.velocity = pg.Vector2(game_object.VELOCITY_DEADZONE + 0.1, 0)
-    game.update(1000 / game.fps)
+    game.update(1000 / game.fps, game.window, game.active_scene)
 
     assert game_object.velocity != pg.Vector2()
 

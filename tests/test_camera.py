@@ -22,7 +22,7 @@ def test_base_camera_instantly_snaps_to_position_if_focus_game_object_is_set(gam
     game.camera.focus_game_object = game_object
 
     game_object.position = position
-    game.update(1000 / game.fps)
+    game.update(1000 / game.fps, game.window, game.active_scene)
 
     assert game_object.position - pg.Vector2(
         game.screen.width / tde.GameObject.SCALE / 2, 
