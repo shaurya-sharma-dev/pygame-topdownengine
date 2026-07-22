@@ -35,10 +35,14 @@ class BaseScene:
         for container in self.ui_containers:
             container.update(dt)
 
-    def render(self):
-        "Render the scene."
+    def render(self, surface: pg.Surface):
+        """Render the scene.
+        
+        Args:
+            surface (pygame.Surface): The Surface to render to.
+        """
         for container in self.ui_containers:
-            container.render(self.game.screen)
+            container.render(surface)
     
 class GameplayScene(BaseScene):
     """A scene that updates and renders all `GameObject` instances.
@@ -88,14 +92,18 @@ class GameplayScene(BaseScene):
         super().update(dt)
         self.game.game_object_group.update(dt, self.game)
 
-    def render(self):
-        "Render the GameplayScene."
-        overlay = pg.Surface(self.game.screen.size, pg.SRCALPHA)
+    def render(self, surface: pg.Surface):
+        """Render the GameplayScene.
+        
+        Args:
+            surface (pygame.Surface): The Surface to render to.
+        """
+        overlay = pg.Surface(surface.size, pg.SRCALPHA)
         overlay.fill((0, 0, 0, self.global_alpha))
 
         for game_object in sorted(self.game.game_object_group.game_objects, key=lambda g: g.draw_index):
             cr = game_object.rect.move(-self.game.camera.position * game_object.SCALE)
-            self.game.screen.blit(game_object.image, cr)
+            surface.blit(game_object.image, cr)
             if self.global_alpha > 0 and game_object.light_radius > 0:
                 scaled_lr = game_object.light_radius * game_object.SCALE
                 overlay.blit(
@@ -113,12 +121,12 @@ class GameplayScene(BaseScene):
                 # Draw Colliders
                 for collider in game_object.world_colliders:
                     pg.draw.rect(
-                        self.game.screen, 
+                        surface, 
                         (0, 0, 255), 
                         scale_rect(collider.move(-self.game.camera.position), game_object.SCALE),
                         1
                     )
 
-        self.game.screen.blit(overlay, (0, 0))
+        surface.blit(overlay, (0, 0))
 
-        super().render() # Draw UI
+        super().render(surface) # Draw UI

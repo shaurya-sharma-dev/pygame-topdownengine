@@ -9,6 +9,7 @@ class Game:
     
     Attributes:
         window (pygame.Window): The main Window object.
+        extra_windows (dict[pygame.Window, str]): A dictionary of every Window (besides the main window) and its corresponding scene key;
         screen (pygame.Surface): The primary display Surface.
         is_running (bool): Boolean flag to control execution.
         clock (pygame.time.Clock): Controls framerate and handles deltatime.
@@ -108,6 +109,9 @@ class Game:
         }
         self.active_scene_key = "gameplay"
 
+        # Extra Windows
+        self.extra_windows = dict()
+
         # Accumalated Deltatime
         self._accumulated_deltatime = 0
 
@@ -169,6 +173,10 @@ class Game:
             # Use 1000 / self.fps for update functions because
             # they still use milliseconds.
             self.active_scene.update(1000 / self.fps * self.game_speed_percentage)
+
+            for _, scene_key in self.extra_windows.items():
+                self.scenes[scene_key].update(1000 / self.fps * self.game_speed_percentage)
+
             self.camera.update(1000 / self.fps * self.game_speed_percentage)
 
             # Subtract from accumulated deltatime in seconds.
@@ -177,8 +185,13 @@ class Game:
     def render(self) -> None:
         "Render everything to the screen."
         self.screen.fill(self.bg_color)
-        self.active_scene.render()
+        self.active_scene.render(self.screen)
         self.window.flip()
+
+        for window, scene_key in self.extra_windows.items():
+            window.get_surface().fill(self.bg_color)
+            self.scenes[scene_key].render(window.get_surface())
+            window.flip()
 
     def run(self) -> None:
         "Run the game loop."
