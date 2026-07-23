@@ -8,7 +8,7 @@ class Game:
     """Acts as the central core of the game and manages the core loop and gamestate.
     
     Attributes:
-        window (pygame.Window): The main Window object.
+        window (pygame.Window): The main Window object. If this window is closed, the program will terminate automatically.
         extra_windows (dict[pygame.Window, str]): A dictionary of every Window (besides the main window) and its corresponding scene key.
         screen (pygame.Surface): The display Surface for the main Window object.
         is_running (bool): Boolean flag to control execution.
