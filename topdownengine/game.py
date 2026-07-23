@@ -131,6 +131,8 @@ class Game:
                 if event.window == self.window:
                     self.is_running = False
                     break
+                else:
+                    del self.extra_windows[event.window]
                 event.window.destroy()
 
             elif event.type == pg.WINDOWRESIZED:
