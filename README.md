@@ -28,7 +28,7 @@ pygame-topdownengine is a 2.5D engine for top-down games, built on top of [pygam
 <br>
 
 This code makes a Player character, a secondary character that will attempt to follow the Player character, and a solid object the Player can collide with and jump over.
-```
+```python
 import topdownengine as tde
 from topdownengine.mobile_object.controller import KeyboardInputController, MovementAIController
 import pygame as pg
