@@ -11,3 +11,6 @@ pygame-topdownengine is a 2.5D engine for top-down games. It is designed to be h
 You can access the GitHub repository for pygame-topdownengine by clicking [here](https://github.com/shaurya-sharma-dev/pygame-topdownengine/tree/main).
 
 For installation instructions, click [here](./installation.md).
+
+!!! warning "Unsupported Version"
+    The 0.4.x versions are no longer supported. Please update to a later version.
