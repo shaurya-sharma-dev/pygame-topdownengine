@@ -3,6 +3,8 @@
 [![PyPI Version](https://img.shields.io/pypi/v/pygame-topdownengine?version=latest&cacheSeconds=0)](https://pypi.org/project/pygame-topdownengine/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pygame-topdownengine?version=latest&cacheSeconds=0)](https://pypi.org/project/pygame-topdownengine/)
 [![Types: Typed](https://img.shields.io/pypi/types/pygame-topdownengine?version=latest&cacheSeconds=0)](https://pypi.org/project/pygame-topdownengine/)
+[![Tests Status](https://raw.githubusercontent.com/shaurya-sharma-dev/pygame-topdownengine/refs/heads/main/.github/test-badge.svg)](https://github.com/shaurya-sharma-dev/pygame-topdownengine/actions/workflows/ci.yml)
+[![Coverage](https://raw.githubusercontent.com/shaurya-sharma-dev/pygame-topdownengine/refs/heads/main/.github/coverage-badge.svg)](https://shaurya-sharma-dev.github.io/pygame-topdownengine/coverage/)
 
 This is the documentation for the pygame-topdownengine package. 
 
