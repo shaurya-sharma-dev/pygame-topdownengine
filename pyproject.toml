@@ -83,10 +83,9 @@ source = ["."]
 omit = [
     "tests/*",
 ]
-data_file = "reports/coverage/coverage.db"
 
-[tool.coverage.html]
-directory = "reports/coverage/html/"
-
-[tool.coverage.xml]
-output = "reports/coverage/coverage.xml"
+[tool.coverage.report]
+exclude_also = [
+    "except PackageNotFoundError:",
+    "__version__ = \"unknown\"",
+]
