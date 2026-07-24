@@ -33,6 +33,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python ${{ matrix.python }}
         uses: actions/setup-python@v5
@@ -44,10 +46,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install ".[dev]"
+          python -m pip install genbadge[all]
 
       - name: Execute tests
         run: |
-          python -m pytest --cov --cov-report=html:htmlcov/
+          python -m pytest --cov --cov-report=html:htmlcov/ --junitxml=junit.xml --cov-report=xml:coverage.xml
 
     # We upload the coverage artifact from just one platform to prevent unneeded overwrites.
     # The actual platform used does not matter, so we are just using ubuntu since is it the
@@ -59,6 +62,30 @@ jobs:
           name: coverage-html-report
           path: htmlcov/
           retention-days: 1
+
+    # Generate badges on ubuntu but different version to run parallel.
+      - name: Generate and Commit Badges
+        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.14'
+        run: |
+          # Generate badges
+          genbadge tests -i junit.xml -o .github/test-badge.svg
+          genbadge coverage -i coverage.xml -o .github/coverage-badge.svg
+
+          # Configure Git credentials
+          git config --local user.email "github-actions[bot]@://github.com"
+          git config --local user.name "github-actions[bot]"
+
+          # Stage badges
+          git add .github/
+
+          # Check out the tracked branch explicitly, then commit and push
+          if ! git diff --cached --quiet; then
+            git checkout main
+            git commit -m "automation: auto-update coverage and test badges [skip ci]"
+            git push origin main
+          else
+            echo "Badges haven't changed. Skipping commit."
+          fi
 
   deploy-coverage:
     name: Deploy Coverage to Pages
