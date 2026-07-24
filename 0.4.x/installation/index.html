@@ -987,6 +987,18 @@ pygame package installed, you <strong>MUST</strong> uninstall it before attempti
 to install pygame-ce or pygame-topdownengine.</p>
 </div>
 <h2 id="installing-pygame-topdownengine">Installing pygame-topdownengine<a class="headerlink" href="#installing-pygame-topdownengine" title="Permanent link">&para;</a></h2>
+<div class="admonition bug">
+<p class="admonition-title">Resolved: Dependency Error</p>
+<p>Prior to version 0.5.1, the <code>pyproject.toml</code> file was incorrectly configured
+to allow for <code>pygame-ce</code> versions below 2.5.2. However, version 2.5.2 of <code>pygame-ce</code>
+is required for typehints, and if a version below 2.5.2 is in the environment, the
+program will crash on import of pygame-topdownengine. </p>
+<p>The <code>pyproject.toml</code> file has been fixed to only allow for <code>pygame-ce</code> versions above
+or equal to 2.5.2.</p>
+<p>The 0.4.x versions WILL NOT have this bug fixed as they are no longer supported. To 
+avoid this bug, use a pygame-ce above 2.5.2. You can also get the bug fix by updating to
+0.5.x.</p>
+</div>
 <p>In order to install pygame-topdownengine, make sure Python and pip are both installed and in PATH. Then, run this command into your terminal:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip install pygame-topdownengine
 </span></code></pre></div></p>
