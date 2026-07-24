@@ -44,6 +44,20 @@ class TestGameObjectGroup:
 
         assert game_object not in group.game_objects
 
+    def test_game_object_is_added_and_removed_if_modifying_game_object_group_game_objects_set_directly(self):
+        group = tde.GameObjectGroup()
+        game_object = tde.GameObject()
+
+        group.game_objects = {game_object,}
+
+        assert game_object in group.game_objects
+        assert group in game_object.groups
+
+        group.game_objects = set()
+
+        assert game_object not in group.game_objects
+        assert group not in game_object.groups
+
 # Velocity Deadzone Tests
 def test_clears_velocity_if_in_velocity_deadzone_range(game: tde.Game):
     game_object = tde.GameObject()
