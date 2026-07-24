@@ -365,10 +365,10 @@ class GameObjectGroup:
         deletions = self.game_objects - new_game_objects
 
         for deletion in deletions:
-            deletion.remove_groups(self)
+            deletion.remove_from(self)
 
         for addition in additions:
-            addition.add_groups(self)
+            addition.add_to(self)
 
     def add(self, *game_objects: GameObject) -> None:
         """Adds GameObject instances to this group.
