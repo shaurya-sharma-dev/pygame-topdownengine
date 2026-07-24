@@ -23,6 +23,13 @@ class TestLerp:
     def test_result_equals_end_if_t_equals_1(self, start, end):
         assert tde_math.lerp(start, end, 1) == end
 
+    def test_raises_type_error_for_mismatched_types(self, start, end):
+        # Rather than use the start and end parameters for their purpose in the other tests,
+        # we use it in this test to ensure it still raises the exception regardless of the value,
+        # as long as types are misaligned.
+        with pytest.raises(TypeError):
+            tde_math.lerp(pg.Vector2(start, end), start, 1)
+
 class TestScaleRect:
     @pytest.fixture(params=range(1, 11), scope="class")
     @classmethod
