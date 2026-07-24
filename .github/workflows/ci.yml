@@ -47,7 +47,7 @@ jobs:
 
       - name: Execute tests
         run: |
-          python -m pytest --cov --cov-report=html
+          python -m pytest --cov --cov-report=html:htmlcov/
 
     # We upload the coverage artifact from just one platform to prevent unneeded overwrites.
     # The actual platform used does not matter, so we are just using ubuntu since is it the
