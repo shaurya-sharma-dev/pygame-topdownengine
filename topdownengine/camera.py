@@ -1,6 +1,7 @@
 import pygame as pg
 import random
 from .game_object import GameObject
+from .game import Game
 
 class Camera:
     """Class that represents the Camera.
@@ -12,12 +13,13 @@ class Camera:
         screenshake (dict[str,float]): Current screenshake dictionary.
         position (pygame.Vector2): The position of the camera, factoring screenshake.
     """
-    def __init__(self):
+    def __init__(self, game: Game):
         "Initialize the camera."
         self.real_position = pg.Vector2()
         self.screenshake_offset = pg.Vector2()
         self.focus_game_object = None
         self.screenshake = {"duration": 0, "intensity": 0}
+        self.game = game
 
     @property
     def position(self) -> pg.Vector2:
@@ -43,10 +45,9 @@ class Camera:
         Args:
             dt (float): The deltatime
         """
-        screen = pg.display.get_surface()
         self.real_position = pg.Vector2(self.focus_game_object.position) - pg.Vector2(
-            screen.width / GameObject.SCALE / 2, 
-            screen.height / GameObject.SCALE / 2
+            self.game.screen.width / GameObject.SCALE / 2, 
+            self.game.screen.height / GameObject.SCALE / 2
         )
 
     def handle_bounds(self) -> None:
@@ -77,10 +78,9 @@ class SmoothTrackerCamera(Camera):
         Args:
             dt (float): The deltatime
         """
-        screen = pg.display.get_surface()
         target_position = pg.Vector2(self.focus_game_object.position) - pg.Vector2(
-            screen.width / GameObject.SCALE / 2, 
-            screen.height / GameObject.SCALE / 2
+            self.game.screen.width / GameObject.SCALE / 2, 
+            self.game.screen.height / GameObject.SCALE / 2
         )
 
         self.real_position += (target_position - self.real_position) * (dt / 1000) * 5
