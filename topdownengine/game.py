@@ -3,6 +3,7 @@
 
 import pygame as pg
 from .scenes import GameplayScene, BaseScene
+from functools import cached_property
 
 class Game:
     """Acts as the central core of the game and manages the core loop and gamestate.
@@ -62,12 +63,10 @@ class Game:
                 )
 
         # Initialize pygame-ce
-        pg.quit()
         pg.init()
 
         # Create window object
         self.window = pg.Window(window_title, (screen_width, screen_height))
-        self.screen = self.window.get_surface()
         self.window.resizable = "resize" in extra_features
 
         if window_icon_path is not None:
@@ -115,6 +114,10 @@ class Game:
 
         # Accumalated Deltatime
         self._accumulated_deltatime = 0
+
+    @cached_property
+    def screen(self) -> pg.Surface:
+        return self.window.get_surface()
 
     @property
     def active_scene(self) -> BaseScene:
