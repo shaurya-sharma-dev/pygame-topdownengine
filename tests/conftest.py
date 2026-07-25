@@ -19,6 +19,7 @@ def game():
     game = tde.Game(1, 1)
     print("Initializing game instance.")
     yield game
+    game.is_running = False
     pg.quit()
 
 @pytest.fixture
