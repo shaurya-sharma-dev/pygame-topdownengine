@@ -57,7 +57,7 @@ jobs:
           pip install --upgrade pip
           pip install zensical==0.0.50
           pip install mkdocstrings-python==2.0.5
-          pip install git+https://github.com/squidfunk/mike.git
+          pip install git+https://github.com/squidfunk/mike.git@2d4ad799442f4592db8ad53b179bfb33db8c69ac
           
           # Install package so mkdocstrings can successfully import it
           echo "Installing package..."
