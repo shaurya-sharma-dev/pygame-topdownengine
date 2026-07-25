@@ -62,6 +62,7 @@ class Game:
                 )
 
         # Initialize pygame-ce
+        pg.quit()
         pg.init()
 
         # Create window object
