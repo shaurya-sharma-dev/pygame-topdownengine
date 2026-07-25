@@ -25,7 +25,7 @@ def test_base_camera_instantly_snaps_to_position_if_focus_game_object_is_set(gam
     game.camera.focus_game_object = game_object
 
     game_object.position = position
-    game.update(1000 / game.fps)
+    game.camera.update(1000 / game.fps)
 
     assert game_object.position - pg.Vector2(
         game.screen.width / tde.GameObject.SCALE / 2, 
@@ -37,7 +37,7 @@ def test_base_camera_instantly_snaps_to_position_if_focus_game_object_is_set(gam
 def test_distance_of_position_from_real_position_within_intensity_times_sqrt_2_if_screenshake_set_on_base_camera(game: tde.Game, position: pg.Vector2, intensity: int):
     game.camera.real_position = position
     game.camera.screenshake = {"duration": 99, "intensity": intensity}
-    game.update(1000 / game.fps)
+    game.camera.update(1000 / game.fps)
 
     # Test that the distance between screenshake position and real position is within
     # intensity multiplied by the square root of 2.
