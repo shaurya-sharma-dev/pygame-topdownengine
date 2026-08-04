@@ -50,7 +50,7 @@ jobs:
 
       - name: Execute tests
         run: |
-          python -m pytest --cov --cov-report=html:htmlcov/ --junitxml=junit.xml --cov-report=xml:coverage.xml
+          python -m pytest -s --cov --cov-report=html:htmlcov/ --junitxml=junit.xml --cov-report=xml:coverage.xml
 
     # We upload the coverage artifact from just one platform to prevent unneeded overwrites.
     # The actual platform used does not matter, so we are just using ubuntu since is it the
