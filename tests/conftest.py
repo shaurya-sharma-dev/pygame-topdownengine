@@ -13,11 +13,13 @@ import topdownengine as tde
 from topdownengine.mobile_object.controller import BaseController
 from topdownengine.controls import MoreKeysPressed
 
+# Print debug info
+pg.print_debug_info()
+
 # Fixtures
 @pytest.fixture
 def game():
     game = tde.Game(1, 1)
-    print("Initializing game instance.")
     yield game
     game.is_running = False
     pg.quit()
