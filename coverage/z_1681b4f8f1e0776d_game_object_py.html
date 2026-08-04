@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Coverage for topdownengine/game_object.py: 81%</title>
+    <title>Coverage for topdownengine/game_object.py: 83%</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_c827f16f.png">
     <link rel="stylesheet" href="style_cb_4667309f.css" type="text/css">
     <script src="coverage_html_cb_dd2e7eb5.js" defer></script>
@@ -12,7 +12,7 @@
     <div class="content">
         <h1>
             <span class="text">Coverage for </span><b>topdownengine<span class="sep">/</span>game_object.py</b>:
-            <span class="pc_cov">81%</span>
+            <span class="pc_cov">83%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -55,8 +55,8 @@
         </aside>
         <h2>
             <span class="text">209 statements &nbsp;</span>
-            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">169<span class="text"> run</span></button>
-            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">40<span class="text"> missing</span></button>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">173<span class="text"> run</span></button>
+            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">36<span class="text"> missing</span></button>
             <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">0<span class="text"> excluded</span></button>
         </h2>
         <p class="text">
@@ -64,8 +64,8 @@
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a id="nextFileLink" class="nav" href="z_1681b4f8f1e0776d_math_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.15.2">coverage.py v7.15.2</a>,
-            created at 2026-07-24 02:27 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.15.3">coverage.py v7.15.3</a>,
+            created at 2026-08-04 22:43 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -443,14 +443,14 @@
     <p class="pln"><span class="n"><a id="t361" href="#t361">361</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t362" href="#t362">362</a></span><span class="t">    <span class="op">@</span><span class="nam">game_objects</span><span class="op">.</span><span class="nam">setter</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t363" href="#t363">363</a></span><span class="t">    <span class="key">def</span> <span class="nam">game_objects</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">new_game_objects</span><span class="op">:</span> <span class="nam">set</span><span class="op">[</span><span class="nam">GameObject</span><span class="op">]</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t364" href="#t364">364</a></span><span class="t">        <span class="nam">additions</span> <span class="op">=</span> <span class="nam">new_game_objects</span> <span class="op">-</span> <span class="nam">self</span><span class="op">.</span><span class="nam">game_objects</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t365" href="#t365">365</a></span><span class="t">        <span class="nam">deletions</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">game_objects</span> <span class="op">-</span> <span class="nam">new_game_objects</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t364" href="#t364">364</a></span><span class="t">        <span class="nam">additions</span> <span class="op">=</span> <span class="nam">new_game_objects</span> <span class="op">-</span> <span class="nam">self</span><span class="op">.</span><span class="nam">game_objects</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t365" href="#t365">365</a></span><span class="t">        <span class="nam">deletions</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">game_objects</span> <span class="op">-</span> <span class="nam">new_game_objects</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t366" href="#t366">366</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t367" href="#t367">367</a></span><span class="t">        <span class="key">for</span> <span class="nam">deletion</span> <span class="key">in</span> <span class="nam">deletions</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t368" href="#t368">368</a></span><span class="t">            <span class="nam">deletion</span><span class="op">.</span><span class="nam">remove_groups</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t367" href="#t367">367</a></span><span class="t">        <span class="key">for</span> <span class="nam">deletion</span> <span class="key">in</span> <span class="nam">deletions</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t368" href="#t368">368</a></span><span class="t">            <span class="nam">deletion</span><span class="op">.</span><span class="nam">remove_from</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t369" href="#t369">369</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t370" href="#t370">370</a></span><span class="t">        <span class="key">for</span> <span class="nam">addition</span> <span class="key">in</span> <span class="nam">additions</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t371" href="#t371">371</a></span><span class="t">            <span class="nam">addition</span><span class="op">.</span><span class="nam">add_groups</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t370" href="#t370">370</a></span><span class="t">        <span class="key">for</span> <span class="nam">addition</span> <span class="key">in</span> <span class="nam">additions</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t371" href="#t371">371</a></span><span class="t">            <span class="nam">addition</span><span class="op">.</span><span class="nam">add_to</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t372" href="#t372">372</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t373" href="#t373">373</a></span><span class="t">    <span class="key">def</span> <span class="nam">add</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="op">*</span><span class="nam">game_objects</span><span class="op">:</span> <span class="nam">GameObject</span><span class="op">)</span> <span class="op">-></span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t374" href="#t374">374</a></span><span class="t">        <span class="str">"""Adds GameObject instances to this group.</span>&nbsp;</span><span class="r"></span></p>
@@ -478,8 +478,8 @@
     <p class="pln"><span class="n"><a id="t396" href="#t396">396</a></span><span class="t"><span class="str">            game (Game): The Game class object.</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t397" href="#t397">397</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t398" href="#t398">398</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t399" href="#t399">399</a></span><span class="t">        <span class="key">for</span> <span class="nam">game_object</span> <span class="key">in</span> <span class="nam">self</span><span class="op">.</span><span class="nam">game_objects</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t400" href="#t400">400</a></span><span class="t">            <span class="nam">game_object</span><span class="op">.</span><span class="nam">update</span><span class="op">(</span><span class="nam">dt</span><span class="op">,</span> <span class="nam">game</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t399" href="#t399">399</a></span><span class="t">        <span class="key">for</span> <span class="nam">game_object</span> <span class="key">in</span> <span class="nam">self</span><span class="op">.</span><span class="nam">game_objects</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t400" href="#t400">400</a></span><span class="t">            <span class="nam">game_object</span><span class="op">.</span><span class="nam">update</span><span class="op">(</span><span class="nam">dt</span><span class="op">,</span> <span class="nam">game</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -488,8 +488,8 @@
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a class="nav" href="z_1681b4f8f1e0776d_math_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.15.2">coverage.py v7.15.2</a>,
-            created at 2026-07-24 02:27 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.15.3">coverage.py v7.15.3</a>,
+            created at 2026-08-04 22:43 +0000
         </p>
     </div>
 </footer>
