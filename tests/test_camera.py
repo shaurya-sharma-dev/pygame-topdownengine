@@ -42,3 +42,26 @@ def test_distance_of_position_from_real_position_within_intensity_times_sqrt_2_i
     # Test that the distance between screenshake position and real position is within
     # intensity multiplied by the square root of 2.
     assert game.camera.real_position.distance_to(game.camera.position) <= intensity * math.sqrt(2)
+
+@pytest.mark.parametrize("position", POSITIONS)
+def test_focus_game_object_is_tracked_smoothly_if_smooth_tracker_camera_is_active(game: tde.Game, position: pg.Vector2):
+    game_object = tde.GameObject()
+    game_object.position = position
+    game.game_object_group.add(game_object)
+
+    game.camera = tde.SmoothTrackerCamera(game)
+    game.camera.focus_game_object = game_object
+
+    dt = 1000 / game.fps
+
+    expected_target_position = pg.Vector2(game_object.position) - pg.Vector2(
+        game.screen.width / game_object.SCALE / 2, 
+        game.screen.height / game_object.SCALE / 2
+    )
+
+    expected_real_position = ((expected_target_position - game.camera.real_position) * (dt / 1000) * 5)
+
+    game.camera.update(dt)
+
+    assert game.camera.real_position.x == pytest.approx(expected_real_position.x)
+    assert game.camera.real_position.y == pytest.approx(expected_real_position.y)
