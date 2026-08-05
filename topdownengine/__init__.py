@@ -14,16 +14,10 @@ from .font import Font
 from .camera import Camera, SmoothTrackerCamera
 from .asset_paths import PACKAGE_ROOT, ASSETS_DIR
 
-# __version__ attribute
-# This only works if the package is installed.
-# (E.g. pip install -e .)
+# Dunder metadata variables
+__title__ = "pygame-topdownengine"
+__author__ = "Shaurya Sharma"
+__license__ = "MIT"
+__copyright__ = "Copyright 2026 Shaurya Sharma"
 
-from importlib.metadata import version, PackageNotFoundError
-
-try:
-    __version__ = version("pygame-topdownengine")
-except PackageNotFoundError: # pragma: no cover
-    __version__ = "unknown"
-
-# Clean namespace
-del version, PackageNotFoundError
+from ._version import __version_info__, __version__

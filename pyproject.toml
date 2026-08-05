@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygame-topdownengine"
-version = "0.5.3"
+dynamic = ["version"]
 authors = [
     { name = "Shaurya Sharma" }
 ]
@@ -66,6 +66,9 @@ Documentation = "https://shaurya-sharma-dev.github.io/pygame-topdownengine/"
 
 [tool.setuptools]
 include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {attr = "topdownengine._version.__version__"}
 
 [tool.setuptools.package-data]
 "*" = ["py.typed", "assets/**/*"]
