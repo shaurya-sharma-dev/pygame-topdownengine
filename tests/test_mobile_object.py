@@ -5,7 +5,7 @@ import topdownengine as tde
 import pytest
 import pygame as pg
 from conftest import FAKED_KEYS
-from topdownengine.mobile_object.controller import KeyboardInputController, StaticController, BaseController
+from topdownengine.mobile_object.controller import KeyboardInputController, StaticController, BaseController, MovementAIController
 
 # Jump Tests
 def test_does_jump_if_jump_called_while_grounded(game: tde.Game, mobile_object: tde.MobileObject):
@@ -57,6 +57,22 @@ def test_velocity_matches_direction_if_stationary_with_keyboard_input_controller
     elif dir.y == -1: 
         step(pg.K_w, "mobile_object.velocity.y < 0")
 
+def test_z_vel_matches_jump_vel_if_stationary_with_keyboard_input_controller_active(game: tde.Game, mobile_object: tde.MobileObject):
+    mobile_object.controller = KeyboardInputController()
+    game.game_object_group.add(mobile_object)
+
+    def step(key, condition):
+        FAKED_KEYS.clear()
+        FAKED_KEYS.add(key)
+        
+        # For some reason, this line fixes an error where pytest says mobile_object is undefined during the eval call.
+        mobile_object
+
+        mobile_object.update(1000 / game.fps, game)
+        assert eval(condition)
+
+    step(pg.K_SPACE, "mobile_object.z_vel > 0")
+
 def test_velocity_does_not_affect_mobile_object_position_if_using_static_controller(game: tde.Game, mobile_object: tde.MobileObject):
     mobile_object.controller = StaticController()
     game.game_object_group.add(mobile_object)
@@ -75,3 +91,28 @@ def test_position_and_velocity_remain_constant_if_update_called_with_base_contro
 
     assert mobile_object.position == pg.Vector2()
     assert mobile_object.velocity == pg.Vector2()
+
+def test_animations_have_four_directions_each_if_directional_anims_is_true(game: tde.Game):
+    mobile_object = tde.MobileObject(
+        controller=BaseController(),
+        animation_paths={
+            "idle": tde.ASSETS_DIR / "example-player" / "idle.png",
+            "walk": tde.ASSETS_DIR / "example-player" / "walk.png"
+        }, frame_size=(16, 16), directional_anims=True
+    )
+
+    assert len(mobile_object.animations) == 8
+
+def test_mobile_object_moves_toward_target_mobile_object_if_movement_ai_controller_is_used(game: tde.Game, mobile_object: tde.MobileObject):
+    target_mobile_object = tde.MobileObject(
+        BaseController(),
+    )
+    target_mobile_object.position = pg.Vector2(999, 999)
+
+    mobile_object.controller = MovementAIController(target_mobile_object=target_mobile_object)
+    before_update_distance = target_mobile_object.position.distance_to(mobile_object.position)
+
+    game.game_object_group.add(mobile_object, target_mobile_object)
+    game.update(1000 / game.fps)
+
+    assert before_update_distance > target_mobile_object.position.distance_to(mobile_object.position)
