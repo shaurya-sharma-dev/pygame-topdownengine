@@ -105,7 +105,7 @@ class Font:
 
         try:
             rect = surf.get_rect(**{align: (x, y)})
-        except TypeError:
+        except AttributeError:
             raise ValueError(f"Invalid align value of {align}")
         
         surface.blit(surf, rect)
