@@ -5,7 +5,7 @@ from topdownengine import math as tde_math
 import pygame as pg
 import pytest
 
-@pytest.mark.parametrize("start, end", [
+START_END_VALUES = [
     [5, 8],    # P -> P
     [1, -7],   # P -> N
     [5, 0],    # P -> 0
@@ -15,20 +15,28 @@ import pytest
     [0, 7],    # 0 -> P
     [0, -6],   # 0 -> N
     [0, 0],    # 0 -> 0
-])
+]
+
 class TestLerp:
-    def test_result_equals_start_if_t_equals_0(self, start, end):
+    @pytest.fixture(params=START_END_VALUES, scope="class")
+    @classmethod
+    def start_end(cls, request):
+        return request.param
+
+    def test_result_equals_start_if_t_equals_0(self, start_end):
+        start, end = start_end
         assert tde_math.lerp(start, end, 0) == start
 
-    def test_result_equals_end_if_t_equals_1(self, start, end):
+    def test_result_equals_end_if_t_equals_1(self, start_end):
+        start, end = start_end
         assert tde_math.lerp(start, end, 1) == end
 
-    def test_raises_type_error_for_mismatched_types(self, start, end):
+    def test_raises_type_error_for_mismatched_types(self):
         # Rather than use the start and end parameters for their purpose in the other tests,
         # we use it in this test to ensure it still raises the exception regardless of the value,
         # as long as types are misaligned.
         with pytest.raises(TypeError):
-            tde_math.lerp(pg.Vector2(start, end), start, 1)
+            tde_math.lerp(pg.Vector2(), 0, 0)
 
 class TestScaleRect:
     @pytest.fixture(params=range(1, 11), scope="class")
