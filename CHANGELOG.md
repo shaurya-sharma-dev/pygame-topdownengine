@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - The `Game` class now uses `pygame.Window` instead of `pygame.display`.
 - **Breaking:** The `Camera` and `SmoothTrackerCamera` classes now require a new `game` parameter.
 - **Breaking:** `Game.run` no longer calls the builtin `exit` function at the end. It now calls the new `Game.quit` method.
+- **Breaking:** The `game` parameter in the `GameObject.set_scale` method is now no longer optional.
 
 ## [0.5.3] - 2026-07-24
 
