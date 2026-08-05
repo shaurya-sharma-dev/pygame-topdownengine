@@ -25,3 +25,12 @@ In other words, **do not request highly specific or customizable features**. For
 
 ## Pull Requests
 Only maintainers can create pull requests.
+
+## Releasing (Maintainers Only)
+1. Change version number in pyproject.toml and update changelog with new version header.
+2. Run `git add . && git commit -m "chore: bump version."`
+3. Run `git push origin main`.
+4. Run `git tag v[version number]`. Make sure the version number used is the EXACT same one used in the pyproject.toml file.
+5. Run `git push origin v[version number]`. This will push the tag to GitHub and start the release workflow.
+6. Once the Test PyPI deployment is finished, check the project to ensure the new release is functioning and everything is correct. Once verified, accept the deployment to the production PyPI project on GitHub.
+7. Once the PyPI deployment is finished, check the project on PyPI.
