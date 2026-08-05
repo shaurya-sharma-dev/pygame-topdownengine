@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Fixed
 - Bug in `Font.draw_text` method where it would attempt to catch the wrong error type to capture invalid alignment values.
+- Added missing space to docstring in `UIContainer.render`.
 
 ## [0.5.3] - 2026-07-24
 

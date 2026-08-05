@@ -68,7 +68,7 @@ class UIContainer:
             e.update(dt)
 
     def render(self, surface: pg.Surface) -> None:
-        """Render all elementsto a given surface.
+        """Render all elements to a given surface.
         
         Args:
             surface (pygame.Surface): The surface to render to.
