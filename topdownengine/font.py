@@ -28,6 +28,27 @@ class Font:
                 self._sizes[size] = pg.font.SysFont(self.path, size)
 
         return self._sizes[size]
+
+    def get_max_size_for_text_in_rect(self, text: str, target_rect: pg.Rect):
+        """Finds the largest font size where the text fits inside a target_rect. Uses the height as the maximum logical starting size.
+        
+        Args:
+            text (str): The text to scale.
+            target_rect (pygame.Rect): The Rect object to scale to.
+        
+        Returns:
+            int: The largest possible font size where the text fits in the target_rect.
+        """
+        start_size = max(2, target_rect.height)
+
+        for size in range(start_size, 1, -1):
+            rendered = self._render(size, text, "black")
+            text_w, text_h = rendered.get_bounding_rect().size
+            
+            if text_w <= target_rect.width and text_h <= target_rect.height:
+                return size
+                
+        return 2
     
     def wrap(self, line: str, size: int, max_width: int) -> list[str]:
         """Break a single string into multiple lines based on width.
