@@ -99,3 +99,13 @@ def test_game_object_rect_attribute_is_frect_if_subpixel_rendering_is_enabled(ga
     tde.GameObject.SUBPIXEL = True
     game_object = tde.GameObject()
     assert type(game_object.rect) == pg.FRect
+
+# Scaling
+@pytest.mark.parametrize("scale_by", range(2, 10))
+def test_game_object_frame_size_is_modified_correctly_if_set_scale_is_called_with_game_object_in_game_object_group(game: tde.Game, scale_by: int):
+    game_object = tde.GameObject()
+    start_frame_size = pg.Vector2(16, 16) # Default frame_size is 16x16 pixels.
+    game.game_object_group.add(game_object)
+    tde.GameObject.set_scale(scale_by, game)
+
+    assert start_frame_size * scale_by == pg.Vector2(game_object.animations["idle"][0].size)
