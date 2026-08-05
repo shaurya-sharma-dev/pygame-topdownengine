@@ -103,6 +103,17 @@ def test_animations_have_four_directions_each_if_directional_anims_is_true(game:
 
     assert len(mobile_object.animations) == 8
 
+def test_animations_have_one_direction_if_directional_anims_is_false(game: tde.Game):
+    mobile_object = tde.MobileObject(
+        controller=BaseController(),
+        animation_paths={
+            "idle": tde.ASSETS_DIR / "example-player" / "idle.png",
+            "walk": tde.ASSETS_DIR / "example-player" / "walk.png"
+        }, frame_size=(16, 48), directional_anims=False
+    )
+
+    assert len(mobile_object.animations) == 2
+
 def test_mobile_object_moves_toward_target_mobile_object_if_movement_ai_controller_is_used(game: tde.Game, mobile_object: tde.MobileObject):
     target_mobile_object = tde.MobileObject(
         BaseController(),
