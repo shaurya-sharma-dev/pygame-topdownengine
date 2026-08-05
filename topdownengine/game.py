@@ -205,5 +205,12 @@ class Game:
             self.handle_events()
             self.update(dt)
             self.render()
+        self.quit()
+
+    def quit(self) -> None:
+        "Safely free up resources."
+        self.is_running = False
+        self.window.destroy()
+        for window in self.extra_windows:
+            window.destroy()
         pg.quit()
-        exit()
