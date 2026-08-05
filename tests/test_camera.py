@@ -24,7 +24,7 @@ def test_base_camera_instantly_snaps_to_position_if_focus_game_object_is_set(gam
     game.game_object_group.add(game_object)
     game.camera.focus_game_object = game_object
 
-    game_object.position = position
+    game_object.position = position.copy()
     game.camera.update(1000 / game.fps)
 
     assert game_object.position - pg.Vector2(
@@ -35,7 +35,7 @@ def test_base_camera_instantly_snaps_to_position_if_focus_game_object_is_set(gam
 @pytest.mark.parametrize("position", POSITIONS)
 @pytest.mark.parametrize("intensity", range(1, 4)) # Use intensities of 1, 2, and 3 because the lowest distance from (0, 0) is ~3.6.
 def test_distance_of_position_from_real_position_within_intensity_times_sqrt_2_if_screenshake_set_on_base_camera(game: tde.Game, position: pg.Vector2, intensity: int):
-    game.camera.real_position = position
+    game.camera.real_position = position.copy()
     game.camera.screenshake = {"duration": 99, "intensity": intensity}
     game.camera.update(1000 / game.fps)
 
@@ -46,7 +46,7 @@ def test_distance_of_position_from_real_position_within_intensity_times_sqrt_2_i
 @pytest.mark.parametrize("position", POSITIONS)
 def test_focus_game_object_is_tracked_smoothly_if_smooth_tracker_camera_is_active(game: tde.Game, position: pg.Vector2):
     game_object = tde.GameObject()
-    game_object.position = position
+    game_object.position = position.copy()
     game.game_object_group.add(game_object)
 
     game.camera = tde.SmoothTrackerCamera(game)
