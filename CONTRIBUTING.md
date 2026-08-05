@@ -26,6 +26,13 @@ In other words, **do not request highly specific or customizable features**. For
 ## Pull Requests
 Only maintainers can create pull requests.
 
+## Local Development
+1. Clone the repository locally.
+2. Go to the local repository root and run `pip install -e ".[dev]"` to install pygame-topdownengine as an editable package and all development dependencies.
+3. To run tests, use `pytest -s` at the repository root.
+4. To build the wheel file locally, use `python -m build` at the repository root.
+5. To verify wheel file contents, use `python -m zipfile --list path\to\wheel`.
+
 ## Releasing (Maintainers Only)
 1. Change version number in pyproject.toml and update changelog with new version header.
 2. Run `git add . && git commit -m "chore: bump version."`
