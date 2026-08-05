@@ -13,6 +13,27 @@ class TestUIContainer:
         with pytest.raises(TypeError, match="Elements must be subclasses of the BaseUIElement class."):
             container.add_ui_element("invalid ui element")
 
+    def test_ui_element_is_in_elements_property_if_added_to_container(self):
+        container = UIContainer()
+        element = BaseUIElement((0, 0))
+        container.add_ui_element(element)
+        assert element in container.elements
+
+    def test_ui_element_is_not_in_elements_property_if_removed_from_container(self):
+        container = UIContainer()
+        element = BaseUIElement((0, 0))
+        container.add_ui_element(element)
+        container.remove_ui_element(element)
+        assert element not in container.elements
+
+    def test_no_ui_elements_in_elements_property_if_all_removed_from_container(self):
+        container = UIContainer()
+        for _ in range(3):
+            element = BaseUIElement((0, 0))
+            container.add_ui_element(element)
+        container.remove_all_ui_elements()
+        assert len(container.elements) == 0
+
 class TestBaseUIElement:
     def test_add_container_method_raises_type_error_if_given_invalid_container(self):
         element = BaseUIElement((0, 0))
