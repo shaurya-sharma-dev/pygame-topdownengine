@@ -21,8 +21,7 @@ pg.print_debug_info()
 def game():
     game = tde.Game(1, 1)
     yield game
-    game.is_running = False
-    pg.quit()
+    game.quit()
 
 @pytest.fixture
 def mobile_object():
