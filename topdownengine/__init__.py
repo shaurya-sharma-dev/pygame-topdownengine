@@ -22,7 +22,7 @@ from importlib.metadata import version, PackageNotFoundError
 
 try:
     __version__ = version("pygame-topdownengine")
-except PackageNotFoundError:
+except PackageNotFoundError: # pragma: no cover
     __version__ = "unknown"
 
 # Clean namespace

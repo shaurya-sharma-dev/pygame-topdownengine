@@ -144,7 +144,7 @@ class BaseUIElement:
         for container in self.containers.copy():
             self.remove_container(container)
 
-    def handle_event(self, event: pg.Event) -> None:
+    def handle_event(self, event: pg.Event) -> None: # pragma: no cover
         """Handle a single event.
         
         Args:
@@ -152,7 +152,7 @@ class BaseUIElement:
         """
         pass
     
-    def update(self, dt: float) -> None:
+    def update(self, dt: float) -> None: # pragma: no cover
         """Update this element.
         
         Args:

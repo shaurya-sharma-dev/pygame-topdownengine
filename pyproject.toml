@@ -83,9 +83,3 @@ source = ["."]
 omit = [
     "tests/*",
 ]
-
-[tool.coverage.report]
-exclude_also = [
-    "except PackageNotFoundError:",
-    "__version__ = \"unknown\"",
-]
