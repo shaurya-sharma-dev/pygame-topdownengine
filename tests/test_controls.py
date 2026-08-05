@@ -6,7 +6,7 @@ from topdownengine.controls import KeyboardInputManager, NoKeysPressed
 import pygame as pg
 
 class TestKeyboardInputManager:
-    def test_deserializing_creates_same_keybinds_dict_if_using_serialized_version_of_original_keybinds_dict(self, game: tde.Game):
+    def test_deserializing_creates_same_keybinds_dict_if_using_serialized_version_of_original_keybinds_dict(self):
         manager = KeyboardInputManager()
         manager.keybinds["Custom Keybind"] = pg.K_AC_BACK
         serialized_manager_keybinds = manager.serialize()
