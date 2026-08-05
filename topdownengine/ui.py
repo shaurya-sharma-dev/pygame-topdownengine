@@ -162,6 +162,15 @@ class BaseUIElement:
     
 class Button(BaseUIElement):
     def __init__(self, position: pg.typing.Point, align: str="center", image: pg.Surface=None, on_click: Callable[[], None]=None, hover_highlight_strength: int=100):
+        """Create a button.
+        
+        Args:
+            position (pygame.typing.Point): The position of the button.
+            align (str, optional): The alignment of the button in relation to the position. Defaults to "center".
+            image (pygame.Surface, optional): The Surface that is drawn to represent the button. Defaults to None,
+            on_click (Callable, optional): The on click callback function. Defaults to None.
+            hover_highlight_strength (int, optional): The hover highlight strength. Defaults to 100.
+        """
         super().__init__(position, align, image)
         self.on_click = on_click
         self.hover_highlight_strength = hover_highlight_strength
