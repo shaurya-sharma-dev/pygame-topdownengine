@@ -58,6 +58,16 @@ class TestGameObjectGroup:
         assert game_object not in group.game_objects
         assert group not in game_object.groups
 
+    def test_game_objects_in_a_group_are_updated_if_the_group_update_method_is_called(self, game: tde.Game):
+        group = tde.GameObjectGroup()
+        game_object = tde.GameObject()
+        game_object.velocity = pg.Vector2(game_object.VELOCITY_DEADZONE + 1, game_object.VELOCITY_DEADZONE + 1)
+
+        group.add(game_object)
+
+        group.update(1000 / game.fps, game)
+        assert game_object.position != pg.Vector2()
+
 # Velocity Deadzone Tests
 def test_clears_velocity_if_in_velocity_deadzone_range(game: tde.Game):
     game_object = tde.GameObject()
