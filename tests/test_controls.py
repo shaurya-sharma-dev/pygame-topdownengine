@@ -16,5 +16,13 @@ class TestKeyboardInputManager:
 
         assert manager.keybinds == new_manager.keybinds
 
+    def test_deserializing_catches_value_error_if_given_a_mouse_button_string(self):
+        manager = KeyboardInputManager()
+        manager.keybinds["Custom Keybind"] = "Button 1"
+        serialized_manager_keybinds = manager.serialize()
+
+        new_manager = KeyboardInputManager()
+        new_manager.deserialize(serialized_manager_keybinds)
+
 def test_getting_index_value_is_equal_to_false_if_using_no_keys_pressed_instance():
     assert not NoKeysPressed()[0]
