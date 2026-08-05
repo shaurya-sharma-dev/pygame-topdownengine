@@ -99,4 +99,3 @@ def test_game_object_rect_attribute_is_frect_if_subpixel_rendering_is_enabled(ga
     tde.GameObject.SUBPIXEL = True
     game_object = tde.GameObject()
     assert type(game_object.rect) == pg.FRect
-    tde.GameObject.SUBPIXEL = False

@@ -22,6 +22,7 @@ def game():
     game = tde.Game(1, 1)
     yield game
     tde.GameObject.set_scale(1, game)
+    tde.GameObject.SUBPIXEL = False
     game.quit()
 
 @pytest.fixture
