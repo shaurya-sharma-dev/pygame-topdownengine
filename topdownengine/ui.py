@@ -186,6 +186,51 @@ class Button(BaseUIElement):
     def update(self, dt: float) -> None:
         self._enable_hover = True
 
+    @classmethod
+    def create_styled(
+        cls,
+        text: str, 
+        font: Font,
+        position: pg.typing.Point, 
+        width: int, 
+        height: int,
+        background_color: pg.typing.ColorLike,
+        foreground_color: pg.typing.ColorLike,
+        on_click: Callable[[], None]=None,
+        hover_highlight_strength: int=100,
+        border_radius: int=-1
+    ):
+        """Create a pre-styled button with a given position, text, size, styles, and on click callback function.
+        
+        Args:
+            text (str): The text to render on the button.
+            font (Font): The font to use to render the text.
+            position (pygame.typing.Point): The position of the button.
+            width (int): The width of the button.
+            height (int): The height of the button.
+            background_color (pygame.typing.ColorLike): The background color.
+            foreground_color (pygame.typing.ColorLike): The text color.
+            on_click (Callable, optional): The on click callback function. Defaults to None.
+            hover_highlight_strength (int, optional): The hover highlight strength. Defaults to 100.
+            border_radius (int, optional): The border radius of the button. Defaults to -1 (no border radius).
+        
+        Returns:
+            Button: The resulting Button object.
+        """
+        image = pg.Surface((width, height), pg.SRCALPHA)
+        rect = pg.Rect(0, 0, width, height)
+        padded_rect = pg.Rect(0, 0, width - (border_radius/2 if border_radius > 0 else 0), height)
+        padded_rect.center = (width/2, height/2)
+        pg.draw.rect(
+            image,
+            background_color,
+            rect,
+            border_radius=border_radius
+        )
+
+        font.draw_text(text, width / 2, height / 2, font.get_max_size_for_text_in_rect(text, padded_rect), image, foreground_color)
+        return cls(position, "center", image, on_click, hover_highlight_strength)
+
 class Text(BaseUIElement):
     def __init__(self, position: pg.typing.Point, font: Font, size: int, text: str, color: pg.typing.ColorLike, align: str="center"):
         image = font._render(size, text, color)
