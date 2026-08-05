@@ -8,7 +8,9 @@
 
 pygame-topdownengine is a 2.5D engine for top-down games, built on top of [pygame-ce](https://github.com/pygame-community/pygame-ce/tree/main). It is designed to be highly modular, with most core systems being located in the monolithic GameObject class. The engine utilizes an OOP architecture for rapid prototyping and development.
 
-pygame-topdownengine supports Windows, MacOS, and POSIX, and Unix.
+pygame-topdownengine supports Windows, MacOS, and POSIX, and Unix. 
+
+**NOTE: pygame-topdownengine is not affiliated, endorsed, or sponsored by pygame-ce.**
 
 ## Features
 - Monolithic `GameObject` class that contains all of the core systems.
