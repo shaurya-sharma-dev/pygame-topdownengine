@@ -20,10 +20,17 @@ game.active_scene_key = "menu"
 font = tde.Font("Arial")
 header = Text((450, 200), font, 50, "pygame-topdownengine", (255, 255, 255))
 
-play_btn = Button((450, 350), on_click=lambda: setattr(game, "active_scene_key", "gameplay"))
-play_btn.image = pg.Surface((150, 50))
-play_btn.image.fill((50, 100, 100))
-font.draw_text("PLAY", 75, 25, 40, play_btn.image, (255, 255, 255))
+play_btn = Button.create_styled(
+    text="PLAY", 
+    font=font, 
+    position=(450, 350), 
+    width=150, 
+    height=50, 
+    background_color=(50, 100, 100), 
+    foreground_color=(255, 255, 255), 
+    on_click=lambda: setattr(game, "active_scene_key", "gameplay"), 
+    border_radius=50
+)
 
 # Add the header + play button to the main menu
 container = UIContainer()
@@ -73,27 +80,35 @@ enemy.light_radius = 24
 # Debug Menu
 game.scenes["debug_menu"] = tde.BaseScene(game)
 debug_container = UIContainer()
-debug_toggle = Button(
-    (150, 50),
-    on_click=lambda: setattr(game, "debug", not game.debug)
+debug_toggle = Button.create_styled(
+    text="TOGGLE DEBUG RENDERING", 
+    font=font, 
+    position=(150, 50), 
+    width=250, 
+    height=50, 
+    background_color=(150, 50, 50), 
+    foreground_color=(255, 255, 255), 
+    on_click=lambda: setattr(game, "debug", not game.debug), 
+    border_radius=50
 )
-debug_toggle.image = pg.Surface((250, 50))
-debug_toggle.image.fill((150, 50, 50))
-font.draw_text("TOGGLE DEBUG RENDERING", 125, 25, 20, debug_toggle.image, (255, 255, 255))
 
-spawn_btn = Button(
-    (150, 125),
+spawn_btn = Button.create_styled(
+    text="SPAWN ENEMY", 
+    font=font, 
+    position=(150, 125), 
+    width=250, 
+    height=50, 
+    background_color=(150, 50, 50), 
+    foreground_color=(255, 255, 255), 
     on_click=lambda: game.game_object_group.add(
         tde.MobileObject(
             controller=MovementAIController(target_mobile_object=player), 
             animation_paths=player.animation_paths, # Use same animations as the Player
             frame_size=(16, 16), directional_anims=True
         )
-    )
+    ), 
+    border_radius=50
 )
-spawn_btn.image = pg.Surface((250, 50))
-spawn_btn.image.fill((150, 50, 50))
-font.draw_text("SPAWN ENEMY", 125, 25, 20, spawn_btn.image, (255, 255, 255))
 
 debug_container.add_ui_element(debug_toggle)
 debug_container.add_ui_element(spawn_btn)
