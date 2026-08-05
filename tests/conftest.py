@@ -21,6 +21,7 @@ pg.print_debug_info()
 def game():
     game = tde.Game(1, 1)
     yield game
+    tde.GameObject.set_scale(1, game)
     game.quit()
 
 @pytest.fixture
