@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `Game.extra_windows` dictionary that allows for the registering of extra `pygame.Window` objects that the `Game` instance will update with their chosen scenes
 - Docstrings to `GameplayScene.get_light` and `GameplayScene.create_light`.
 - `Game.quit` method to safely free resources.
+- `Button.create_styled` factory method to create pre-styled buttons.
+- Docstring to `Button.__init__` method.
 
 ### Changed
 - The `Game` class now uses `pygame.Window` instead of `pygame.display`.
