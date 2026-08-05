@@ -31,10 +31,7 @@ class TestLerp:
         start, end = start_end
         assert tde_math.lerp(start, end, 1) == end
 
-    def test_raises_type_error_for_mismatched_types(self):
-        # Rather than use the start and end parameters for their purpose in the other tests,
-        # we use it in this test to ensure it still raises the exception regardless of the value,
-        # as long as types are misaligned.
+    def test_raises_type_error_if_mismatched_types(self):
         with pytest.raises(TypeError):
             tde_math.lerp(pg.Vector2(), 0, 0)
 
