@@ -40,3 +40,24 @@ class TestBaseUIElement:
 
         with pytest.raises(TypeError, match="Containers must be instances of UIContainer."):
             element.add_container("invalid container")
+
+    def test_ui_container_is_in_containers_property_if_added_to_element(self):
+        container = UIContainer()
+        element = BaseUIElement((0, 0))
+        element.add_container(container)
+        assert container in element.containers
+
+    def test_ui_container_is_not_in_containers_property_if_removed_from_element(self):
+        container = UIContainer()
+        element = BaseUIElement((0, 0))
+        element.add_container(container)
+        element.remove_container(container)
+        assert container not in element.containers
+
+    def test_no_ui_containers_in_containers_property_if_all_removed_from_element(self):
+        element = BaseUIElement((0, 0))
+        for _ in range(3):
+            container = UIContainer()
+            element.add_container(container)
+        element.remove_from_all_containers()
+        assert len(element.containers) == 0
