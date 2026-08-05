@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+- `Game.extra_windows` dictionary that allows for the registering of extra `pygame.Window` objects that the `Game` instance will update with their chosen scenes
+- Docstrings to `GameplayScene.get_light` and `GameplayScene.create_light`.
+- `Game.quit` method to safely free resources.
+
+### Changed
+- The `Game` class now uses `pygame.Window` instead of `pygame.display`.
+- **Breaking:** The `Camera` and `SmoothTrackerCamera` classes now require a new `game` parameter.
+- **Breaking:** `Game.run` no longer calls the builtin `exit` function at the end. It now calls the new `Game.quit` method.
+
 ## [0.5.3] - 2026-07-24
 
 ### Fixed
