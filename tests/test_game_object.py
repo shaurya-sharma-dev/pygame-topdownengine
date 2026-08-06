@@ -109,3 +109,23 @@ def test_game_object_frame_size_is_modified_correctly_if_set_scale_is_called_wit
     tde.GameObject.set_scale(scale_by, game)
 
     assert start_frame_size * scale_by == pg.Vector2(game_object.animations["idle"][0].size)
+
+# Collisions
+def test_handle_collision_method_raises_value_error_if_both_axes_are_non_zero(game: tde.Game):
+    game_object = tde.GameObject()
+    with pytest.raises(ValueError, match="Both axes cannot be moved in one step. Move them in separate method calls."):
+        game_object.handle_collision(pg.Vector2(1, 1), game)
+
+# Elevation
+def test_game_object_elevated_if_handle_elevation_called_while_intersecting(game: tde.Game):
+    game_object = tde.GameObject()
+    env_object = tde.EnvObject(
+        animation_paths={
+            "idle": tde.ASSETS_DIR / "example-cliff.png"
+        },
+        frame_size=(32, 32), colliders=[pg.Rect(0, 0, 32, 32)]
+    )
+
+    game.game_object_group.add(game_object, env_object)
+    game_object.handle_elevation(game)
+    assert game_object.elevation == env_object.height
