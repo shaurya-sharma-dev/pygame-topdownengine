@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 import topdownengine as tde
-from topdownengine.ui import UIContainer, BaseUIElement
+from topdownengine.ui import UIContainer, BaseUIElement, Button
 import pygame as pg
 import pytest
 
@@ -68,3 +68,62 @@ class TestBaseUIElement:
 
         assert element.image is element.image
         assert element.rect.center == (0, 0)
+
+class TestButton:
+    def test_on_click_is_called_if_mousebuttonup_event_sent_while_mouse_over(self, monkeypatch):
+        button = Button((0, 0), "topleft", pg.Surface((100, 100)), lambda: setattr(button, "clicked", True))
+        button.clicked = False
+
+        event = pg.Event(pg.MOUSEBUTTONUP, dict())
+
+        monkeypatch.setattr(pg.mouse, "get_pos", lambda: (50, 50))
+        button.handle_event(event)
+
+        assert button.clicked
+
+    def test_on_click_is_not_called_if_mousebuttonup_event_sent_while_mouse_not_over(self, monkeypatch):
+        button = Button((0, 0), "topleft", pg.Surface((100, 100)), lambda: setattr(button, "clicked", True))
+        button.clicked = False
+
+        event = pg.Event(pg.MOUSEBUTTONUP, dict())
+
+        monkeypatch.setattr(pg.mouse, "get_pos", lambda: (150, 50))
+        button.handle_event(event)
+
+        assert not button.clicked
+
+    def test_image_is_highlighted_if_mouse_over_after_first_frame(self, monkeypatch, game):
+        image = pg.Surface((100, 100), pg.SRCALPHA)
+        image.fill("black")
+
+        button = Button((0, 0), "topleft", image)
+        button.update(0) # "Complete" first frame.
+        
+        monkeypatch.setattr(pg.mouse, "get_pos", lambda: (50, 50))
+        manually_highlighted = tde.VisualUtils.make_img_white(image, button.hover_highlight_strength).convert_alpha()
+
+        assert pg.image.tobytes(button.image, "RGBA") == pg.image.tobytes(manually_highlighted, "RGBA")
+
+    def test_image_is_not_highlighted_if_mouse_over_during_first_frame(self, monkeypatch, game):
+        image = pg.Surface((100, 100), pg.SRCALPHA)
+        image.fill("black")
+
+        button = Button((0, 0), "topleft", image)
+        
+        monkeypatch.setattr(pg.mouse, "get_pos", lambda: (50, 50))
+        manually_highlighted = tde.VisualUtils.make_img_white(button._image, button.hover_highlight_strength).convert_alpha()
+
+        assert pg.image.tobytes(button.image, "RGBA") != pg.image.tobytes(manually_highlighted, "RGBA")
+        assert pg.image.tobytes(button.image, "RGBA") == pg.image.tobytes(image, "RGBA")
+
+    def test_image_is_not_highlighted_if_mouse_not_over(self, monkeypatch, game):
+        image = pg.Surface((100, 100), pg.SRCALPHA)
+        image.fill("black")
+
+        button = Button((0, 0), "topleft", image)
+        button.update(0) # "Complete" first frame.
+        
+        monkeypatch.setattr(pg.mouse, "get_pos", lambda: (150, 50))
+        manually_highlighted = tde.VisualUtils.make_img_white(image, button.hover_highlight_strength).convert_alpha()
+
+        assert pg.image.tobytes(button.image, "RGBA") != pg.image.tobytes(manually_highlighted, "RGBA")
