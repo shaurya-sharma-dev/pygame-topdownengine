@@ -61,3 +61,10 @@ class TestBaseUIElement:
             element.add_container(container)
         element.remove_from_all_containers()
         assert len(element.containers) == 0
+
+    def test_image_is_set_and_alignment_is_constant_if_image_property_is_set(self):
+        element = BaseUIElement((0, 0))
+        element.image = pg.Surface((100, 100))
+
+        assert element.image is element.image
+        assert element.rect.center == (0, 0)
