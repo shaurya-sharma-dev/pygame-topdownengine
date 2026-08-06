@@ -21,3 +21,30 @@ def test_active_scene_property_returns_correct_scene_if_active_scene_key_attribu
 
     game.active_scene_key = "another scene"
     assert game.active_scene == game.scenes[game.active_scene_key]
+
+def test_core_methods_are_called_in_correct_order_if_run_method_called(game: tde.Game, monkeypatch):
+    execution_order = []
+
+    # Mock methods
+    def mock_handle_events(self):
+        execution_order.append("handle_events")
+
+    def mock_update(self, dt: float):
+        execution_order.append("update")
+        self.is_running = False # Break in first frame
+
+    def mock_render(self):
+        execution_order.append("render")
+
+    def mock_quit(self):
+        execution_order.append("quit")
+
+    monkeypatch.setattr(tde.Game, "handle_events", mock_handle_events)
+    monkeypatch.setattr(tde.Game, "update", mock_update)
+    monkeypatch.setattr(tde.Game, "render", mock_render)
+    monkeypatch.setattr(tde.Game, "quit", mock_quit)
+    
+    game.is_running = True
+    game.run()
+
+    assert execution_order == ["handle_events", "update", "render", "quit"]
