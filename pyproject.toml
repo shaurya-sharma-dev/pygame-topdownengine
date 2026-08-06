@@ -83,4 +83,5 @@ relative_files = true
 source = ["."]
 omit = [
     "tests/*",
+    "topdownengine/_version.py",
 ]
