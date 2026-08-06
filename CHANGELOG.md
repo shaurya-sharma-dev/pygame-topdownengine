@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - `Game.quit` method to safely free resources.
 - `Button.create_styled` factory method to create pre-styled buttons.
 - Docstring to `Button.__init__` method.
+- The formerly internal `GameObject.handle_collision` and `GameObject.handle_elevation` methods to the public API.
 
 ### Changed
 - The `Game` class now uses `pygame.Window` instead of `pygame.display`.

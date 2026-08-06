@@ -261,8 +261,19 @@ class GameObject:
             for c in self.colliders
         ]
 
-    def _handle_collision(self, dir: pg.Vector2, game: Game) -> bool:
-        """Checks for collisions and moves the GameObject. Returns whether a collision occured or not."""
+    def handle_collision(self, dir: pg.Vector2, game: Game) -> bool:
+        """Checks for and handles collisions for this GameObject. Call this method on both axes before calling handle_elevation.
+                
+        Args:
+            dir (pygame.Vector2): The movement vector to evaluate collisions aginst.
+            game (Game): The Game object containing all of the GameObject instances to evaluate collisions against.
+
+        Returns:
+            bool: Whether a collision was found and handled.
+        
+        Raises:
+            ValueError: If both dir.x and dir.y are non-zero numbers. You should call this function on one axis at a time.
+        """
         if dir.x and dir.y:
             raise ValueError("Both axes cannot be moved in one step. Move them in separate method calls.")
         
@@ -302,7 +313,12 @@ class GameObject:
 
         return return_value
 
-    def _handle_elevation(self, game: Game) -> None:
+    def handle_elevation(self, game: Game) -> None:
+        """Handles the elevation of this GameObject. Call this after calling the handle_collision method on both axes.
+        
+        Args:
+            game (Game): The Game object containing all of the GameObject instances to evaluate elevation against.
+        """
         self.elevation = 0
 
         for self_hitbox in self.world_colliders:
@@ -338,9 +354,9 @@ class GameObject:
         if not self.velocity.length():
             return
         
-        self._handle_collision(pg.Vector2(self.velocity.x * (dt * game.fps / 1000), 0), game)
-        self._handle_collision(pg.Vector2(0, self.velocity.y * (dt * game.fps / 1000)), game)
-        self._handle_elevation(game)
+        self.handle_collision(pg.Vector2(self.velocity.x * (dt * game.fps / 1000), 0), game)
+        self.handle_collision(pg.Vector2(0, self.velocity.y * (dt * game.fps / 1000)), game)
+        self.handle_elevation(game)
 
 class GameObjectGroup:
     """A group of GameObject instances.
